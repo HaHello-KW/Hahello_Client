@@ -2,9 +2,10 @@ import React,{useState} from 'react';
 import { Button, View, Text,Pressable,StyleSheet,TouchableOpacity,TextInput } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import MyUpBar_1 from '../../upbar/UpBar_1';
+//import MyUpBar_7 from '../../upbar/UpBar_7';
+import MyUpBar_7 from '../../upbar/UpBar_7';
 
-const Q_Default_1 = ({ navigation, route }) => {
+const Q_A_4 = ({ navigation, route }) => {
   
   Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";
@@ -105,10 +106,10 @@ const placeholder = "날짜를 입력해주세요";
 
     return (
         <>        
-        <MyUpBar_1/>
+        <MyUpBar_7/>
         <View style={styles.container}>
             <TouchableOpacity onPress={showDatePicker}>
-              <Text>나는</Text>
+              <Text>나의 마지막 생리일은</Text>
                 <TextInput
                     pointerEvents="none"
                     style={styles.textInput}
@@ -117,8 +118,43 @@ const placeholder = "날짜를 입력해주세요";
                     underlineColorAndroid="transparent"
                     editable={false}
                     value={text}                    
+                />                
+                <DateTimePickerModal
+                    headerTextIOS={placeholder}
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={handleConfirm}
+                    onCancel={hideDatePicker}
                 />
-                <Text>에 태어났어</Text>
+
+                <Text>나의 생리주기는</Text>
+                <TextInput
+                    pointerEvents="none"
+                    style={styles.textInput}
+                    placeholder={con_day}
+                    placeholderTextColor='#000000'
+                    underlineColorAndroid="transparent"
+                    editable={false}
+                    value={text}                    
+                />                
+                <DateTimePickerModal
+                    headerTextIOS={placeholder}
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={handleConfirm}
+                    onCancel={hideDatePicker}
+                />
+
+                <Text>나의 생리기간은</Text>
+                <TextInput
+                    pointerEvents="none"
+                    style={styles.textInput}
+                    placeholder={con_day}
+                    placeholderTextColor='#000000'
+                    underlineColorAndroid="transparent"
+                    editable={false}
+                    value={text}                    
+                />                
                 <DateTimePickerModal
                     headerTextIOS={placeholder}
                     isVisible={isDatePickerVisible}
@@ -130,7 +166,7 @@ const placeholder = "날짜를 입력해주세요";
             <Button
                 title=" 다음 "
                 color="#F47100"
-                onPress={() => navigation.navigate('Q_Default_2')}
+                onPress={() => navigation.navigate('Q_A_4_1')}
             >
             </Button>
         </View>
@@ -138,4 +174,4 @@ const placeholder = "날짜를 입력해주세요";
   );
 };
 
-export default Q_Default_1;
+export default Q_A_4;
