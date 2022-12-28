@@ -116,5 +116,5 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
-
+//안녕
 export default App;
