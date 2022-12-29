@@ -34,6 +34,7 @@ import Q_A_Type from './src/screens/userA/q_a_type';
 import Q_Default_3 from './src/screens/default/q_default_3';
 import BTEST from './src/screens/userA/BTEST';
 import Q_Default_2 from './src/screens/default/q_default_2';
+import HQ_1 from './src/screens/HQ/HQ_1';
 // =======
 // import Q_Default_3 from './src/screens/default/q_default_3';
 // import Q_A_1 from './src/screens/userA/q_a_1';
@@ -114,6 +115,11 @@ const App = () => {
           //           name="BTEST"
           //           component={BTEST}
           // >>>>>>> 61c27733845b543401eabc08a8c193456a73f6d4
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="HQ_1"
+          component={HQ_1}
         />
         {/* <Stack.Screen
           options={{headerShown: false}}
