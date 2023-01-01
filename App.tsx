@@ -34,11 +34,11 @@ import Q_A_Type from './src/screens/userA/q_a_type';
 import Q_Default_3 from './src/screens/default/q_default_3';
 import BTEST from './src/screens/userA/BTEST';
 import Q_Default_2 from './src/screens/default/q_default_2';
-// =======
-// import Q_Default_3 from './src/screens/default/q_default_3';
-// import Q_A_1 from './src/screens/userA/q_a_1';
-// import BTEST from './src/screens/userA/BTEST';
-// >>>>>>> 61c27733845b543401eabc08a8c193456a73f6d4
+
+import WQ_1 from './src/screens/WQ/wq_1';
+import WQ_2 from './src/screens/WQ/wq_2';
+import WQ_3 from './src/screens/WQ/wq_3';
+import WQ_4 from './src/screens/WQ/wq_4';
 
 const Stack = createNativeStackNavigator();
 
@@ -110,16 +110,27 @@ const App = () => {
           options={{headerShown: false}}
           name="Q_A_Type"
           component={Q_A_Type}
-          // =======
-          //           name="BTEST"
-          //           component={BTEST}
-          // >>>>>>> 61c27733845b543401eabc08a8c193456a73f6d4
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           options={{headerShown: false}}
-          name="BTEST"
-          component={BTEST}
-        /> */}
+          name="WQ_1"
+          component={WQ_1}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="WQ_2"
+          component={WQ_2}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="WQ_3"
+          component={WQ_3}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="WQ_4"
+          component={WQ_4}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
