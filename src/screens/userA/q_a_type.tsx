@@ -22,7 +22,7 @@ const Q_A_Type = ({navigation, route}) => {
         {/* <NextButton onPress={() => navigation.navigate('BTEST')}></NextButton> */}
       </View>
       <UserImg img={UserAimg}></UserImg>
-      <NextButton onPress={() => navigation.navigate('WQ_1')}></NextButton>
+      <NextButton onPress={() => navigation.navigate('HQ_1')}></NextButton>
     </>
   );
 };
