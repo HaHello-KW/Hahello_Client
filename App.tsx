@@ -37,6 +37,7 @@ import Q_Default_2 from './src/screens/default/q_default_2';
 
 import HQ_1 from './src/screens/HQ/HQ_1';
 import HQ_2 from './src/screens/HQ/HQ_2';
+import HQ_3 from './src/screens/HQ/HQ_3';
 
 import WQ_1 from './src/screens/WQ/wq_1';
 import WQ_2 from './src/screens/WQ/wq_2';
@@ -143,6 +144,11 @@ const App = () => {
           options={{headerShown: false}}
           name="WQ_4"
           component={WQ_4}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="HQ_3"
+          component={HQ_3}
         />
       </Stack.Navigator>
     </NavigationContainer>
