@@ -55,7 +55,7 @@ const WQ_4 = ({navigation, route}) => {
                 style={styles.inputText}
                 onChangeText={onChangeNumber_bodyWater}
                 value={number_bodyWater}
-                placeholder="0.00 L"
+                placeholder="0.00"
                 keyboardType="numeric"
               />
             </View>
