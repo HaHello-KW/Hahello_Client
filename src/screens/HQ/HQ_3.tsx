@@ -25,24 +25,20 @@ import {useState} from 'react';
 import {Alert, alertClasses} from '@mui/material';
 
 const HQ_3 = ({navigation, route}) => {
-
   // amh는 버튼 amh의 수치값을 보관하기 위한 state, 초기에 null로 세팅
   const [amh, amhChange] = useState(null);
 
-  
   //만약 amh의 수치값이 입력되지 않았으면(null값이면) false를 리턴함.
-  const isNull = () =>{
-    if(amh !== null){
+  const isNull = () => {
+    if (amh !== null) {
       return false;
-    }
-    else{
+    } else {
       return true;
     }
-  }
+  };
 
   // 이건 구글링 해옴
   const [modalVisible, setModalVisible] = useState(false);
-
 
   return (
     <>
@@ -61,18 +57,21 @@ const HQ_3 = ({navigation, route}) => {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>나의 AMH수치는</Text>
             <TextInput
-                style={styles.inputText}
-                onChangeText={amhChange}
-                value={amh}
-                placeholder="0.00"
-                keyboardType="numeric"                
-              />
+              style={styles.inputText}
+              onChangeText={amhChange}
+              value={amh}
+              placeholder="0.00"
+              keyboardType="numeric"
+            />
             <Pressable
               // isNull함수의 리턴값에 따라 버튼의 색이 달라짐
-              style={[styles.button, styles.buttonClose, {backgroundColor:isNull() ? '#BDBDBD' : '#FF7C00' }]}
-              
+              style={[
+                styles.button,
+                styles.buttonClose,
+                {backgroundColor: isNull() ? '#BDBDBD' : '#FF7C00'},
+              ]}
               //amh수치값이 입력되지 않았으면 modal을 닫을 수 없음
-              disabled = {isNull()}
+              disabled={isNull()}
               onPress={() => setModalVisible(!modalVisible)}>
               <Text style={styles.textStyle}>확인</Text>
             </Pressable>
@@ -84,7 +83,7 @@ const HQ_3 = ({navigation, route}) => {
       <GobackButton onPress={() => navigation.pop()} />
       <Text style={styles.text}>나는 이런 검사를 받았어</Text>
 
-        {/* AMH버튼 */}
+      {/* AMH버튼 .*/}
       <Pressable onPress={() => setModalVisible(true)}>
         <Image
           style={{
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 8,
-    width:358,
+    width: 358,
     padding: 35,
     alignItems: 'center',
     shadowColor: '#000',
