@@ -44,6 +44,8 @@ import WQ_2 from './src/screens/WQ/wq_2';
 import WQ_3 from './src/screens/WQ/wq_3';
 import WQ_4 from './src/screens/WQ/wq_4';
 
+import QTEST from './src/screens/default/testSelection';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -149,6 +151,13 @@ const App = () => {
           options={{headerShown: false}}
           name="HQ_3"
           component={HQ_3}
+        />
+
+        {/* 밑은 테스트 용도 */}
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="QTEST"
+          component={QTEST}
         />
       </Stack.Navigator>
     </NavigationContainer>

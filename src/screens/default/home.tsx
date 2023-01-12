@@ -25,7 +25,10 @@ const Q_Home = ({navigation, route}) => {
       </View>
       <TouchableOpacity
         style={styles.startbutton}
-        onPress={() => navigation.navigate('Q_Default_1')}>
+        // onPress={() => navigation.navigate('Q_Default_1')}
+
+        //테스트를 위해 home화면에서 테스트화면으로 넘어감
+        onPress={() => navigation.navigate('QTEST')}>
         <Text style={styles.starttxt}>시작하기</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.laterbutton} onPress={() => null}>
