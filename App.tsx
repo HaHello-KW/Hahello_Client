@@ -35,6 +35,10 @@ import Q_Default_3 from './src/screens/default/q_default_3';
 import BTEST from './src/screens/userA/BTEST';
 import Q_Default_2 from './src/screens/default/q_default_2';
 
+import HQ_1 from './src/screens/HQ/HQ_1';
+import HQ_2 from './src/screens/HQ/HQ_2';
+import HQ_3 from './src/screens/HQ/HQ_3';
+
 import WQ_1 from './src/screens/WQ/wq_1';
 import WQ_2 from './src/screens/WQ/wq_2';
 import WQ_3 from './src/screens/WQ/wq_3';
@@ -113,6 +117,16 @@ const App = () => {
         />
         <Stack.Screen
           options={{headerShown: false}}
+          name="HQ_1"
+          component={HQ_1}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="HQ_2"
+          component={HQ_2}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
           name="WQ_1"
           component={WQ_1}
         />
@@ -130,6 +144,11 @@ const App = () => {
           options={{headerShown: false}}
           name="WQ_4"
           component={WQ_4}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="HQ_3"
+          component={HQ_3}
         />
       </Stack.Navigator>
     </NavigationContainer>
