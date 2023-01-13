@@ -1,11 +1,11 @@
 import {View, Text, Button} from 'react-native';
 
-import { UserStyle } from '../../styling/userLayout';
+import {UserStyle} from '../../styling/userLayout';
 import NextButton from '../../Buttons/nextButton';
 import SelectionButton from '../../Buttons/selectionButton';
 import GobackButton from '../../Buttons/gobackButton';
 
-import HQimg from '../../../assets/images/HQ1.png'
+import HQimg from '../../../assets/images/HQ1.png';
 import UserImg from '../../Buttons/userImg';
 
 import MyUpBar_wq from '../../upbar/UpBar_WQ';

@@ -24,6 +24,22 @@ import MyUpBar_wq from '../../upbar/UpBar_WQ';
 import {useState} from 'react';
 import {Alert, alertClasses} from '@mui/material';
 
+import {Chip} from 'react-native-paper';
+import AMH from './modal_amh';
+import FSH from './modal_fsh';
+
+//modal테스트용 import
+import Mymodal from './modal';
+import popvar from './popupVar';
+
+var popUPon = true;
+
+const ModalOpen = () => {
+  //popUPon = !popUPon;
+  popUPon = true;
+  //return !popUPon;
+};
+
 const HQ_3 = ({navigation, route}) => {
   //0: AMH, 1: FSH, 2: LH, 3: TSH, 4: E2
   const [isSelect, selectFunc] = useState([false, false, false, false]); //버튼 다중선택을 위한 state
@@ -35,13 +51,23 @@ const HQ_3 = ({navigation, route}) => {
     ]);
   };
 
+  const [valueList, valueF] = useState([null, null, null, null, null]);
+  const changeValue = (num: number) => {
+    valueF([
+      ...valueList.slice(0, num),
+      !valueList[num],
+      ...valueList.slice(num + 1),
+    ]);
+  };
+
   // amh는 버튼 amh의 수치값을 보관하기 위한 state, 초기에 null로 세팅
   const [amh, amhChange] = useState(null);
 
   const [selection1, select1F] = useState(false);
+
   //만약 amh의 수치값이 입력되지 않았으면(null값이면) false를 리턴함.
-  const isNull = () => {
-    if (amh !== null) {
+  const isNull = (num: number) => {
+    if (valueList[num] !== null) {
       return false;
     } else {
       return true;
@@ -61,108 +87,22 @@ const HQ_3 = ({navigation, route}) => {
   // 이건 구글링 해옴
   const [modalVisible, setModalVisible] = useState(false);
 
+  //let popUPon = false;
+
   return (
     <>
       <View style={styles.container}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            //alert('Modal has been closed.');
-            setModalVisible(!modalVisible);
-          }}
-          onShow={() => {
-            //alert('Modal has been open.');
-          }}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>나의 AMH수치는</Text>
-              <TextInput
-                style={styles.inputText}
-                onChangeText={amhChange}
-                value={amh}
-                placeholder="0.00"
-                keyboardType="numeric"
-              />
-              <Pressable
-                // isNull함수의 리턴값에 따라 Modal창의 확인 버튼의 색이 달라짐 -> 수치값을 입력하지 않으면 회색, 입력했으면 주황색
-                style={[
-                  styles.button,
-                  styles.buttonClose,
-                  {backgroundColor: isNull() ? '#BDBDBD' : '#FF7C00'},
-                ]}
-                //amh수치값이 입력되지 않았으면 modal을 닫을 수 없음
-                disabled={isNull()}
-                onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.textStyle}>확인</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
-
+        <AMH></AMH>
+        <FSH></FSH>
         <MyUpBar_wq />
         <GobackButton onPress={() => navigation.pop()} />
         <Text style={styles.text}>나는 이런 검사를 받았어</Text>
 
-        {/* AMH버튼.. */}
-        <Pressable
-          onPress={() => {
-            setModalVisible(true);
-            //changeS1();
-            selectChange(0);
-          }}>
-          <Image
-            style={{
-              position: 'absolute',
-              left: 28,
-              top: 180,
-              width: 100,
-              height: 100,
-              borderRadius: 100,
-              overflow: 'hidden',
-              //borderWidth: 3,
-              borderColor: 'blue',
-            }}
-            //source={require('../../../assets/images/AMH.png')}
-            source={
-              // amh수치값이 입력되지 않았으면 AMH파일을 불러오고 입력됐으면 AMHSelect파일을 불러옴
-              isSelect[0]
-                ? require('../../../assets/images/AMHSelect.png')
-                : require('../../../assets/images/AMH.png')
-            }
-          />
-        </Pressable>
+        <TouchableOpacity>
+          <Text>modalTest</Text>
+          <Mymodal title="팝업 테스트임"></Mymodal>
+        </TouchableOpacity>
 
-        {/* FSH버튼.. */}
-        <Pressable
-          onPress={() => {
-            setModalVisible(true);
-            selectChange(1);
-          }}>
-          <Image
-            style={{
-              position: 'absolute',
-              //left: 148,
-              left: '21.03%',
-              top: 300,
-              //bottom: '20%',
-              width: 100,
-              height: 100,
-              borderRadius: 10,
-              overflow: 'hidden',
-              //borderWidth: 3,
-              borderColor: 'blue',
-            }}
-            //source={require('../../../assets/images/AMH.png')}
-            source={
-              // amh수치값이 입력되지 않았으면 AMH파일을 불러오고 입력됐으면 AMHSelect파일을 불러옴
-              isSelect[1]
-                ? require('../../../assets/images/FSHSelect.png')
-                : require('../../../assets/images/FSH.png')
-            }
-          />
-        </Pressable>
         <UserImg img={HQimg}></UserImg>
         <View style={styles.nextContainer}>
           <NextButton onPress={() => navigation.navigate('HQ_3')} />
