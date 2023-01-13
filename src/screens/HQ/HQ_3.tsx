@@ -29,7 +29,7 @@ import AMH from './modal_amh';
 import FSH from './modal_fsh';
 
 //modal테스트용 import
-import Mymodal from './modal';
+import NumberInput_popup from './modal';
 import popvar from './popupVar';
 
 var popUPon = true;
@@ -100,7 +100,7 @@ const HQ_3 = ({navigation, route}) => {
 
         <TouchableOpacity>
           <Text>modalTest</Text>
-          <Mymodal title="팝업 테스트임"></Mymodal>
+          <NumberInput_popup title="팝업 테스트임"></NumberInput_popup>
         </TouchableOpacity>
 
         <UserImg img={HQimg}></UserImg>

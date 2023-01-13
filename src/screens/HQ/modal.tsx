@@ -14,7 +14,7 @@ import {useState} from 'react';
 
 import {getGrid2UtilityClass} from '@mui/material';
 
-const Mymodal = ({title}) => {
+const NumberInput_popup = ({title}) => {
   //const [mode, modeChange] = useState(popupOn);
 
   const [isSelect0, selectFunc] = useState(false); //버튼 다중선택을 위한 state
@@ -208,4 +208,4 @@ const styles = StyleSheet.create({
     top: 650,
   },
 });
-export default Mymodal;
+export default NumberInput_popup;
