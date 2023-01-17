@@ -1,4 +1,4 @@
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
 import MyUpBar_3 from '../../upbar/UpBar_3';
 
 import {DefaultStyle} from '../../styling/defaultLayout';
@@ -40,7 +40,7 @@ const Button_Selector = ({title, count, content}) => {
           <Text style={styles.titleTxt}>{title}</Text>
         </View>
         <View style={styles.selectionContainer}>
-          <>{countF()}</>
+          <ScrollView>{countF()}</ScrollView>
         </View>
       </View>
     </>

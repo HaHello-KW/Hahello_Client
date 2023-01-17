@@ -10,13 +10,19 @@ import GobackButton from '../../Buttons/gobackButton';
 import Button_Selector from './selector';
 
 import contentList from './content';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const QTEST = ({navigation, route}) => {
   return (
     <>
       <MyUpBar_3 />
       <GobackButton onPress={() => navigation.pop()} />
-      <Button_Selector title="selector테스트" count="4" content={contentList} />
+      <Button_Selector
+        title="selector테스트"
+        count="10"
+        content={contentList}
+      />
+
       <View style={[DefaultStyle.container2]}>
         <NextButton onPress={() => navigation.navigate('Q_A_1')} />
       </View>
