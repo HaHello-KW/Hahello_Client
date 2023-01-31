@@ -32,7 +32,7 @@ import Chart from './chartExam';
 import TimeLine from './timeLineFullPage';
 
 const RESULT_HOME = ({navigation, route}) => {
-  const [target, change] = useState(false);
+  //const [target, change] = useState(true);
   const [amh_isopen, openFunc] = useState(true);
 
   const graph_box_open_amh = () => {
@@ -45,23 +45,13 @@ const RESULT_HOME = ({navigation, route}) => {
 
         <Text style={styles.hormone_text}>정상</Text>
         <Text style={styles.hormone_value}>1.91 ng/ml</Text>
-        <TouchableOpacity onPress={() => change(!target)}>
+        <TouchableOpacity onPress={() => openFunc(!amh_isopen)}>
           <Image
             style={styles.hormone_button1}
             source={require('../../../assets/images/hormone_open.png')}
           />
         </TouchableOpacity>
         <View style={styles.graph_base}>
-          {/* <Text style={styles.graph_xValue1}>34세</Text>
-          <Text style={styles.graph_xValue2}>35세</Text>
-          <Text style={styles.graph_xValue3}>36세</Text>
-          <Text style={styles.graph_xValue4}>37세</Text>
-          <Text style={styles.graph_yValue1}>87.5</Text>
-          <Text style={styles.graph_yValue2}>75.5</Text>
-          <Text style={styles.graph_yValue3}>62.5</Text>
-          <Text style={styles.graph_yValue4}>50.1</Text>
-          <Text style={styles.graph_yValue5}>37.6</Text>
-          {graph()} */}
           <>{Chart()}</>
         </View>
       </View>
@@ -78,7 +68,7 @@ const RESULT_HOME = ({navigation, route}) => {
 
         <Text style={styles.hormone_text}>정상</Text>
         <Text style={styles.hormone_value}>1.91 ng/ml</Text>
-        <TouchableOpacity onPress={() => change(!target)}>
+        <TouchableOpacity onPress={() => openFunc(!amh_isopen)}>
           <Image
             style={styles.hormone_button1}
             source={require('../../../assets/images/hormone_close.png')}
@@ -93,6 +83,25 @@ const RESULT_HOME = ({navigation, route}) => {
   };
 
   const graph_box_closed_fsh = () => {
+    return (
+      <View style={styles.hormone_box_fsh_closeMode}>
+        <Image
+          style={styles.fsh}
+          source={require('../../../assets/images/FSH_result.png')}
+        />
+
+        <Text style={styles.hormone_text}>정상</Text>
+        <Text style={styles.hormone_value}>1.91 ng/ml</Text>
+        <TouchableOpacity onPress={() => alert('aa')}>
+          <Image
+            style={styles.hormone_button1}
+            source={require('../../../assets/images/hormone_open.png')}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  const graph_box_open_fsh = () => {
     return (
       <View style={styles.hormone_box_fsh_closeMode}>
         <Image
@@ -172,10 +181,8 @@ const RESULT_HOME = ({navigation, route}) => {
                 호르몬 수치 입력하기 {'>'}
               </Text>
             </TouchableOpacity>
-            {/* {graph_box_open_amh()} */}
             <View>
-              {/* {target ? graph_box_open_amh() : graph_box_closed_amh()} */}
-              {target ? graph_box_open_amh() : graph_box_closed_amh()}
+              {amh_isopen ? graph_box_open_amh() : graph_box_closed_amh()}
               {graph_box_closed_fsh()}
               {graph_box_closed_lh()}
             </View>
@@ -288,42 +295,6 @@ const RESULT_HOME = ({navigation, route}) => {
 
             <View style={styles.timeLine_ex}>
               <ScrollView nestedScrollEnabled={true}>
-                {/* <Text
-                  style={{
-                    left: 22,
-                    top: 6,
-                    width: 29,
-                    height: 15,
-                    fontSize: 12,
-                    fontWeight: '400',
-                    color: '#9D9D9D',
-                  }}>
-                  2022
-                  </Text>
-                  <Text
-                  style={{
-                    left: 1,
-                    top: 6,
-                    width: 42,
-                    height: 30,
-                    fontSize: 20,
-                    fontWeight: '700',
-                    color: '#9D9D9D',
-                  }}>
-                  32세
-                  </Text>
-                  <Text>aa</Text>
-                  <Text>aa</Text>
-                  <Text>aa</Text>
-                  <Text>aa</Text>
-                  <Text>aa</Text>
-                  <Text>aa2</Text>
-                  <Text>aa3</Text>
-                  <Text>aa4</Text>
-                  <Text>aa5</Text>
-                <Text>aa6</Text>
-                <Text>aa7</Text>
-              <Text>aa8</Text> */}
                 <TimeLine />
               </ScrollView>
               <TouchableOpacity onPress={() => alert('타임라인수정')}>
@@ -775,7 +746,7 @@ const styles = StyleSheet.create({
     left: 15,
     top: 78,
     //backgroundColor: '#F7F7F7',
-    backgroundColor: '#F7F7F7',
+    //backgroundColor: '#F7F7F7',
   },
   graph_xValue1: {
     position: 'absolute',

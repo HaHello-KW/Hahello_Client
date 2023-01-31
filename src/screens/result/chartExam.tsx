@@ -12,7 +12,7 @@ import {
 const Chart = () => {
   return (
     <View>
-      <Text>Bezier Line Chart</Text>
+      {/* <Text>Bezier Line Chart</Text> */}
       <LineChart
         data={{
           //labels: ['34세', '35세', '36세', '37세', 'May', 'June'],
@@ -32,7 +32,7 @@ const Chart = () => {
         }}
         //width={Dimensions.get('window').width} // from react-native
         width={306}
-        height={220}
+        height={207}
         //yAxisLabel="$"
         //yAxisSuffix="k"
         yAxisInterval={1} // optional, defaults to 1
@@ -61,7 +61,7 @@ const Chart = () => {
         bezier
         style={{
           marginVertical: 8,
-          borderRadius: 16,
+          borderRadius: 0,
         }}
       />
     </View>

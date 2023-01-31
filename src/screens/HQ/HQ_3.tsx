@@ -38,11 +38,43 @@ const HQ_3 = ({navigation, route}) => {
 
   // amh는 버튼 amh의 수치값을 보관하기 위한 state, 초기에 null로 세팅
   const [amh, amhChange] = useState(null);
+  const [lh, lhChange] = useState(null);
+  const [fsh, fshChange] = useState(null);
+  const [e2, e2Change] = useState(null);
+  const [tsh, tshChange] = useState(null);
 
   const [selection1, select1F] = useState(false);
   //만약 amh의 수치값이 입력되지 않았으면(null값이면) false를 리턴함.
-  const isNull = () => {
+  const isNullAmh = () => {
     if (amh !== null) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  const isNullFsh = () => {
+    if (fsh !== null) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  const isNullLh = () => {
+    if (lh !== null) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  const isNullTsh = () => {
+    if (tsh !== null) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  const isNullE2 = () => {
+    if (e2 !== null) {
       return false;
     } else {
       return true;
@@ -61,14 +93,18 @@ const HQ_3 = ({navigation, route}) => {
 
   // 이건 구글링 해옴
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisiblefsh, setModalVisiblefsh] = useState(false);
+  const [modalVisiblelh, setModalVisiblelh] = useState(false);
+  const [modalVisibletsh, setModalVisibletsh] = useState(false);
+  const [modalVisiblee2, setModalVisiblee2] = useState(false);
 
   return (
     <>
-      {/* <View style={styles.container}> */}
+      {/* 밑에 있는 modal은 amh */}
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={modalVisible && isSelect[0]}
         onRequestClose={() => {
           //alert('Modal has been closed.');
           setModalVisible(!modalVisible);
@@ -91,10 +127,10 @@ const HQ_3 = ({navigation, route}) => {
               style={[
                 styles.button,
                 styles.buttonClose,
-                {backgroundColor: isNull() ? '#BDBDBD' : '#FF7C00'},
+                {backgroundColor: isNullAmh() ? '#BDBDBD' : '#FF7C00'},
               ]}
               //amh수치값이 입력되지 않았으면 modal을 닫을 수 없음
-              disabled={isNull()}
+              disabled={isNullAmh()}
               onPress={() => setModalVisible(!modalVisible)}>
               <Text style={styles.textStyle}>확인</Text>
             </Pressable>
@@ -102,6 +138,156 @@ const HQ_3 = ({navigation, route}) => {
         </View>
       </Modal>
 
+      {/* 밑에 있는 modal은 fsh */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisiblefsh && isSelect[1]}
+        onRequestClose={() => {
+          //alert('Modal has been closed.');
+          setModalVisiblefsh(!modalVisiblefsh);
+        }}
+        onShow={() => {
+          //alert('Modal has been open.');
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>나의 FSH수치는</Text>
+            <TextInput
+              style={styles.inputText}
+              onChangeText={fshChange}
+              value={fsh}
+              placeholder="0.00"
+              keyboardType="numeric"
+            />
+            <Pressable
+              // isNull함수의 리턴값에 따라 Modal창의 확인 버튼의 색이 달라짐 -> 수치값을 입력하지 않으면 회색, 입력했으면 주황색
+              style={[
+                styles.button,
+                styles.buttonClose,
+                {backgroundColor: isNullFsh() ? '#BDBDBD' : '#FF7C00'},
+              ]}
+              //amh수치값이 입력되지 않았으면 modal을 닫을 수 없음
+              disabled={isNullFsh()}
+              onPress={() => setModalVisiblefsh(!modalVisiblefsh)}>
+              <Text style={styles.textStyle}>확인</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      {/* 밑에 있는 modal은 lh */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisiblelh && isSelect[2]}
+        onRequestClose={() => {
+          //alert('Modal has been closed.');
+          setModalVisiblelh(!modalVisiblelh);
+        }}
+        onShow={() => {
+          //alert('Modal has been open.');
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>나의 LH수치는</Text>
+            <TextInput
+              style={styles.inputText}
+              onChangeText={lhChange}
+              value={lh}
+              placeholder="0.00"
+              keyboardType="numeric"
+            />
+            <Pressable
+              // isNull함수의 리턴값에 따라 Modal창의 확인 버튼의 색이 달라짐 -> 수치값을 입력하지 않으면 회색, 입력했으면 주황색
+              style={[
+                styles.button,
+                styles.buttonClose,
+                {backgroundColor: isNullLh() ? '#BDBDBD' : '#FF7C00'},
+              ]}
+              //amh수치값이 입력되지 않았으면 modal을 닫을 수 없음
+              disabled={isNullLh()}
+              onPress={() => setModalVisiblelh(!modalVisiblelh)}>
+              <Text style={styles.textStyle}>확인</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      {/* 밑에 있는 modal은 tsh */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisibletsh && isSelect[3]}
+        onRequestClose={() => {
+          //alert('Modal has been closed.');
+          setModalVisibletsh(!modalVisibletsh);
+        }}
+        onShow={() => {
+          //alert('Modal has been open.');
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>나의 TSH수치는</Text>
+            <TextInput
+              style={styles.inputText}
+              onChangeText={tshChange}
+              value={tsh}
+              placeholder="0.00"
+              keyboardType="numeric"
+            />
+            <Pressable
+              // isNull함수의 리턴값에 따라 Modal창의 확인 버튼의 색이 달라짐 -> 수치값을 입력하지 않으면 회색, 입력했으면 주황색
+              style={[
+                styles.button,
+                styles.buttonClose,
+                {backgroundColor: isNullTsh() ? '#BDBDBD' : '#FF7C00'},
+              ]}
+              //amh수치값이 입력되지 않았으면 modal을 닫을 수 없음
+              disabled={isNullTsh()}
+              onPress={() => setModalVisibletsh(!modalVisibletsh)}>
+              <Text style={styles.textStyle}>확인</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      {/* 밑에 있는 modal은 e2 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisiblee2 && isSelect[4]}
+        onRequestClose={() => {
+          //alert('Modal has been closed.');
+          setModalVisiblee2(!modalVisiblee2);
+        }}
+        onShow={() => {
+          //alert('Modal has been open.');
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>나의 E2수치는</Text>
+            <TextInput
+              style={styles.inputText}
+              onChangeText={e2Change}
+              value={e2}
+              placeholder="0.00"
+              keyboardType="numeric"
+            />
+            <Pressable
+              // isNull함수의 리턴값에 따라 Modal창의 확인 버튼의 색이 달라짐 -> 수치값을 입력하지 않으면 회색, 입력했으면 주황색
+              style={[
+                styles.button,
+                styles.buttonClose,
+                {backgroundColor: isNullE2() ? '#BDBDBD' : '#FF7C00'},
+              ]}
+              //amh수치값이 입력되지 않았으면 modal을 닫을 수 없음
+              disabled={isNullE2()}
+              onPress={() => setModalVisiblee2(!modalVisiblee2)}>
+              <Text style={styles.textStyle}>확인</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      {/* dd */}
       <MyUpBar_wq />
       <GobackButton onPress={() => navigation.pop()} />
       <View style={[UserStyle.container]} />
@@ -143,7 +329,7 @@ const HQ_3 = ({navigation, route}) => {
         {/* FSH버튼.. */}
         <Pressable
           onPress={() => {
-            setModalVisible(true);
+            setModalVisiblefsh(true);
             selectChange(1);
           }}>
           <Image
@@ -166,6 +352,91 @@ const HQ_3 = ({navigation, route}) => {
               isSelect[1]
                 ? require('../../../assets/images/FSHSelect.png')
                 : require('../../../assets/images/FSH.png')
+            }
+          />
+        </Pressable>
+
+        {/* LH버튼.. */}
+        <Pressable
+          onPress={() => {
+            setModalVisiblelh(true);
+            //changeS1();
+            selectChange(2);
+          }}>
+          <Image
+            style={{
+              position: 'absolute',
+              left: -40,
+              top: 20,
+              width: 100,
+              height: 100,
+              borderRadius: 100,
+              overflow: 'hidden',
+              //borderWidth: 3,
+              borderColor: 'blue',
+            }}
+            //source={require('../../../assets/images/AMH.png')}
+            source={
+              // amh수치값이 입력되지 않았으면 AMH파일을 불러오고 입력됐으면 AMHSelect파일을 불러옴
+              isSelect[2]
+                ? require('../../../assets/images/LH_colored.png')
+                : require('../../../assets/images/LH.png')
+            }
+          />
+        </Pressable>
+        {/* tsh버튼.. */}
+        <Pressable
+          onPress={() => {
+            setModalVisibletsh(true);
+            //changeS1();
+            selectChange(3);
+          }}>
+          <Image
+            style={{
+              position: 'absolute',
+              left: 25,
+              top: 170,
+              width: 100,
+              height: 100,
+              borderRadius: 40,
+              overflow: 'hidden',
+              //borderWidth: 3,
+              borderColor: 'blue',
+            }}
+            //source={require('../../../assets/images/AMH.png')}
+            source={
+              // amh수치값이 입력되지 않았으면 AMH파일을 불러오고 입력됐으면 AMHSelect파일을 불러옴
+              isSelect[3]
+                ? require('../../../assets/images/TSH_colored.png')
+                : require('../../../assets/images/TSH.png')
+            }
+          />
+        </Pressable>
+        {/* e2버튼.. */}
+        <Pressable
+          onPress={() => {
+            setModalVisiblee2(true);
+            //changeS1();
+            selectChange(4);
+          }}>
+          <Image
+            style={{
+              position: 'absolute',
+              left: 65,
+              top: 60,
+              width: 100,
+              height: 100,
+              borderRadius: 40,
+              overflow: 'hidden',
+              //borderWidth: 3,
+              borderColor: 'blue',
+            }}
+            //source={require('../../../assets/images/AMH.png')}
+            source={
+              // amh수치값이 입력되지 않았으면 AMH파일을 불러오고 입력됐으면 AMHSelect파일을 불러옴
+              isSelect[4]
+                ? require('../../../assets/images/E2_colored.png')
+                : require('../../../assets/images/E2.png')
             }
           />
         </Pressable>
