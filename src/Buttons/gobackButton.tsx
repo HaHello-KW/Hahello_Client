@@ -21,12 +21,6 @@ export default class GobackButton extends Component<Goback, any> {
   }
   render() {
     return (
-      // <Icon
-      //   style={styles.icon}
-      //   name="arrow-left"
-      //   size={30}
-      //   onPress={this.props.onPress}
-      // />
       <TouchableOpacity onPress={this.props.onPress} style={styles.icon}>
         <Image source={require('../../assets/images/goback_icon.png')}></Image>
       </TouchableOpacity>
