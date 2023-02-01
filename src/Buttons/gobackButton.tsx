@@ -6,6 +6,7 @@ import {
   Text,
   Platform,
   StatusBar,
+  Image,
 } from 'react-native';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -20,12 +21,15 @@ export default class GobackButton extends Component<Goback, any> {
   }
   render() {
     return (
-      <Icon
-        style={styles.icon}
-        name="arrow-left"
-        size={30}
-        onPress={this.props.onPress}
-      />
+      // <Icon
+      //   style={styles.icon}
+      //   name="arrow-left"
+      //   size={30}
+      //   onPress={this.props.onPress}
+      // />
+      <TouchableOpacity onPress={this.props.onPress} style={styles.icon}>
+        <Image source={require('../../assets/images/goback_icon.png')}></Image>
+      </TouchableOpacity>
     );
   }
 }

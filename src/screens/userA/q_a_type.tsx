@@ -48,8 +48,8 @@ const Q_A_Type = ({navigation, route}) => {
           <Text style={styles.latertxt}>나중에 할래요</Text>
         </TouchableOpacity>
       </View>
-      {/* <Image source={TxtCollection.q_a_type.imgPath} /> */}
       <GobackButton onPress={() => navigation.pop()}></GobackButton>
+      {/* <Image source={TxtCollection.q_a_type.imgPath} /> */}
     </>
   );
 };

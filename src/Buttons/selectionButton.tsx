@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: 'center',
     // backgroundColor: '#E3E3E3',
+
+    //현재 absolute로 지정되어잇음(px단위)
+    //%로 바꿔서 구현해야함ㅇㅇ 알고잇을것!!
     width: 324,
     height: 64,
     borderRadius: 8,

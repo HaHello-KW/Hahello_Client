@@ -23,7 +23,7 @@ const MyUpBar = ({level}: props, {navigation}) => {
           {arr}
         </HStack>
       </Box>
-      <GobackButton onPress={() => navigation.pop()} />
+      {/* <GobackButton onPress={() => navigation.pop()} /> */}
     </>
   );
 };
