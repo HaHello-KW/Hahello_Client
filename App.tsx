@@ -4,13 +4,8 @@ import {enableScreens} from 'react-native-screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-import DateTimePicker from '@react-native-community/datetimepicker';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {Box, HStack} from '@react-native-material/core';
-
 import Q_Home from './src/screens/default/home';
-import Q_Default_1 from './src/screens/default/q_default_1';
+//import defaultPage from './src/screens/default/defaultPage';
 
 import Q_A_1 from './src/screens/userA/q_a_1';
 import Q_A_2 from './src/screens/userA/q_a_2';
@@ -21,6 +16,7 @@ import Q_A_4_1 from './src/screens/userA/q_a_4_1';
 import Q_A_Type from './src/screens/userA/q_a_type';
 import Q_Default_3 from './src/screens/default/q_default_3';
 import Q_Default_2 from './src/screens/default/q_default_2';
+import Q_Default_1 from './src/screens/default/q_default_1';
 import Q_A_2_2 from './src/screens/userA/q_a_2_2';
 import Q_A_1_1 from './src/screens/userA/q_a_1_1';
 import Q_A_2_3 from './src/screens/userA/q_a_2_3';
