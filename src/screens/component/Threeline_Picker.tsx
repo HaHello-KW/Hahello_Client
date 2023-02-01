@@ -24,105 +24,117 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import PType from '../converter/dateConverter';
 
 type props = {
-    pglevel: number;
-    first: string;
-    second: string;
-    third: string;
-    first_pickerType: string;
-    second_pickerType: string;
-    imgpath: object | null;
-    nextpage: string;
+  pglevel: number;
+  first: string;
+  second: string;
+  third: string;
+  first_pickerType: string;
+  second_pickerType: string;
+  imgpath: object | null;
+  nextpage: string;
 };
 
 //pickerType : datePicker, yearPicker, numberPicker, None
 function Threeline_Picker({
-    pglevel,
-    first,
-    second,
-    third,
-    first_pickerType,
-    second_pickerType,
-    imgpath,
-    nextpage,
+  pglevel,
+  first,
+  second,
+  third,
+  first_pickerType,
+  second_pickerType,
+  imgpath,
+  nextpage,
 }: props) {
-    const navigation = useNavigation();
-        if(imgpath === null){
-        if(second_pickerType == 'None'){
-            return(
-                <>
-                    <MyUpBar level={pglevel}/>
-                    <GobackButton onPress={() => navigation.pop()}/>
-                    <View style={styles.container}>
-                        <Text style={styles.text}>{first}</Text>
-                        <View style={styles.container_t}>
-                            <PType Type_of_Picker={first_pickerType}></PType>
-                            <Text style = {styles.text}>{second}</Text>
-                        </View>
-                        <View style={styles.container_t}>
-                            <Text style = {styles.text}>{third}</Text>
-                        </View>
-                    </View>
-                    <View style = {[DefaultStyle.container2]}>
-                        <NextButton destination={nextpage} disabled={false} />
-                    </View>
-                </>
-            )
-        }
-        else{
-            return(
-                <>
-                    <MyUpBar level = {pglevel}/>
-                    <GobackButton onPress={()=>navigation.pop()}/>
-                    <View style={styles.container}>
-                        <Text style={styles.text}>{first}</Text>
-                        <View style={styles.container_t}>
-                            <PType Type_of_Picker={first_pickerType}></PType>
-                            <Text style = {styles.text}>{second}</Text>
-                        </View>
-                        <View style={styles.container_t}>
-                            <PType Type_of_Picker={second_pickerType}></PType>
-                            <Text style = {styles.text}>{third}</Text>
-                        </View>
-                    </View>
-                    <View style = {[DefaultStyle.container2]}>
-                        <NextButton destination={nextpage} disabled={false} />
-                    </View>
-                </>
-            )
-        }
+  const navigation = useNavigation();
+  if (imgpath === null) {
+    if (second_pickerType == 'None') {
+      return (
+        <>
+          <MyUpBar level={pglevel} />
+          <GobackButton onPress={() => navigation.pop()} />
+          <View style={styles.container}>
+            <View style={styles.container_question}>
+              <Text style={styles.text}>{first}</Text>
+              <View style={styles.container_t}>
+                <PType Type_of_Picker={first_pickerType}></PType>
+                <Text style={styles.text}>{second}</Text>
+              </View>
+              <View style={styles.container_t}>
+                <Text style={styles.text}>{third}</Text>
+              </View>
+            </View>
+            <View style={styles.container_contents} />
+          </View>
+          <View style={[DefaultStyle.container2]}>
+            <NextButton destination={nextpage} disabled={false} />
+          </View>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <MyUpBar level={pglevel} />
+          <GobackButton onPress={() => navigation.pop()} />
+          <View style={styles.container}>
+            <Text style={styles.text}>{first}</Text>
+            <View style={styles.container_t}>
+              <PType Type_of_Picker={first_pickerType}></PType>
+              <Text style={styles.text}>{second}</Text>
+            </View>
+            <View style={styles.container_t}>
+              <PType Type_of_Picker={second_pickerType}></PType>
+              <Text style={styles.text}>{third}</Text>
+            </View>
+          </View>
+          <View style={[DefaultStyle.container2]}>
+            <NextButton destination={nextpage} disabled={false} />
+          </View>
+        </>
+      );
     }
-    else{
-        
-    }
-    
-
+  } else {
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 4,
-        backgroundColor: '#f5f5f5',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    container_t:{
-        flexDirection: "row",
-        backgroundColor: '#f5f5f5',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    textInput: {
-        fontSize: 24,
-        fontWeight: '400',
-        color: '#f47100',
-        textAlign: 'center',
-    },
-    text: {
-        fontSize: 24,
-        fontWeight: '400',
-        color: '#000000',
-        textAlign: 'center',
-    },
+  container: {
+    flex: 7,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container_t: {
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container_question: {
+    flex: 4,
+    // flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container_contents: {
+    flex: 3,
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textInput: {
+    fontSize: 24,
+    fontWeight: '400',
+    color: '#f47100',
+    textAlign: 'center',
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: '400',
+    color: '#000000',
+    textAlign: 'center',
+  },
 });
 
-export default Threeline_Picker
+export default Threeline_Picker;

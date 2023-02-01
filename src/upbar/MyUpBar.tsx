@@ -9,6 +9,8 @@ type props = {
 };
 const MyUpBar = ({level}: props, {navigation}) => {
   let arr: any = [];
+  //i 키값 부여로 인한 오류
+  //encountered two children with the same...
   for (let i = 1; i <= 7; i++) {
     i <= level
       ? arr.push(<Box key="{i}" w="12%" h={2} style={styles.boxlineDone} />)

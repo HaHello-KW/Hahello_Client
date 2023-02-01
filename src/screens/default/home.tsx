@@ -37,6 +37,22 @@ const Q_Home = () => {
         <Text style={styles.latertxt}>나중에 할래요</Text>
       </TouchableOpacity>
     </ImageBackground>
+
+    //스타일링 없는 버전
+    // <ImageBackground source={Homebg}>
+    //   <View>
+    //     <Text>환영합니다, 하해호님!</Text>
+    //     <Text>
+    //       나의 유형을 체크하면 맞춤형 콘텐츠와 건강관리를 받아보실 수 있어요!
+    //     </Text>
+    //   </View>
+    //   <TouchableOpacity onPress={() => navigation.navigate('Q_Default_1')}>
+    //     <Text>시작하기</Text>
+    //   </TouchableOpacity>
+    //   <TouchableOpacity onPress={() => null}>
+    //     <Text>나중에 할래요</Text>
+    //   </TouchableOpacity>
+    // </ImageBackground>
   );
 };
 

@@ -268,12 +268,31 @@ const RESULT_HOME = ({navigation, route}) => {
                 top: 66,
                 width: 189,
                 height: 28,
+                fontFamily: 'Noto Sans KR',
                 fontSize: 24,
                 fontWeight: '700',
                 color: '#F47100',
               }}>
               하해호님 건강여정
             </Text>
+
+            {/* "전체보기 >" 스타일 피그마와 상이하게 조정한 부분 존재 */}
+            <TouchableOpacity onPress={() => alert('전체보기 화면으로 이동')}>
+              <Text
+                style={{
+                  left: 290,
+                  top: 45,
+                  width: 80,
+                  height: 20,
+                  fontFamily: 'Noto Sans KR',
+                  fontWeight: '400',
+                  fontSize: 16,
+                  color: '#15111',
+                }}>
+                전체보기 {'>'}
+              </Text>
+            </TouchableOpacity>
+
             <View style={styles.timeLine_ex}>
               <ScrollView nestedScrollEnabled={true}>
                 <TimeLine />
@@ -880,13 +899,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     //border-top-left-radius: '24',
   },
+  //전체보기 > 버튼 피그마 기준 지정 스타일
+  // viewAll: {
+  //   width: 59,
+  //   height: 16,
+  //   left: 281,
+  //   // top: 1773,
+  //   fontWeight: '400',
+  //   fontSize: 16,
+  //   textAlign: 'center',
+  //   letterSpacing: -0.006,
+  //   color: '#151111',
+  // },
   timeLine_ex: {
     position: 'absolute',
     left: 20,
     top: 134,
     width: 330,
-    height: 250,
-    //height: 350,
+    // height: 250,
+    height: 300,
+    backgroundColor: '#ffffff',
   },
   medicalInfo: {
     position: 'absolute',
