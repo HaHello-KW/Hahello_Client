@@ -34,8 +34,11 @@ import IQ_1 from './src/screens/OTHERQ/iq_1';
 import Q_RESULT from './src/screens/OTHERQ/q_result';
 import RESULT_HOME from './src/screens/result/result_home';
 
+import {LogBox} from 'react-native';
+
 enableScreens();
 const Stack = createNativeStackNavigator();
+LogBox.ignoreAllLogs();
 
 const App = () => {
   return (
