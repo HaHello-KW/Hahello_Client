@@ -119,18 +119,32 @@ function PType({Type_of_Picker}:props){
         )
     }
     else if(Type_of_Picker == "numberPicker"){
+        interface Value {
+            val : any;
+        }
+
+        const [val, setVal] = useState<Value>({
+            val: 0,
+        });
+        
+        const handleInputChange = (key: any, value: any) => {
+            setVal(prevState => ({
+              ...prevState,
+              [key]: value,
+            }));
+        };
+
         return(
-            
-            <TouchableOpacity onPress={showDatePicker}>
-                <TextInput
-                    keyboardType="decimal-pad"
-                    style={styles.textInput}
-                    placeholder='n'
-                    placeholderTextColor="#C1C1C1"
-                    underlineColorAndroid="transparent"
-                />
-            </TouchableOpacity>
-            
+            <TextInput
+                value={val.val}
+                style={styles.input}
+                placeholderTextColor="#C1C1C1"
+                onChangeText={num=>{
+                    handleInputChange('val',num);
+                }}
+                placeholder="n"
+                keyboardType="numeric"
+            />
         )
     }
 }
@@ -138,14 +152,14 @@ function PType({Type_of_Picker}:props){
 const styles = StyleSheet.create({
     container: {
         flex: 4,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#ffffff',
         alignItems: 'center',
         justifyContent: 'center',
     },
     //flex를 zero로 하여 두번째 줄에 바로 이어가게
     container_t:{
         flexDirection: "row",
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#ffffff',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -154,13 +168,22 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         color: '#f47100',
         textAlign: 'center',
+        backgroundColor: '#ffffff',
     },
     text: {
         fontSize: 24,
         fontWeight: '400',
         color: '#000000',
         textAlign: 'center',
+        backgroundColor: '#ffffff',
     },
+    input: {
+        alignItems: 'center',
+        fontSize: 24,
+        fontWeight: '400',
+        color: '#F47100',
+        justifyContent: 'center',
+      },
     
 });
 
