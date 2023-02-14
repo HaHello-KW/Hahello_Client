@@ -38,6 +38,13 @@ type props = {
   // onPress: () => void;
 };
 
+//navigation 구현 아이디어
+//usenavigation이 아닌, setcontent로 다음 인덱스의 페이지를 갖고온다?
+//nextbutton press -> setcontent pagecontents[0] -> pagecontents[1]
+//같은 느낌으로 goback button도
+//gobacbutton press -> setcontent pagecontents[1] -> pagecontents[0]
+//reducer? redux? 로 상태 관리??
+
 function NextButton({destination, disabled}: props) {
   const navigation = useNavigation();
   // const [disable, setDisable] = useState(true);

@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Box, HStack} from '@react-native-material/core';
-import PropTypes from 'prop-types';
-import GobackButton from '../Buttons/gobackButton';
+// import PropTypes from 'prop-types';
+// import GobackButton from '../Buttons/gobackButton';
 
 type props = {
   level: number;
@@ -28,13 +28,13 @@ const MyUpBar = ({level}: props, {navigation}) => {
   );
 };
 
-MyUpBar.defaultProps = {
-  level: '0',
-};
+// MyUpBar.defaultProps = {
+//   level: '0',
+// };
 
-MyUpBar.propTypes = {
-  level: PropTypes.string,
-};
+// MyUpBar.propTypes = {
+//   level: PropTypes.string,
+// };
 
 const styles = StyleSheet.create({
   container: {

@@ -55,7 +55,7 @@ function Button_Selector({
   //idx, newArr에 빨간줄이 뜨는 이유는??
 
   const newArr = Array(content.length).fill(false);
-  const handlePress = (idx: number | any) => {
+  const handlePress = (idx: number) => {
     newArr[idx] = true;
     setIsButtonSelect(newArr);
   };

@@ -1,0 +1,51 @@
+const Test_contents = {
+  default_question: [
+    {
+      pgLevel: 1,
+      questionType: 'Button_Selector',
+      questionTxt: '나는',
+      selectionTxt: [
+        '난소 건강을 유지하고 싶어',
+        '난자 냉동 계획이 있어',
+        '난임 시술 계획이 있어',
+        '현재 시술을 하고 있어 (난자 냉동, 난임 시술)',
+        '갱년기 준비와 관리를 하고 싶어',
+      ],
+      firstPickerType: null,
+      firstlineTxt: null,
+      secondPickerType: null,
+      secondlineTxt: null,
+      thirdPickerType: null,
+      thirdlineTxt: null,
+      nextpage: 'q_d_2',
+    },
+    {
+      pgLevel: 2,
+      questionType: 'Threeline_Picker',
+      questionTxt: null,
+      selectionTxt: null,
+      firstPickerType: 'none',
+      firstlineTxt: 'hi hello',
+      secondPickerType: 'datePicker',
+      secondlineTxt: 'testing',
+      thirdPickerType: 'yearPicker',
+      thirdlineTxt: 'please',
+      nextpage: 'none',
+    },
+    {
+      pgLevel: 3,
+      questionType: 'Threeline_Picker',
+      questionTxt: null,
+      selectionTxt: null,
+      firstPickerType: 'none',
+      firstlineTxt: 'hi hello2',
+      secondPickerType: 'datePicker',
+      secondlineTxt: 'testing2',
+      thirdPickerType: 'yearPicker',
+      thirdlineTxt: 'please2',
+      nextpage: 'none',
+    },
+  ],
+};
+
+export default Test_contents;
