@@ -1,0 +1,49 @@
+[
+    {
+      "id": 3,
+      "pgLevel": 4,
+      "questionType": "Button_Selector",
+      "questionTxt": "나는",
+      "selectionTxt": [
+        "결혼하고 싶어",
+        "결혼 생각이 없어",
+        "아직 잘 모르겠어"
+      ],
+      "firstPickerType": null,
+      "firstlineTxt": null,
+      "secondPickerType": null,
+      "secondlineTxt": null,
+      "thirdPickerType": null,
+      "thirdlineTxt": null
+    },
+    {
+      "id": 4,
+      "pgLevel": 4,
+      "questionType": "Threeline_Picker",
+      "questionTxt": null,
+      "selectionTxt": null,
+      "firstPickerType": "none",
+      "firstlineTxt": "나는",
+      "secondPickerType": "numberPicker",
+      "secondlineTxt": "살쯤에",
+      "thirdPickerType": "none",
+      "thirdlineTxt": "결혼하면 좋겠어"
+    },
+    {
+        "id": 5,
+        "pgLevel": 5,
+        "questionType": "Button_Selector",
+        "questionTxt": "나는 아이를 ",
+        "selectionTxt": [
+          "갖고 싶어",
+          "갖고 싶은 생각이 없어"
+        ],
+        "firstPickerType": null,
+        "firstlineTxt": null,
+        "secondPickerType": null,
+        "secondlineTxt": null,
+        "thirdPickerType": null,
+        "thirdlineTxt": null
+      }
+  ]
+  
