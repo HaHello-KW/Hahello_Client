@@ -10,17 +10,13 @@ import {
 import {defaultPageModel} from '../models/defaultPageModel';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import PType from './dateConverter';
-import GobackButton from './gobackButton';
-import MyUpBar from './MyUpBar';
-import NextButton from './nextButton';
 
 type defaultPageProps = {
-  index: number;
   pageContents: defaultPageModel;
   //handling function 추후 ㄱㄱ
 };
 
-function DefaultPage({index, pageContents}: defaultPageProps) {
+function DefaultPage({pageContents}: defaultPageProps) {
   // const navigation = useNavigation();
 
   // 질문 유형=button selector
@@ -33,6 +29,7 @@ function DefaultPage({index, pageContents}: defaultPageProps) {
     const handlePress = (idx: number) => {
       newArr[idx] = true;
       setIsButtonSelect(newArr);
+      console.log(idx);
     };
 
     /*

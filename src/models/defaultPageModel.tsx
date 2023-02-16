@@ -1,4 +1,5 @@
 export interface defaultPageModel {
+  id: number;
   pgLevel: number;
   questionType: string;
   questionTxt: any;

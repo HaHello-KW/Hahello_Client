@@ -14,14 +14,14 @@ export const defaultPageStyles = StyleSheet.create({
   //button selector question
   container_bs_q: {
     flex: 1.5,
-    backgroundColor: '#123123',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   //button selector content
   container_bs_c: {
     flex: 5.5,
-    backgroundColor: '#236743',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -40,8 +40,7 @@ export const defaultPageStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-
-  //next button
+  //next button container
   container_next: {
     flex: 1.5,
     width: '100%',

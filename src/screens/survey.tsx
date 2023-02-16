@@ -8,10 +8,9 @@ import GobackButton from '../components/gobackButton';
 import DefaultPage from '../components/defaultPage';
 
 //for testing
-import Test_contents from '../txtCollection/testing';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
-import {Pressable} from '@react-native-material/core';
+import testing from '../txtCollection/testing.json';
 
 //survey에 goback button, next button, myupbar를 넣으면 안되는 것인가??
 //됨 -> routing기능 넣어도? reducer? redux?
@@ -19,6 +18,7 @@ import {Pressable} from '@react-native-material/core';
 const Survey = () => {
   // const [contents, setContents] = useState([]);
   // const [defaultpage, setDefaultPage] = useState<defaultPageModel>({
+  //   id: 0,
   //   pgLevel: 0,
   //   questionType: '',
   //   questionTxt: '',
@@ -40,22 +40,32 @@ const Survey = () => {
   //   });
   // }, []);
 
+  //iterator 쓸거면 굳이 navigation 안갖고와도 될거같은데...?
   // const navigation = useNavigation();
 
-  //이런 접근 괜찮나요??
-
-  let a = 0;
-  const [contents, setContents] = useState(Test_contents.default_question[a]);
+  var [iterator, setIterator] = useState(0);
+  const [contents, setContents] = useState(testing[iterator]);
 
   const handleGoback = () => {
-    // a--;
-    // setContents(Test_contents.default_question[a]);
+    if (iterator > 0) {
+      iterator--;
+      setIterator(iterator);
+    } else {
+      iterator = 0;
+      setIterator(iterator);
+    }
+    setContents(testing[iterator]);
   };
 
   const handleNext = () => {
-    // a++;
-    // setContents(Test_contents.default_question[a]);
-    // console.log(a);
+    if (iterator < testing.length) {
+      iterator++;
+      setIterator(iterator);
+    } else {
+      iterator = testing.length - 1;
+      setIterator(iterator);
+    }
+    setContents(testing[iterator]);
   };
 
   //jsx구성요소 오류 해결 필요
@@ -64,15 +74,34 @@ const Survey = () => {
     <>
       <MyUpBar level={contents.pgLevel} />
       <GobackButton onPress={handleGoback} />
-      <DefaultPage index={0} pageContents={contents} />
+      <DefaultPage pageContents={contents} />
       <View style={[defaultPageStyles.container_next]}>
         {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
-        <Pressable onPress={handleNext}>
-          <Text>next</Text>
-        </Pressable>
+        <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>
+          <Text style={styles.nxt_txt}>다음</Text>
+        </TouchableOpacity>
       </View>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  nxt_bt: {
+    justifyContent: 'center',
+    backgroundColor: '#F47100',
+    marginTop: '2%',
+    //크기 px아닌 %로 설정
+    //selection button box와 동일한 구조로
+    width: '70%',
+    height: '45%',
+    borderRadius: 5,
+  },
+  nxt_txt: {
+    fontSize: 16,
+    fontWeight: '400',
+    textAlign: 'center',
+    color: '#FBFBFB',
+  },
+});
 
 export default Survey;
