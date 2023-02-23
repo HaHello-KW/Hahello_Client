@@ -10,8 +10,14 @@ import {
 import {defaultPageModel} from '../models/defaultPageModel';
 import {TypePageModel} from '../models/typePageModel';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
+//import {UserStyle} from '../styles/typePageStyles';
 import PType from './dateConverter';
+
 import {UserStyle} from '../styles/typePageStyles';
+
+//for test
+import UserImg from './userImg';
+import UserImgHQ from './userImgHQ';
 
 import SelectionButton from './selectionButton';
 type typePageProps = {
@@ -46,29 +52,15 @@ function TypePage({pageContents}: typePageProps) {
       console.log(idx);
     };
 
-    /*
-        const setCount = () => {
-        count = content.length;
-        return count;
-        };
-        setCount();
-        useEffect(() => {
-            console.log(newArr);
-        }, [newArr]);
-    
-        */
-
     return (
       <>
         {/* 여기에 넣는게 맞나? 아니면 screen의 survey에?  */}
         {/* <MyUpBar level={pageContents.pgLevel} /> */}
         {/* <GobackButton onPress={() => navigation.pop()} /> */}
-        <View style={[defaultPageStyles.container_bs_q]}>
-          <Text style={[defaultPageStyles.txt]}>
-            {pageContents.questionTxt}
-          </Text>
+        <View style={[UserStyle.container_bs_q]}>
+          <Text style={[UserStyle.txt]}>{pageContents.questionTxt}</Text>
         </View>
-        <View style={[defaultPageStyles.container_bs_c]}>
+        <View style={[UserStyle.container_bs_c]}>
           {pageContents.selectionTxt.map(function (value: any, index: number) {
             return (
               //왜 가려져서 나오지?? scrollview의 문제인가? 스타일링 관련해서 알아볼 것
@@ -111,21 +103,21 @@ function TypePage({pageContents}: typePageProps) {
     return (
       <>
         {/* <MyUpBar level={pageContents.pgLevel} /> */}
-        <View style={[defaultPageStyles.container_tlp_q]}>
-          <View style={styles.container_tlp_line}>
+        <View style={[UserStyle.container_tlp_q]}>
+          <View style={UserStyle.container_tlp_line}>
             <PType Type_of_Picker={pageContents.firstPickerType}></PType>
             <Text style={styles.tlp_txt}>{pageContents.firstlineTxt}</Text>
           </View>
-          <View style={styles.container_tlp_line}>
+          <View style={UserStyle.container_tlp_line}>
             <PType Type_of_Picker={pageContents.secondPickerType} />
             <Text style={styles.tlp_txt}>{pageContents.secondlineTxt}</Text>
           </View>
-          <View style={styles.container_tlp_line}>
+          <View style={UserStyle.container_tlp_line}>
             <PType Type_of_Picker={pageContents.thirdPickerType} />
             <Text style={styles.tlp_txt}>{pageContents.thirdlineTxt}</Text>
           </View>
         </View>
-        <View style={[defaultPageStyles.container_tlp_c]} />
+        <View style={[UserStyle.container_tlp_c]} />
         {/* <View style={[defaultPageStyles.container_next]}>
               <NextButton destination={pageContents.nextpage} disabled={false} />
               <Text>hi hello this is test</Text>
@@ -138,26 +130,24 @@ function TypePage({pageContents}: typePageProps) {
   ) {
     return (
       <>
-        <View style={[UserStyle.container]} />
-        <View style={[UserStyle.container3_1]}>
-          <Text style={styles.blacktxt}>{pageContents.firstlineTxt}</Text>
-          <PType Type_of_Picker={pageContents.firstPickerType}></PType>
-        </View>
-        <View style={[UserStyle.container3_2]}>
-          <Text style={styles.blacktxt}>{pageContents.secondlineTxt}</Text>
-          <Text style={[UserStyle.descriptionGray]}>보충보충</Text>
-          <View style={styles.container_test}>
+        {}
+        <View style={UserStyle.container_slp_q}>
+          <View style={UserStyle.container3_1}>
+            <Text style={UserStyle.blacktxt}>{pageContents.firstlineTxt}</Text>
+            <PType Type_of_Picker={pageContents.firstPickerType}></PType>
+          </View>
+          <View style={UserStyle.container3_2}>
+            <Text style={UserStyle.blacktxt}>{pageContents.secondlineTxt}</Text>
+            <Text style={[UserStyle.descriptionGray]}>보충보충</Text>
             <PType Type_of_Picker={pageContents.secondPickerType}></PType>
           </View>
-        </View>
-        <View style={[UserStyle.container3_3]}>
-          <Text style={styles.blacktxt}>{pageContents.thirdlineTxt}</Text>
-          <Text style={[UserStyle.descriptionGray]}>보충보충</Text>
-          <View style={styles.container_test}>
+          <View style={UserStyle.container3_3}>
+            <Text style={UserStyle.blacktxt}>{pageContents.thirdlineTxt}</Text>
+            <Text style={[UserStyle.descriptionGray]}>보충보충</Text>
             <PType Type_of_Picker={pageContents.thirdPickerType}></PType>
           </View>
         </View>
-        {/* <Text>this is Six_line</Text> */}
+        {}
       </>
     );
   } else if (
@@ -171,10 +161,6 @@ function TypePage({pageContents}: typePageProps) {
       newArr[idx] = true;
       setIsButtonSelect2(newArr);
     };
-    // useEffect(() => {
-    //   console.log(newArr);
-    // }, [newArr]);
-
     return (
       <>
         <View style={styles.container}>
@@ -257,43 +243,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  //이 밑은 Sixline_picker.tsx에서 가져온 스타일 객체들임
-  ////////////////////
-  textInput: {
-    fontSize: 24,
-    fontWeight: '400',
-    color: '#F47100',
-    height: 50,
-    width: 300,
-    textAlign: 'center',
-    //borderColor: '#000000',
-    //borderWidth: 1,
-    //borderRadius: 12,
-    padding: 10,
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: '400',
-    color: '#C1C1C1',
-    textAlign: 'center',
-  },
-  boxline: {
-    marginTop: 80,
-    marginBottom: '10%',
-    marginRight: '3%',
-    marginLeft: '3%',
-  },
-  boxlineDone: {
-    backgroundColor: '#F47100',
-  },
-  boxlineYet: {
-    backgroundColor: '#FFFFFF',
-  },
-  buttonSelection: {
-    backgroundColor: '#F2F2F2',
-    width: 300,
-    height: 40,
-  },
   blacktxt: {
     fontWeight: '500',
     fontSize: 16,
@@ -301,41 +250,8 @@ const styles = StyleSheet.create({
     color: '#000000',
     textAlign: 'center',
   },
-  coloredtxt: {
-    fontWeight: '500',
-    fontSize: 16,
-    lineHeight: 23,
-    color: '#FF7C00',
-  },
-  input: {
-    alignItems: 'center',
-    fontSize: 24,
-    fontWeight: '400',
-    color: '#F47100',
-    justifyContent: 'center',
-  },
-  container_test: {
-    // flex: 1,
-    flexDirection: 'row',
-    // width: 240,
-    // height: 140,
-    // backgroundColor: '#008000',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    // lineHeight: 34.75,
-  },
-  image: {
-    position: 'absolute',
-    left: '36%',
-    top: '13%',
-    width: 105,
-    height: 105,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
 
-  //이 밑은 하이브리드tsx파일에서 가져온 스타일 객체
+  //여기밑은 합치기 전 백성현 파일의 하이브리드타입 파일에서 가져옴
   container: {
     flex: 7,
     backgroundColor: '#ffffff',

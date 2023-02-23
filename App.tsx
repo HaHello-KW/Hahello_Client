@@ -24,14 +24,17 @@ import RESULT_HOME from './src/screens/result/result_home';
 import {LogBox} from 'react-native';
 import Survey from './src/screens/survey';
 import Survey2 from './src/screens/survey2';
+
 // enableScreens();
 // const Stack = createNativeStackNavigator();
 LogBox.ignoreAllLogs();
 
+enableScreens();
+const Stack = createNativeStackNavigator();
+
 const App = () => {
   return (
     <>
-      {/* <Survey></Survey> */}
       <Survey2></Survey2>
     </>
   );

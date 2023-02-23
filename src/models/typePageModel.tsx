@@ -1,4 +1,4 @@
-export interface typePageModel {
+export interface TypePageModel {
   id: number;
   //imgpath : any;
   pgLevel: number;
