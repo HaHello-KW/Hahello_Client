@@ -11,7 +11,7 @@ import DefaultPage from '../components/defaultPage';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
-import testing2 from '../txtCollection/testing2.json'
+import testing2 from '../txtCollection/testing2.json';
 import TypePage from '../components/typePage';
 
 //survey에 goback button, next button, myupbar를 넣으면 안되는 것인가??
@@ -45,6 +45,14 @@ const Survey2 = () => {
   //iterator 쓸거면 굳이 navigation 안갖고와도 될거같은데...?
   // const navigation = useNavigation();
 
+  //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
+  const [input, setInput] = useState(0);
+  function parentFucntion(x: any) {
+    // console.log(x);
+    setInput(x);
+  }
+  console.log(input);
+
   var [iterator, setIterator] = useState(0);
   const [contents, setContents] = useState(testing2[iterator]);
 
@@ -76,7 +84,7 @@ const Survey2 = () => {
     <>
       <MyUpBar level={contents.pgLevel} />
       <GobackButton onPress={handleGoback} />
-      <TypePage pageContents={contents} />
+      <TypePage pageContents={contents} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>
         {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>

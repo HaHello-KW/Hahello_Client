@@ -85,7 +85,6 @@ function PType({Type_of_Picker, pickDate}: props) {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [text, onChangeText] = useState('');
-  pickDate(text);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -100,6 +99,7 @@ function PType({Type_of_Picker, pickDate}: props) {
       hideDatePicker();
       onChangeText(date.format('yyyy년 MM월 dd일'));
     };
+    pickDate(text);
 
     con_day = year + '년 ' + month + '월 ' + day + '일 ';
 
@@ -130,6 +130,7 @@ function PType({Type_of_Picker, pickDate}: props) {
       hideDatePicker();
       onChangeText(date.format('yyyy년'));
     };
+    pickDate(text);
 
     con_day = year + '년 ';
 
@@ -156,6 +157,11 @@ function PType({Type_of_Picker, pickDate}: props) {
       </>
     );
   } else if (Type_of_Picker == 'numberPicker') {
+    // const handleConfirm = date => {
+    //   hideDatePicker();
+    //   onChangeText(date.format('yyyy년'));
+    // };
+    pickDate(text);
     return (
       <>
         <TouchableOpacity onPress={showDatePicker}>
@@ -165,6 +171,7 @@ function PType({Type_of_Picker, pickDate}: props) {
             placeholder="n"
             placeholderTextColor="#C1C1C1"
             underlineColorAndroid="transparent"
+            onChangeText={onChangeText}
           />
         </TouchableOpacity>
       </>

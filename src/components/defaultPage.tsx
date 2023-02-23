@@ -15,11 +15,11 @@ import SelectionButton from './selectionButton';
 
 type defaultPageProps = {
   pageContents: defaultPageModel;
-  parentFucntion: any;
+  parentFunction: any;
   //handling function 추후 ㄱㄱ
 };
 
-function DefaultPage({pageContents, parentFucntion}: defaultPageProps) {
+function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
   // const navigation = useNavigation();
 
   // 질문 유형=button selector
@@ -43,7 +43,7 @@ function DefaultPage({pageContents, parentFucntion}: defaultPageProps) {
     //이에 따라 type이 정해진다 a-1, a-2, ..., e-5
 
     //부모 컴포넌트로 getidx 전달
-    parentFucntion(getidx);
+    parentFunction(getidx);
     //
     //console.log(getidx);
 
@@ -113,7 +113,7 @@ function DefaultPage({pageContents, parentFucntion}: defaultPageProps) {
     pageContents.selectionTxt == null
   ) {
     function pickDateFunction(x: any) {
-      parentFucntion(x);
+      parentFunction(x);
     }
     return (
       <>

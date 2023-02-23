@@ -80,29 +80,12 @@ const Survey = () => {
   }
   console.log(input);
 
-  //testing2.json = default~type 모두 한꺼번에 있는거, 근데 이건 아닌듯?
-  // var [itr1, setItr1] = useState(0);
-  // var [itr2, setItr2] = useState(0);
-  // const pageTypes = Object.keys(testing);
-  // var [nowPagetype, setNowPagetype] = useState(pageTypes[itr1]);
-  // const [nowPage, setNowPage] = useState(testing[nowPagetype]);
-  // const [contents, setContents] = useState(nowPage[itr2]);
-
-  //iterator 쓸거면 굳이 navigation 안갖고와도 될거같은데...?
-  // const navigation = useNavigation();
-
-  //현재처럼 말고 페이지 하나씩 json형태로 갖고오면 안되는 것인가?
-  //handlenext마다 axios_post해서 서버로 값 보내고 그에 따라 다음 페이지 가져오기,,,는 안되려나?
-  //
-  //현재는 각 type별로 모든 페이지들의 정보가 담긴 json 가져오는 형태...
-  //iterator로 다음 페이지를 갖고오는 것
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   // const [contents, setContents] = useState('');
 
   var [iterator, setIterator] = useState(0);
-  const [contents, setContents] = useState(testing);
-  const [nowPage, setNowPage] = useState(contents[iterator]);
+  const [contents, setContents] = useState(testing[iterator]);
 
   /*
   handleGoback, handleNext에 포함되어야 하나?
@@ -180,27 +163,27 @@ const Survey = () => {
       iterator = 0;
       setIterator(iterator);
     }
-    setNowPage(contents[iterator]);
+    setContents(testing[iterator]);
   };
 
   const handleNext = () => {
-    if (iterator < contents.length) {
+    if (iterator < testing.length) {
       iterator++;
       setIterator(iterator);
     } else {
-      iterator = contents.length - 1;
+      iterator = testing.length - 1;
       setIterator(iterator);
     }
     // setNowPage(pageName[iterator]);
-    setNowPage(contents[iterator]);
+    setContents(testing[iterator]);
   };
 
   //jsx구성요소 오류 해결 필요
   return (
     <>
-      <MyUpBar level={nowPage.pgLevel} />
+      <MyUpBar level={contents.pgLevel} />
       <GobackButton onPress={handleGoback} />
-      <DefaultPage pageContents={nowPage} parentFucntion={parentFucntion} />
+      <DefaultPage pageContents={contents} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>
         {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>

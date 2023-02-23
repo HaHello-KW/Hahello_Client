@@ -35,7 +35,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <>
-    <Survey2></Survey2>
+      <Survey2></Survey2>
     </>
   );
 
