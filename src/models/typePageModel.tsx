@@ -1,10 +1,17 @@
-export interface typePageModel {
+export interface TypePageModel {
+  id: number;
+  //imgpath : any;
   pgLevel: number;
-  imgPath: any;
   questionType: string;
   questionTxt: any;
-  selectionTxt: any;
-  pickerType: any;
+  selectionTxt: string[] | null;
+  firstPickerType: any;
+  firstlineTxt: any;
+  secondPickerType: any;
+  secondlineTxt: any;
+  thirdPickerType: any;
+  thirdlineTxt: any;
+  nextpage: string;
 }
 
-//imgpath, questiontxt, selectiontxt, pickertype -> array? object? string? any?
+//questiontxt, selectiontxt, pickertype -> array? object? string? any?
