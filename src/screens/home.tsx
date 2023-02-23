@@ -14,7 +14,7 @@ import {
 
 import {ImageBackground} from 'react-native';
 // import {RootStackParamList} from '../../../App';
-import Homebg from '../../../assets/images/home_start.png';
+import Homebg from '../../assets/images/home_start.png';
 import GobackButton from '../../Buttons/gobackButton';
 import NextButton from '../../Buttons/nextButton';
 
@@ -30,7 +30,7 @@ const Q_Home = () => {
       </View>
       <TouchableOpacity
         style={styles.startbutton}
-        onPress={() => navigation.navigate('Q_Default_1')}>
+        onPress={() => navigation.navigate('Survey')}>
         <Text style={styles.starttxt}>시작하기</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.laterbutton} onPress={() => null}>

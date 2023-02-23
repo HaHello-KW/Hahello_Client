@@ -35,7 +35,28 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <>
-    <Survey2></Survey2>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="Home"
+              component={Q_Home}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="Survey"
+              component={Survey}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="Survey2"
+              component={Survey2}
+            />
+
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </>
   );
 

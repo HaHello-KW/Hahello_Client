@@ -162,9 +162,10 @@ function TypePage({pageContents}:typePageProps){
         pageContents.questionType == 'Hybrid_Picker' &&
         pageContents.selectionTxt == null
       ){
+        const [isButtonSelect2, setIsButtonSelect2] = useState('')
         return(
-            <>
-            </>
+          <>
+          </>
         )
       }
 }
@@ -208,6 +209,50 @@ const styles = StyleSheet.create({
       fontWeight: '500',
       fontSize: 16,
       lineHeight: 23,
+      color: '#000000',
+      textAlign: 'center',
+    },
+    container: {
+      flex: 7,
+      backgroundColor: '#ffffff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    container_t: {
+      flexDirection: 'row',
+      backgroundColor: '#ffffff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    container_s: {
+      flexDirection: 'column',
+      backgroundColor: '#ffffff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    container_question: {
+      flex: 4,
+      // flexDirection: 'row',
+      backgroundColor: '#ffffff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    container_contents: {
+      flex: 3,
+      flexDirection: 'row',
+      backgroundColor: '#ffffff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    textInput_H: {
+      fontSize: 24,
+      fontWeight: '400',
+      color: '#f47100',
+      textAlign: 'center',
+    },
+    text_H: {
+      fontSize: 24,
+      fontWeight: '400',
       color: '#000000',
       textAlign: 'center',
     },

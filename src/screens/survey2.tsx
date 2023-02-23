@@ -6,7 +6,7 @@ import MyUpBar from '../components/MyUpBar';
 import GobackButton from '../components/gobackButton';
 // import {useNavigation} from '@react-navigation/native';
 import DefaultPage from '../components/defaultPage';
-
+import {useNavigation} from '@react-navigation/native';
 //for testing
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
@@ -42,33 +42,45 @@ const Survey2 = () => {
   //   });
   // }, []);
 
-  //iterator 쓸거면 굳이 navigation 안갖고와도 될거같은데...?
+  // iterator 쓸거면 굳이 navigation 안갖고와도 될거같은데...?
   // const navigation = useNavigation();
 
+  
   var [iterator, setIterator] = useState(0);
   const [contents, setContents] = useState(testing2[iterator]);
+  const navigation=useNavigation();
 
   const handleGoback = () => {
     if (iterator > 0) {
       iterator--;
       setIterator(iterator);
     } else {
-      iterator = 0;
-      setIterator(iterator);
+      navigation.pop();
     }
     setContents(testing2[iterator]);
   };
 
   const handleNext = () => {
     if (iterator < testing2.length) {
-      iterator++;
-      setIterator(iterator);
-    } else {
-      iterator = testing2.length - 1;
-      setIterator(iterator);
+      if (iterator === testing2.length - 1) {
+        //navigation
+      } else {
+        setIterator(++iterator)
+      }
     }
     setContents(testing2[iterator]);
+    
   };
+
+  const axios_get = () => {
+    axios.get("URL")
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
 
   //jsx구성요소 오류 해결 필요
   //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?

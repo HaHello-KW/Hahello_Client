@@ -3,7 +3,6 @@ import {StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export const UserStyle = StyleSheet.create({
-  
   //sixline_picker의 스타일링
   container_slp_q: {
     flex: 7,
