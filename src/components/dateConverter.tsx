@@ -69,9 +69,10 @@ Number.prototype.zf = function (len) {
 
 type props = {
   Type_of_Picker: string;
+  pickDate: any;
 };
 
-function PType({Type_of_Picker}: props) {
+function PType({Type_of_Picker, pickDate}: props) {
   const date = new Date();
   const year = date.getFullYear();
   var month_ = date.getMonth() + 1;
@@ -84,6 +85,7 @@ function PType({Type_of_Picker}: props) {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [text, onChangeText] = useState('');
+  pickDate(text);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);

@@ -12,7 +12,7 @@ import {getStatusBarHeight} from 'react-native-status-bar-height';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface Goback {
-  onPress: () => null;
+  onPress: () => any;
 }
 
 export default class GobackButton extends Component<Goback, any> {

@@ -7,16 +7,19 @@ import {
   View,
   ScrollView,
 } from 'react-native';
+import {set} from 'react-native-reanimated';
 import {defaultPageModel} from '../models/defaultPageModel';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import PType from './dateConverter';
+import SelectionButton from './selectionButton';
 
 type defaultPageProps = {
   pageContents: defaultPageModel;
+  parentFucntion: any;
   //handling function 추후 ㄱㄱ
 };
 
-function DefaultPage({pageContents}: defaultPageProps) {
+function DefaultPage({pageContents, parentFucntion}: defaultPageProps) {
   // const navigation = useNavigation();
 
   // 질문 유형=button selector
@@ -25,12 +28,35 @@ function DefaultPage({pageContents}: defaultPageProps) {
     pageContents.selectionTxt != null
   ) {
     const [isButtonSelect, setIsButtonSelect] = useState('');
+    // const [newArr, setnewArr] = useState(Array(pageContents.selectionTxt.length).fill(false));
     const newArr = Array(pageContents.selectionTxt.length).fill(false);
+    const [getidx, setgetidx] = useState(0);
     const handlePress = (idx: number) => {
       newArr[idx] = true;
+      // setnewArr(newArr);
       setIsButtonSelect(newArr);
-      console.log(idx);
+      // console.log(idx);
+      setgetidx(idx);
     };
+
+    //페이지마다 서버로 보내야하는 사용자의 선택지 답변 = getidx
+    //이에 따라 type이 정해진다 a-1, a-2, ..., e-5
+
+    //부모 컴포넌트로 getidx 전달
+    parentFucntion(getidx);
+    //
+    //console.log(getidx);
+
+    //쟤를 이용한다면... type어쩌고 어떻게 이용하지
+    //q_d_2, q_d_3의 getidx에 따라 type이 구체적으로 정해짐
+    //mock json 좀더 작성해봐서 (구조 조금 바꿔보자)
+    //iterator로 움직이든, 페이지 이름으로 움직이든 다시 재구성 해볼 것
+    //type별 testing 페이지 생각해둘 것
+    //유지보수 시점에서 봣을때 navigation vs 지금처럼 iterator...무엇이 낫나?
+    // + axios 방법 알아봐...!!
+    //iterator...? pagename으로 구분하면 ㄱㄴ하지않을까
+    //q_d_2, q_d_3 말고 usera~e정하기, user1~5정하기 뭐 그런식으로 페이지 이름을 정해버리면..
+    //ㄱㄴ하지않을까....
 
     /*
     const setCount = () => {
@@ -46,9 +72,6 @@ function DefaultPage({pageContents}: defaultPageProps) {
 
     return (
       <>
-        {/* 여기에 넣는게 맞나? 아니면 screen의 survey에?  */}
-        {/* <MyUpBar level={pageContents.pgLevel} /> */}
-        {/* <GobackButton onPress={() => navigation.pop()} /> */}
         <View style={[defaultPageStyles.container_bs_q]}>
           <Text style={[defaultPageStyles.txt]}>
             {pageContents.questionTxt}
@@ -80,11 +103,6 @@ function DefaultPage({pageContents}: defaultPageProps) {
             );
           })}
         </View>
-        {/* 여기에 넣는게 맞나? 아니면 screen의 survey에?  */}
-        {/* <View style={[defaultPageStyles.container_next]}>
-          <NextButton destination={pageContents.nextpage} disabled={false} />
-          <Text>hi hello this is test</Text>
-        </View> */}
       </>
     );
   }
@@ -94,28 +112,34 @@ function DefaultPage({pageContents}: defaultPageProps) {
     pageContents.questionType == 'Threeline_Picker' &&
     pageContents.selectionTxt == null
   ) {
+    function pickDateFunction(x: any) {
+      parentFucntion(x);
+    }
     return (
       <>
-        {/* <MyUpBar level={pageContents.pgLevel} /> */}
         <View style={[defaultPageStyles.container_tlp_q]}>
           <View style={styles.container_tlp_line}>
-            <PType Type_of_Picker={pageContents.firstPickerType}></PType>
+            <PType
+              Type_of_Picker={pageContents.firstPickerType}
+              pickDate={pickDateFunction}></PType>
             <Text style={styles.tlp_txt}>{pageContents.firstlineTxt}</Text>
           </View>
           <View style={styles.container_tlp_line}>
-            <PType Type_of_Picker={pageContents.secondPickerType} />
+            <PType
+              Type_of_Picker={pageContents.secondPickerType}
+              pickDate={pickDateFunction}
+            />
             <Text style={styles.tlp_txt}>{pageContents.secondlineTxt}</Text>
           </View>
           <View style={styles.container_tlp_line}>
-            <PType Type_of_Picker={pageContents.thirdPickerType} />
+            <PType
+              Type_of_Picker={pageContents.thirdPickerType}
+              pickDate={pickDateFunction}
+            />
             <Text style={styles.tlp_txt}>{pageContents.thirdlineTxt}</Text>
           </View>
         </View>
         <View style={[defaultPageStyles.container_tlp_c]} />
-        {/* <View style={[defaultPageStyles.container_next]}>
-          <NextButton destination={pageContents.nextpage} disabled={false} />
-          <Text>hi hello this is test</Text>
-        </View> */}
       </>
     );
   }
@@ -128,7 +152,7 @@ const styles = StyleSheet.create({
     //현재 absolute로 지정되어잇음(px단위)
     //%로 바꿔서 구현해야함ㅇㅇ 알고잇을것!! -> 바꿈, 확인 필요
     width: '85%',
-    height: '18%',
+    height: '15%',
     borderRadius: 8,
     marginBottom: '2%',
     //   width: 300,
@@ -158,10 +182,3 @@ const styles = StyleSheet.create({
 });
 
 export default DefaultPage;
-
-//230213
-//1. navigation기능 포함한거 해봐야함
-//  nextpage 어떻게 갖고올건데??
-//2. 선택한 답변 post하는거 어떻게할건데?
-//  사용자의 답변 서버로 보내는거
-// ->selection button 기능? 인덱스?어떻게?값반환??

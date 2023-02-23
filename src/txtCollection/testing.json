@@ -2,6 +2,20 @@
   {
     "id": 0,
     "pgLevel": 1,
+    "questionType": "Threeline_Picker",
+    "questionTxt": null,
+    "selectionTxt": null,
+    "firstPickerType": "none",
+    "firstlineTxt": "나는",
+    "secondPickerType": "datePicker",
+    "secondlineTxt": "에",
+    "thirdPickerType": "none",
+    "thirdlineTxt": "태어났어",
+    "nextpage": "q_d_2"
+  },
+  {
+    "id": 1,
+    "pgLevel": 2,
     "questionType": "Button_Selector",
     "questionTxt": "나는",
     "selectionTxt": [
@@ -17,34 +31,26 @@
     "secondlineTxt": null,
     "thirdPickerType": null,
     "thirdlineTxt": null,
-    "nextpage": "q_d_2"
-  },
-  {
-    "id": 1,
-    "pgLevel": 2,
-    "questionType": "Threeline_Picker",
-    "questionTxt": null,
-    "selectionTxt": null,
-    "firstPickerType": "none",
-    "firstlineTxt": "hi hello",
-    "secondPickerType": "datePicker",
-    "secondlineTxt": "testing",
-    "thirdPickerType": "yearPicker",
-    "thirdlineTxt": "please",
-    "nextpage": "none"
+    "nextpage": "q_d_3"
   },
   {
     "id": 2,
     "pgLevel": 3,
-    "questionType": "Threeline_Picker",
-    "questionTxt": null,
-    "selectionTxt": null,
-    "firstPickerType": "none",
-    "firstlineTxt": "hi hello2",
-    "secondPickerType": "datePicker",
-    "secondlineTxt": "testing2",
-    "thirdPickerType": "yearPicker",
-    "thirdlineTxt": "please2",
-    "nextpage": "none"
+    "questionType": "Button_Selector",
+    "questionTxt": "나는",
+    "selectionTxt": [
+      "결혼을 안 했어",
+      "결혼을 했어",
+      "임신 준비 중이야",
+      "자녀가 있어",
+      "임신 중이야"
+    ],
+    "firstPickerType": null,
+    "firstlineTxt": null,
+    "secondPickerType": null,
+    "secondlineTxt": null,
+    "thirdPickerType": null,
+    "thirdlineTxt": null,
+    "nextpage": "typePage"
   }
 ]
