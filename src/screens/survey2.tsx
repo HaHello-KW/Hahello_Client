@@ -17,8 +17,12 @@ import {useNavigation} from '@react-navigation/native';
 import UserImg from '../components/userImg';
 import UserAimg from '../../assets/images/userA.png';
 
-//survey에 goback button, next button, myupbar를 넣으면 안되는 것인가??
-//됨 -> routing기능 넣어도? reducer? redux?
+//asyncstorage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {storeData, getData, containsKey, removeData} from './async';
+
+//콘솔창 에러 숨기기(임시)
+console.warn = console.error = () => {};
 
 const Survey2 = () => {
   // const [contents, setContents] = useState([]);
@@ -37,17 +41,32 @@ const Survey2 = () => {
   //   nextpage: '',
   // });
 
+  const navigation = useNavigation();
+
   //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
-  const [input, setInput] = useState(0);
+  const [input, setInput] = useState(null);
   function parentFucntion(x: any) {
-    // console.log(x);
-    setInput(x);
+    useEffect(() => {
+      setInput(x);
+    }, [x]);
+
+    useEffect(() => {
+      storeData(`userinput_${iterator}`, input);
+      // getData(`userinput_${iterator}`);
+    }, [iterator] && [input]);
   }
-  // console.log(input);
+
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState('');
+  // const [contents, setContents] = useState('');
 
   var [iterator, setIterator] = useState(0);
   const [contents, setContents] = useState(testing2[iterator]);
-  const navigation = useNavigation();
+
+  //각 페이지마다 입력받은 input들을 inputarr에 담아 handlePost 통해 서버로 inputarr을 전달
+  // const [inputarr, setInputArr] = useState(
+  //   new Array(testing.length).fill(null),
+  // );
 
   const handleGoback = () => {
     if (iterator > 0) {
@@ -62,13 +81,19 @@ const Survey2 = () => {
   const handleNext = () => {
     if (iterator < testing2.length) {
       if (iterator === testing2.length - 1) {
+        console.log('testing');
+        for (let i = 0; i < testing2.length; i++) {
+          getData(`userinput_${i}`);
+        }
         //navigation
       } else {
-        setIterator(++iterator);
+        ++iterator;
+        setIterator(iterator);
       }
+      setContents(testing2[iterator]);
     }
-    setContents(testing2[iterator]);
   };
+
   //jsx구성요소 오류 해결 필요
   //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?
   return (

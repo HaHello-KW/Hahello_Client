@@ -36,18 +36,6 @@ function TypePage({pageContents, parentFunction}: typePageProps) {
     };
     parentFunction(getidx);
 
-    /*
-        const setCount = () => {
-        count = content.length;
-        return count;
-        };
-        setCount();
-        useEffect(() => {
-            console.log(newArr);
-        }, [newArr]);
-    
-        */
-
     return (
       <>
         <View style={[UserStyle.container_bs_q]}>

@@ -14,7 +14,9 @@ import testing from '../txtCollection/testing.json';
 import testing1 from '../txtCollection/testing1.json';
 import {useNavigation} from '@react-navigation/native';
 
+//asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {storeData, getData, containsKey, removeData} from './async';
 
 //콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
@@ -42,8 +44,16 @@ const Survey = () => {
   //deafultpage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
   const [input, setInput] = useState(null);
   function parentFucntion(x: any) {
-    setInput(x);
+    useEffect(() => {
+      setInput(x);
+    }, [x]);
+
+    useEffect(() => {
+      storeData(`userinput_${iterator}`, input);
+      // getData(`userinput_${iterator}`);
+    }, [iterator] && [input]);
   }
+  //이게왜...의도한건 input리셋이엇는데 아니웬걸 갑자기 마지막 iterator 해결된거같은...?
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -75,11 +85,6 @@ const Survey = () => {
     //loading 끄기
     setLoading(false);
   };
-
-  // const form = new FormData();
-  // form.append('userInput', inputarr);
-  //{ "userInput" : inputarr }
-
   const handlePost = async (event: any) => {
     try {
       //loading 상태 true로 바꿔주고
@@ -105,9 +110,9 @@ const Survey = () => {
 
   //다음 핸들러 함수들 안의 console.log들은 확인용임
   const handleGoback = () => {
-    inputarr.splice(iterator, 1, null);
-    setInputArr(inputarr);
-    console.log(inputarr);
+    // inputarr.splice(iterator, 1, null);
+    // setInputArr(inputarr);
+    // console.log(inputarr);
     if (iterator > 0) {
       iterator--;
       setIterator(iterator);
@@ -115,17 +120,29 @@ const Survey = () => {
       navigation.pop();
     }
     setContents(testing[iterator]);
-    // return inputarr;
   };
 
   //다시 해볼 것 왜 마지막은 다음을 누른 다음에서야 입력이 되는거지?
   const handleNext = () => {
-    var arr = [iterator, input];
-    inputarr.splice(iterator, 1, arr);
-    setInputArr(inputarr);
-    console.log(inputarr);
+    // inputarr.splice(iterator, 1, input);
+    // setInputArr(inputarr);
+
     if (iterator < testing.length) {
       if (iterator === testing.length - 1) {
+        // let obj = {...inputarr};
+        // let data = JSON.stringify(obj);
+        // console.log(data);
+        // AsyncStorage.setItem('userinput', data, () => {
+        //   AsyncStorage.getItem('userinput', (err, result) => {
+        //     console.log(result);
+        //     console.log(' is this sucessed? yess!! ');
+        //   });
+        // });
+
+        console.log('testing');
+        for (let i = 0; i < testing.length; i++) {
+          getData(`userinput_${i}`);
+        }
         //navigation
         navigation.navigate('Survey2');
       } else {
@@ -134,42 +151,15 @@ const Survey = () => {
       }
       setContents(testing[iterator]);
     }
-    return inputarr;
   };
-  //왜 마지막이 출력안됨? handleNext안에선 되는데?
-  console.log('test');
-  console.log(inputarr);
 
   // let obj
-  // useEffect(() => {
-  //   console.log(iterator);
-  //   console.log(input);
-  //   console.log('hihi');
-  // }, [iterator]);
-  //
   // useEffect(() => {
   //   inputarr.splice(iterator, 1, input);
   //   setInputArr(inputarr);
   //   obj = {...inputarr};
   //   console.log(obj);
   // }, []);
-
-  const handler = () => {
-    //방법1
-    // var it = iterator.toString();
-    // useEffect(() => {
-    //   AsyncStorage.setItem(it, JSON.stringify(input), () => {
-    //     AsyncStorage.mergeItem(it, JSON.stringify(input), () => {
-    //       AsyncStorage.getItem(it, (err, result) => {
-    //         console.log(result);
-    //       });
-    //     });
-    //   });
-    // }, [it]);
-    //방법2
-    // let data = JSON.stringify(obj);
-    // AsyncStorage.setItem('userinput', data, () => {});
-  };
 
   //jsx구성요소 오류 해결 필요
   return (
