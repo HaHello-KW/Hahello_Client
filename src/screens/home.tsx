@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Button,
   View,
@@ -11,15 +11,16 @@ import {
   TextInput,
   Touchable,
 } from 'react-native';
-
+import Axios from 'axios';
 import {ImageBackground} from 'react-native';
 // import {RootStackParamList} from '../../../App';
-import Homebg from '../../../assets/images/home_start.png';
+import Homebg from '../../assets/images/home_start.png';
 import GobackButton from '../../Buttons/gobackButton';
 import NextButton from '../../Buttons/nextButton';
 
 const Q_Home = () => {
   const navigation = useNavigation();
+
   return (
     <ImageBackground source={Homebg} style={styles.image}>
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -30,7 +31,9 @@ const Q_Home = () => {
       </View>
       <TouchableOpacity
         style={styles.startbutton}
-        onPress={() => navigation.navigate('Q_Default_1')}>
+        onPress={() => {
+          navigation.navigate('Survey');
+        }}>
         <Text style={styles.starttxt}>시작하기</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.laterbutton} onPress={() => null}>

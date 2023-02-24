@@ -12,10 +12,12 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
 import testing1 from '../txtCollection/testing1.json';
+import {useNavigation} from '@react-navigation/native';
 
-// type testingType = {
-//   [key: string]: any;
-// };
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+//콘솔창 에러 숨기기(임시)
+console.warn = console.error = () => {};
 
 const Survey = () => {
   // const [contents, setContents] = useState([]);
@@ -34,148 +36,139 @@ const Survey = () => {
   //   nextpage: '',
   // });
 
-  /*
-  axios 예시
-
-  useEffect(() => {
-    axios.get(url).then(response => {
-      setDefaultPage(response.data);
-    });
-  }, []);
-
-  const axios_get = () => {
-	axios.get("http://localhost:8080/get")
-    	.then((response) => {
-        	console.log(response);
-        })
-        .catch((error) => {
-        	console.log(error);
-        })
-}
-
-  const axios_post = () => {
-	// const data = {
-  //   	name : 'name',
-  //       age: 23
-  //   }
-    
-    axios.post("http://localhost:8000/post", data)
-    	.then((response => {
-        	console.log(response)
-        })
-        .catch((error) => {
-        	console.log(error);
-        })
-}
-*/
-
-  //서버로 전달할 값 어디다가 저장해...?
-  //-> 밑의 const [input, setInput]으로 전달 ㄱㄴ할듯??
+  //survey -> survey2
+  const navigation = useNavigation();
 
   //deafultpage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
-  const [input, setInput] = useState();
+  const [input, setInput] = useState(null);
   function parentFucntion(x: any) {
-    // console.log(x);
     setInput(x);
   }
-  console.log(input);
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   // const [contents, setContents] = useState('');
 
   var [iterator, setIterator] = useState(0);
   const [contents, setContents] = useState(testing[iterator]);
 
-  /*
-  handleGoback, handleNext에 포함되어야 하나?
-  next버튼 누를때마다 사용자가 입력한 거 전달해서...그에 맞게 다음 페이지 json 로딩...
-  그러면 iterator 필요없고 navigation도 필요없지 않나...? 아닌가...?
+  //각 페이지마다 입력받은 input들을 inputarr에 담아 handlePost 통해 서버로 inputarr을 전달
+  const [inputarr, setInputArr] = useState(
+    new Array(testing.length).fill(null),
+  );
 
-  const handleGet = async() => {
+  //handleget? home의 시작 버튼...? 음
+  const handleGet = async () => {
     try {
       //요청 시작 할 때에는 error, contents 초기화
-      setError(null);
-      setContents(null);
+      setError('');
+      // setContents(null);
       //loading 상태를 true로 바꿈
-      setLoding(true);
+      setLoading(true);
 
-      const response = await axios.get('어쩌고 url', {
-        params: {
-          id: 어쩌고
-          name: 저쩌고
-          ...
-        }
-      });
-
-      //데이터는 response.data 안에 들어있다. 
+      const response = await axios.get('~/survey/default');
+      //데이터는 response.data 안에 들어있다. or response.data.data
       setContents(response.data);
-    } catch(e) {
-      setError(e);
+    } catch (error) {
+      setError('An error has occurred');
     }
     //loading 끄기
     setLoading(false);
   };
 
-  // 한페이지씩 갖고오는게 아니라면...? -> form 형식으로 데이터 전달해야하나...?
-  //const form - new FormData();
-  //form.append(어쩌고, 저쩌고);
-  //axios.post('어쩌고url', form).then ~
+  // const form = new FormData();
+  // form.append('userInput', inputarr);
+  //{ "userInput" : inputarr }
 
-  const handlePost = async (event) => {
-    // if (!fullName.trim() || !email.trim()) {
-    //   alert("Name or Email is invalid");
-    //   return;
-    // }
-    
+  const handlePost = async (event: any) => {
     try {
       //loading 상태 true로 바꿔주고
       setLoading(true);
-      //error, contents 초기화 안해도 되나..?
-      //input 값을 서버로 전달!! 맞겠지?
-      const response = await axios.post(`저쩌고 url`, {
-        input
-      });
+      //error, contents 초기화 안해도 되나..? 필요하다면 추가할 것
+      //input arr 값을 서버로 전달
+      const response = await axios.post(`~/survey`, form);
+
       //요청이 성공적 + 결과로 새로운 리소스 생성 | POST, PUT
       if (response.status === 201) {
-        alert(` You have created: ${JSON.stringify(response.data)}`);
-        //loading 상태 false로 바꿔주고 input값 reset...!..?
+        console.log('success');
+        //loading 상태 false로 바꿔주고 inputarr값 reset
         setLoading(false);
-        setInput();
+        setInputArr(new Array());
       } else {
-        throw new Error("An error has occurred");
+        throw new Error('An error has occurred');
       }
     } catch (error) {
-      alert("An error has occurred");
-      // setIsLoading(false);
+      setError('An error has occurred');
+      setLoading(false);
     }
   };
-  */
 
-  //현재는 iterator로 왔다갔다 하면서... -> type 페이지까지 고려한다면 이게맞나?
-  //만일 iterator가 아니라 json이 페이지(각 질문)별로 오는거면
-  //handlePost, handleGet 방식으로 해야할듯...? 어 이러면 nextpage가 필요하겠네 model 속성중에
+  //다음 핸들러 함수들 안의 console.log들은 확인용임
   const handleGoback = () => {
+    inputarr.splice(iterator, 1, null);
+    setInputArr(inputarr);
+    console.log(inputarr);
     if (iterator > 0) {
       iterator--;
       setIterator(iterator);
     } else {
-      iterator = 0;
-      setIterator(iterator);
+      navigation.pop();
     }
     setContents(testing[iterator]);
+    // return inputarr;
   };
 
+  //다시 해볼 것 왜 마지막은 다음을 누른 다음에서야 입력이 되는거지?
   const handleNext = () => {
+    var arr = [iterator, input];
+    inputarr.splice(iterator, 1, arr);
+    setInputArr(inputarr);
+    console.log(inputarr);
     if (iterator < testing.length) {
-      iterator++;
-      setIterator(iterator);
-    } else {
-      iterator = testing.length - 1;
-      setIterator(iterator);
+      if (iterator === testing.length - 1) {
+        //navigation
+        navigation.navigate('Survey2');
+      } else {
+        ++iterator;
+        setIterator(iterator);
+      }
+      setContents(testing[iterator]);
     }
-    // setNowPage(pageName[iterator]);
-    setContents(testing[iterator]);
+    return inputarr;
+  };
+  //왜 마지막이 출력안됨? handleNext안에선 되는데?
+  console.log('test');
+  console.log(inputarr);
+
+  // let obj
+  // useEffect(() => {
+  //   console.log(iterator);
+  //   console.log(input);
+  //   console.log('hihi');
+  // }, [iterator]);
+  //
+  // useEffect(() => {
+  //   inputarr.splice(iterator, 1, input);
+  //   setInputArr(inputarr);
+  //   obj = {...inputarr};
+  //   console.log(obj);
+  // }, []);
+
+  const handler = () => {
+    //방법1
+    // var it = iterator.toString();
+    // useEffect(() => {
+    //   AsyncStorage.setItem(it, JSON.stringify(input), () => {
+    //     AsyncStorage.mergeItem(it, JSON.stringify(input), () => {
+    //       AsyncStorage.getItem(it, (err, result) => {
+    //         console.log(result);
+    //       });
+    //     });
+    //   });
+    // }, [it]);
+    //방법2
+    // let data = JSON.stringify(obj);
+    // AsyncStorage.setItem('userinput', data, () => {});
   };
 
   //jsx구성요소 오류 해결 필요

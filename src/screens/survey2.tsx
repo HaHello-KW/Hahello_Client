@@ -13,6 +13,9 @@ import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
 import testing2 from '../txtCollection/testing2.json';
 import TypePage from '../components/typePage';
+import {useNavigation} from '@react-navigation/native';
+import UserImg from '../components/userImg';
+import UserAimg from '../../assets/images/userA.png';
 
 //survey에 goback button, next button, myupbar를 넣으면 안되는 것인가??
 //됨 -> routing기능 넣어도? reducer? redux?
@@ -34,50 +37,38 @@ const Survey2 = () => {
   //   nextpage: '',
   // });
 
-  //서버로부터 데이터 받아오기
-  //이런느낌 같은데 맞을까...
-  // useEffect(() => {
-  //   axios.get(url).then(response => {
-  //     setDefaultPage(response.data);
-  //   });
-  // }, []);
-
-  //iterator 쓸거면 굳이 navigation 안갖고와도 될거같은데...?
-  // const navigation = useNavigation();
-
   //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
   const [input, setInput] = useState(0);
   function parentFucntion(x: any) {
     // console.log(x);
     setInput(x);
   }
-  console.log(input);
+  // console.log(input);
 
   var [iterator, setIterator] = useState(0);
   const [contents, setContents] = useState(testing2[iterator]);
+  const navigation = useNavigation();
 
   const handleGoback = () => {
     if (iterator > 0) {
       iterator--;
       setIterator(iterator);
     } else {
-      iterator = 0;
-      setIterator(iterator);
+      navigation.pop();
     }
     setContents(testing2[iterator]);
   };
 
   const handleNext = () => {
     if (iterator < testing2.length) {
-      iterator++;
-      setIterator(iterator);
-    } else {
-      iterator = testing2.length - 1;
-      setIterator(iterator);
+      if (iterator === testing2.length - 1) {
+        //navigation
+      } else {
+        setIterator(++iterator);
+      }
     }
     setContents(testing2[iterator]);
   };
-
   //jsx구성요소 오류 해결 필요
   //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?
   return (

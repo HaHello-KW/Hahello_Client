@@ -30,7 +30,7 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
     const [isButtonSelect, setIsButtonSelect] = useState('');
     // const [newArr, setnewArr] = useState(Array(pageContents.selectionTxt.length).fill(false));
     const newArr = Array(pageContents.selectionTxt.length).fill(false);
-    const [getidx, setgetidx] = useState(0);
+    const [getidx, setgetidx] = useState();
     const handlePress = (idx: number) => {
       newArr[idx] = true;
       // setnewArr(newArr);
@@ -46,29 +46,6 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
     parentFunction(getidx);
     //
     //console.log(getidx);
-
-    //쟤를 이용한다면... type어쩌고 어떻게 이용하지
-    //q_d_2, q_d_3의 getidx에 따라 type이 구체적으로 정해짐
-    //mock json 좀더 작성해봐서 (구조 조금 바꿔보자)
-    //iterator로 움직이든, 페이지 이름으로 움직이든 다시 재구성 해볼 것
-    //type별 testing 페이지 생각해둘 것
-    //유지보수 시점에서 봣을때 navigation vs 지금처럼 iterator...무엇이 낫나?
-    // + axios 방법 알아봐...!!
-    //iterator...? pagename으로 구분하면 ㄱㄴ하지않을까
-    //q_d_2, q_d_3 말고 usera~e정하기, user1~5정하기 뭐 그런식으로 페이지 이름을 정해버리면..
-    //ㄱㄴ하지않을까....
-
-    /*
-    const setCount = () => {
-    count = content.length;
-    return count;
-    };
-    setCount();
-    useEffect(() => {
-        console.log(newArr);
-    }, [newArr]);
-
-    */
 
     return (
       <>
