@@ -1,0 +1,56 @@
+[
+  {
+    "id": 0,
+    "pgLevel": 1,
+    "questionType": "Threeline_Picker",
+    "questionTxt": null,
+    "selectionTxt": null,
+    "firstPickerType": "none",
+    "firstlineTxt": "나는",
+    "secondPickerType": "datePicker",
+    "secondlineTxt": "에",
+    "thirdPickerType": "none",
+    "thirdlineTxt": "태어났어",
+    "nextpage": "q_d_2"
+  },
+  {
+    "id": 1,
+    "pgLevel": 2,
+    "questionType": "Button_Selector",
+    "questionTxt": "나는",
+    "selectionTxt": [
+      "난소 건강을 유지하고 싶어",
+      "난자 냉동 계획이 있어",
+      "난임 시술 계획이 있어",
+      "현재 시술을 하고 있어 (난자 냉동, 난임 시술)",
+      "갱년기 준비와 관리를 하고 싶어"
+    ],
+    "firstPickerType": null,
+    "firstlineTxt": null,
+    "secondPickerType": null,
+    "secondlineTxt": null,
+    "thirdPickerType": null,
+    "thirdlineTxt": null,
+    "nextpage": "q_d_3"
+  },
+  {
+    "id": 2,
+    "pgLevel": 3,
+    "questionType": "Button_Selector",
+    "questionTxt": "나는",
+    "selectionTxt": [
+      "결혼을 안 했어",
+      "결혼을 했어",
+      "임신 준비 중이야",
+      "자녀가 있어",
+      "임신 중이야"
+    ],
+    "firstPickerType": null,
+    "firstlineTxt": null,
+    "secondPickerType": null,
+    "secondlineTxt": null,
+    "thirdPickerType": null,
+    "thirdlineTxt": null,
+    "nextpage": "typePage"
+  }
+]

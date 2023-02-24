@@ -13,14 +13,15 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@material-ui/core": "^4.12.4",
-    "@mui/material": "^5.10.16",
+    "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-community/cli-platform-android": "^9.3.1",
     "@react-native-community/datetimepicker": "^6.7.1",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-material/core": "^1.3.7",
     "@react-navigation/bottom-tabs": "^6.5.3",
-    "@react-navigation/native": "^6.1.1",
+    "@react-navigation/native": "^6.1.2",
     "@react-navigation/native-stack": "^6.9.7",
+    "axios": "^1.3.2",
     "loadash": "^1.0.0",
     "react": "18.1.0",
     "react-native": "^0.70.1",
@@ -40,6 +41,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
+    "@mui/material": "^5.11.4",
     "@react-native-community/eslint-config": "^2.0.0",
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^26.0.23",
@@ -67,5 +69,8 @@
       "json",
       "node"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

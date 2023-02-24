@@ -39,7 +39,7 @@ const TimeLine = () => {
             left: 99,
             top: 16,
             width: 2,
-            height: 900,
+            height: 1200,
             zIndex: 1,
           }}></View>
         <View
@@ -144,6 +144,11 @@ const TimeLine = () => {
         34세
       </Text> */}
       {test()}
+      <Text></Text>
+      <Text></Text>
+      <Text></Text>
+      <Text></Text>
+      <Text></Text>
       <Text></Text>
       <Text></Text>
       <Text></Text>
