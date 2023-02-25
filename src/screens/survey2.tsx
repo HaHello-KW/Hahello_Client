@@ -26,6 +26,7 @@ import {
   removeData,
   storeMultiData,
 } from './async';
+import handleGet from './axios';
 
 //콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
@@ -58,11 +59,23 @@ const Survey2 = () => {
   // });
   //
 
+  // const GETURL = async () => {
+  //   return await getData('typeUrl');
+  // };
+
+  // console.log(GETURL());
+
+  // const {typeUrl} = require('./survey');
+  // console.log(typeUrl);
+  // const jsondata = handleGet(typeUrl);
+
+  const [t, ff] = useState(null);
   const GETURL = async () => {
-    return await getData('typeUrl');
+    ff(await getData('typeUrl'));
   };
 
-  console.log(GETURL());
+  GETURL();
+  console.log(t);
 
   const navigation = useNavigation();
 
@@ -71,10 +84,13 @@ const Survey2 = () => {
   const [input, setInput] = useState();
 
   var [iterator, setIterator] = useState(0);
-  const [contents, setContents] = useState(testing2[iterator]);
+  const [contents, setContents] = useState(testing2);
+  //const [contents, setContents] = useState(jsondata);
 
-  const [pagename, setPagename] = useState(contents.pagename);
-  const prevPagename = usePrevState(pagename);
+  const [nowpage, setNowpage] = useState(contents[0]);
+
+  const [pagename, setPagename] = useState(nowpage.pagename);
+  // const prevPagename = usePrevState(pagename);
   // const [inputarr, setInputArr] = useState(new Array(MAX).fill(null))
   function parentFucntion(x: any) {
     // useEffect(() => {
@@ -195,13 +211,13 @@ const Survey2 = () => {
     } else {
       navigation.pop();
     }
-    setContents(testing2[iterator]);
-    setPagename(contents.pagename);
+    setNowpage(contents[iterator]);
+    setPagename(nowpage.pagename);
   };
 
   const handleNext = () => {
-    if (iterator < testing2.length) {
-      if (iterator === testing2.length - 1) {
+    if (iterator < contents.length) {
+      if (iterator === contents.length - 1) {
         // console.log('testing');
         // setPagename(contents.pagename);
         // getData(`${pagename}`);
@@ -221,8 +237,8 @@ const Survey2 = () => {
         setIterator(iterator);
       }
       // setPagename(contents.pagename);
-      setContents(testing2[iterator]);
-      setPagename(contents.pagename);
+      setNowpage(contents[iterator]);
+      setPagename(nowpage.pagename);
     }
   };
 
@@ -230,9 +246,9 @@ const Survey2 = () => {
   //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?
   return (
     <>
-      <MyUpBar level={contents.pgLevel} />
+      <MyUpBar level={nowpage.pgLevel} />
       <GobackButton onPress={handleGoback} />
-      <TypePage pageContents={contents} parentFunction={parentFucntion} />
+      <TypePage pageContents={nowpage} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>
         {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>

@@ -59,7 +59,7 @@ const Survey = () => {
   //deafultpage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
   // const [inputarr, setInputarr] = useState(new Array());
 
-  // const jsondata = handleGet('http://localhost:8080/defaultPage');
+  //const jsondata = handleGet('http://localhost:8080/defaultPage');
 
   const [input, setInput] = useState();
   var [iterator, setIterator] = useState(0);
@@ -166,44 +166,45 @@ const Survey = () => {
         // setPagename(contents.pagename);
         // console.log('handlenext last iterator');
         storeData(`userinput_${iterator}`, input);
-        // console.log('hihello');
-        // getData(`userinput_${iterator}`);
-        // console.log(getData(`userinput_${iterator}`));
-        //{"_A": null, "_x": 0, "_y": 0, "_z": null}
-        //get 요청? 서버로 보내기?
-        // if(getdata = 0) -> a
-        // if(getdata = 1) -> b
-        // if(getdata = 2) -> c
-        // if(getdata = 3) -> d
-        // if(getdata = 4) -> e
 
+        var typeUrl;
         switch (await getData(`userinput_${iterator}`)) {
           case 0:
-            console.log('type a');
+            // console.log('type a');
             //const a = testing2
             //testing2를 리턴 어쩌고해서
             //survery2에 던져준다?
             //아니면 리턴한 값을 survey2가 쓸수있게끔 한다...
-
+            // typeUrl = 'type a';
+            // module.exports = {typeUrl};
+            //
             storeData('typeUrl', 'type a');
             // getData('typeUrl');
             // return url;
             break;
           case 1:
-            console.log('type b');
+            // console.log('type b');
             storeData('typeUrl', 'type b');
+            // typeUrl = 'type b';
+            // module.exports = {typeUrl};
             break;
           case 2:
-            console.log('type c');
+            // console.log('type c');
             storeData('typeUrl', 'type c');
+            // typeUrl = 'type c';
+            // module.exports = {typeUrl};
             break;
           case 3:
-            console.log('type d');
+            // console.log('type d');
             storeData('typeUrl', 'type d');
+            // typeUrl = 'type d';
+            // module.exports = {typeUrl};
             break;
           case 4:
-            console.log('type e');
+            // console.log('type e');
             storeData('typeUrl', 'type e');
+            // typeUrl = 'type e';
+            // module.exports = {typeUrl};
             break;
           default:
             console.log('testing');
@@ -211,6 +212,8 @@ const Survey = () => {
 
         //navigation
         navigation.navigate('Survey2');
+        //asyncstorage 초기화(clear)
+        // AsyncStorage.clear();
       } else {
         // setPagename(nowpage.pagename);
         ++iterator;
