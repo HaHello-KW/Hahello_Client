@@ -87,27 +87,33 @@ const Survey2 = () => {
     // }, [input]);
 
     //얘를 어디다가 해야하나?
-    setPagename(contents.pagename);
+    // setPagename(contents.pagename);
 
     useEffect(() => {
       setInput(x);
     }, [x]);
 
     useEffect(() => {
-      // if (prevPagename !== pagename) {
-      // setInput(x);
       storeData(`${pagename}`, input);
+      // console.log('useeffect');
       getData(`${pagename}`);
-      // }
-      // else if (prevPagename === pagename) {
-      //   // setInput(x);
-      //   inputarr.push(input);
-      //   setInputarr(inputarr);
-      //   // console.log(inputarr);
-      //   storeData(`${pagename}`, inputarr);
-      //   getData(`${pagename}`);
-      // }
-    }, [pagename] && [input]);
+    }, [pagename]);
+
+    // useEffect(() => {
+    //   // if (prevPagename !== pagename) {
+    //   // setInput(x);
+    //   storeData(`${pagename}`, input);
+    //   getData(`${pagename}`);
+    //   // }
+    //   // else if (prevPagename === pagename) {
+    //   //   // setInput(x);
+    //   //   inputarr.push(input);
+    //   //   setInputarr(inputarr);
+    //   //   // console.log(inputarr);
+    //   //   storeData(`${pagename}`, inputarr);
+    //   //   getData(`${pagename}`);
+    //   // }
+    // }, [pagename] && [input]);
 
     // && ([inputarr] || [input])
 
@@ -191,7 +197,7 @@ const Survey2 = () => {
       if (iterator === testing2.length - 1) {
         // console.log('testing');
         // setPagename(contents.pagename);
-        getData(`${pagename}`);
+        // getData(`${pagename}`);
         //
         // for (let i = 0; i < testing2.length; i++) {
         //   getData(`userinput_${i}`);
@@ -207,10 +213,9 @@ const Survey2 = () => {
         ++iterator;
         setIterator(iterator);
       }
-      // getData(`${contents.pagename}`);
       // setPagename(contents.pagename);
       setContents(testing2[iterator]);
-      // setPagename(contents.pagename);
+      setPagename(contents.pagename);
     }
   };
 
