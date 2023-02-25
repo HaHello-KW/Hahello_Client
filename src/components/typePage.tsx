@@ -21,7 +21,7 @@ type typePageProps = {
   parentFunction: any;
 };
 
-function TypePage({pageContents, parentFunction}: typePageProps) {
+function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
   if (
     pageContents.questionType == 'Button_Selector' &&
     pageContents.selectionTxt != null
@@ -34,6 +34,7 @@ function TypePage({pageContents, parentFunction}: typePageProps) {
       setIsButtonSelect(newArr);
       setgetidx(idx);
     };
+
     parentFunction(getidx);
 
     return (

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import defaultPage from '../components/defaultPage';
 import axios from 'axios';
 import {defaultPageModel} from '../models/defaultPageModel';
@@ -17,73 +17,53 @@ import {useNavigation} from '@react-navigation/native';
 import UserImg from '../components/userImg';
 import UserAimg from '../../assets/images/userA.png';
 
+import handleGet from './axios';
+
 //asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {storeData, getData, containsKey, removeData} from './async';
+import {
+  storeData,
+  getData,
+  containsKey,
+  removeData,
+  storeMultiData,
+} from './async';
 
 //콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
 
+const MAX = 3;
+
+export function usePrevState(state: any) {
+  const ref = useRef(state);
+  useEffect(() => {
+    ref.current = state;
+  }, [state]);
+  return ref.current;
+}
+
 const Survey2 = () => {
-  // const [contents, setContents] = useState([]);
-  // const [defaultpage, setDefaultPage] = useState<defaultPageModel>({
-  //   id: 0,
-  //   pgLevel: 0,
-  //   questionType: '',
-  //   questionTxt: '',
-  //   selectionTxt: [],
-  //   firstPickerType: '',
-  //   firstlineTxt: '',
-  //   secondPickerType: '',
-  //   secondlineTxt: '',
-  //   thirdPickerType: '',
-  //   thirdlineTxt: '',
-  //   nextpage: '',
-  // });
-  // let TargetJSON;
-  // const num = getData('UserChoice');
-  // console.log('저장되어 있는 데이터는??    ' + Number(num));
-  // const target = await getData('UserChoice');
-  // switch (target) {
-  //   case '0':
-  //     TargetJSON = testing;
-  //     break;
-  //   case '1':
-  //     TargetJSON = testing2;
-  //     break;
-  //   case '2':
-  //     TargetJSON = testing3;
-  //     break;
-  //   default:
-  //     break;
-  // }
+  const [t, ff] = useState(null);
+  const GETURL = async () => {
+    ff(await getData('typeUrl'));
+  };
+
+  GETURL();
+  console.log(t);
 
   const navigation = useNavigation();
 
   //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
-  const [input, setInput] = useState(null);
-  function parentFucntion(x: any) {
-    useEffect(() => {
-      setInput(x);
-    }, [x]);
 
-    useEffect(() => {
-      storeData(`userinput_${iterator}`, input);
-      // getData(`userinput_${iterator}`);
-    }, [iterator] && [input]);
-  }
-
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState('');
-  // const [contents, setContents] = useState('');
+  const jsondata = handleGet(t); //t 에는 url 들어가있다
 
   var [iterator, setIterator] = useState(0);
-  const [contents, setContents] = useState(testing2[iterator]);
 
-  //각 페이지마다 입력받은 input들을 inputarr에 담아 handlePost 통해 서버로 inputarr을 전달
-  // const [inputarr, setInputArr] = useState(
-  //   new Array(testing.length).fill(null),
-  // );
+  const [nowpage, setNowpage] = useState(jsondata[0]);
+
+  var [iterator, setIterator] = useState(0);
+
+  // const [inputarr, setInputArr] = useState(new Array(MAX).fill(null))
 
   const handleGoback = () => {
     if (iterator > 0) {
@@ -92,22 +72,21 @@ const Survey2 = () => {
     } else {
       navigation.pop();
     }
-    setContents(testing2[iterator]);
+    setNowpage(jsondata[iterator]);
+    //setPagename(nowpage.pagename);
   };
 
   const handleNext = () => {
-    if (iterator < testing2.length) {
-      if (iterator === testing2.length - 1) {
-        console.log('testing');
-        for (let i = 0; i < testing2.length; i++) {
-          getData(`userinput_${i}`);
-        }
-        //navigation
+    if (iterator < jsondata.length) {
+      if (iterator === jsondata.length - 1) {
       } else {
+        // setPagename(contents.pagename);
         ++iterator;
         setIterator(iterator);
       }
-      setContents(testing2[iterator]);
+      // setPagename(contents.pagename);
+      setNowpage(jsondata[iterator]);
+      //setPagename(contents.pagename);
     }
   };
 
@@ -115,9 +94,9 @@ const Survey2 = () => {
   //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?
   return (
     <>
-      <MyUpBar level={contents.pgLevel} />
+      <MyUpBar level={nowpage.pgLevel} />
       <GobackButton onPress={handleGoback} />
-      <TypePage pageContents={contents} parentFunction={parentFucntion} />
+      <TypePage pageContents={nowpage} />
       <View style={[defaultPageStyles.container_next]}>
         {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>
