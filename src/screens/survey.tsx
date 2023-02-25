@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useReducer, useRef} from 'react';
 import defaultPage from '../components/defaultPage';
 import axios from 'axios';
 import {defaultPageModel} from '../models/defaultPageModel';
@@ -16,10 +16,24 @@ import {useNavigation} from '@react-navigation/native';
 
 //asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {storeData, getData, containsKey, removeData} from './async';
+import {
+  storeData,
+  getData,
+  containsKey,
+  removeData,
+  storeMultiData,
+} from './async';
 
 //콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
+
+export function usePrevState(state: any) {
+  const ref = useRef(state);
+  useEffect(() => {
+    ref.current = state;
+  }, [state]);
+  return ref.current;
+}
 
 const Survey = () => {
   // const [contents, setContents] = useState([]);
@@ -42,30 +56,55 @@ const Survey = () => {
   const navigation = useNavigation();
 
   //deafultpage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
-  const [input, setInput] = useState(null);
+  const [inputarr, setInputarr] = useState(new Array());
+  const [input, setInput] = useState();
+
+  var [iterator, setIterator] = useState(0);
+  const [contents, setContents] = useState(testing[iterator]);
+
+  const [pagename, setPagename] = useState(contents.pagename);
+  // const prevPagename = usePrevState(pagename);
+
+  function reducer(state: any) {
+    const {iterator, input} = state;
+    if (iterator) {
+      storeData;
+    } else if (input) {
+      storeMultiData;
+    } else {
+      console.log('test');
+    }
+  }
+
   function parentFucntion(x: any) {
     useEffect(() => {
       setInput(x);
     }, [x]);
 
     useEffect(() => {
-      storeData(`userinput_${iterator}`, input);
-      // getData(`userinput_${iterator}`);
-    }, [iterator] && [input]);
+      storeData(`${pagename}`, input);
+      console.log('useeffect');
+      getData(`${pagename}`);
+    }, [pagename]);
+
+    // useEffect(() => {
+    //   storeData(`userinput_${iterator}`, input);
+    //   getData(`userinput_${iterator}`);
+    // }, [input]);
+
+    //usereducer...?
+    // const[state, dispatch] = useReducer(reducer, {
+    //   iterator: ,
+    //   input: ,
+    // })
   }
-  //이게왜...의도한건 input리셋이엇는데 아니웬걸 갑자기 마지막 iterator 해결된거같은...?
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   // const [contents, setContents] = useState('');
 
-  var [iterator, setIterator] = useState(0);
-  const [contents, setContents] = useState(testing[iterator]);
-
-  //각 페이지마다 입력받은 input들을 inputarr에 담아 handlePost 통해 서버로 inputarr을 전달
-  const [inputarr, setInputArr] = useState(
-    new Array(testing.length).fill(null),
-  );
+  // var [iterator, setIterator] = useState(0);
+  // const [contents, setContents] = useState(testing[iterator]);
 
   //handleget? home의 시작 버튼...? 음
   const handleGet = async () => {
@@ -110,9 +149,6 @@ const Survey = () => {
 
   //다음 핸들러 함수들 안의 console.log들은 확인용임
   const handleGoback = () => {
-    // inputarr.splice(iterator, 1, null);
-    // setInputArr(inputarr);
-    // console.log(inputarr);
     if (iterator > 0) {
       iterator--;
       setIterator(iterator);
@@ -124,42 +160,30 @@ const Survey = () => {
 
   //다시 해볼 것 왜 마지막은 다음을 누른 다음에서야 입력이 되는거지?
   const handleNext = () => {
-    // inputarr.splice(iterator, 1, input);
-    // setInputArr(inputarr);
-
     if (iterator < testing.length) {
+      setPagename(contents.pagename);
       if (iterator === testing.length - 1) {
-        // let obj = {...inputarr};
-        // let data = JSON.stringify(obj);
-        // console.log(data);
+        //
+        // setPagename(contents.pagename);
+        console.log('handlenext last iterator');
+        getData(`${pagename}`);
+        //
         // AsyncStorage.setItem('userinput', data, () => {
         //   AsyncStorage.getItem('userinput', (err, result) => {
         //     console.log(result);
         //     console.log(' is this sucessed? yess!! ');
         //   });
         // });
-
-        console.log('testing');
-        for (let i = 0; i < testing.length; i++) {
-          getData(`userinput_${i}`);
-        }
         //navigation
         navigation.navigate('Survey2');
       } else {
+        // setPagename(contents.pagename);
         ++iterator;
         setIterator(iterator);
       }
       setContents(testing[iterator]);
     }
   };
-
-  // let obj
-  // useEffect(() => {
-  //   inputarr.splice(iterator, 1, input);
-  //   setInputArr(inputarr);
-  //   obj = {...inputarr};
-  //   console.log(obj);
-  // }, []);
 
   //jsx구성요소 오류 해결 필요
   return (

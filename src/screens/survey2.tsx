@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import defaultPage from '../components/defaultPage';
 import axios from 'axios';
 import {defaultPageModel} from '../models/defaultPageModel';
@@ -19,10 +19,26 @@ import UserAimg from '../../assets/images/userA.png';
 
 //asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {storeData, getData, containsKey, removeData} from './async';
+import {
+  storeData,
+  getData,
+  containsKey,
+  removeData,
+  storeMultiData,
+} from './async';
 
 //콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
+
+const MAX = 3;
+
+export function usePrevState(state: any) {
+  const ref = useRef(state);
+  useEffect(() => {
+    ref.current = state;
+  }, [state]);
+  return ref.current;
+}
 
 const Survey2 = () => {
   // const [contents, setContents] = useState([]);
@@ -44,24 +60,115 @@ const Survey2 = () => {
   const navigation = useNavigation();
 
   //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
-  const [input, setInput] = useState(null);
+  const [inputarr, setInputarr] = useState(new Array());
+  const [input, setInput] = useState();
+
+  var [iterator, setIterator] = useState(0);
+  const [contents, setContents] = useState(testing2[iterator]);
+
+  const [pagename, setPagename] = useState(contents.pagename);
+  const prevPagename = usePrevState(pagename);
+  // const [inputarr, setInputArr] = useState(new Array(MAX).fill(null))
   function parentFucntion(x: any) {
+    // useEffect(() => {
+    //   setInput(x);
+    //   inputarr.push(input);
+    //   setInputarr(inputarr);
+    // }, [x]);
+
+    // useEffect(() => {
+    //   storeData(`userinput_${iterator}`, inputarr);
+    //   // getData(`userinput_${iterator}`);
+    // }, [iterator] && [inputarr]);
+
+    // useEffect(() => {
+    //   storeData(`userinput_${iterator}`, input);
+    //   getData(`userinput_${iterator}`);
+    // }, [input]);
+
+    //얘를 어디다가 해야하나?
+    setPagename(contents.pagename);
+
     useEffect(() => {
       setInput(x);
     }, [x]);
 
     useEffect(() => {
-      storeData(`userinput_${iterator}`, input);
-      // getData(`userinput_${iterator}`);
-    }, [iterator] && [input]);
+      // if (prevPagename !== pagename) {
+      // setInput(x);
+      storeData(`${pagename}`, input);
+      getData(`${pagename}`);
+      // }
+      // else if (prevPagename === pagename) {
+      //   // setInput(x);
+      //   inputarr.push(input);
+      //   setInputarr(inputarr);
+      //   // console.log(inputarr);
+      //   storeData(`${pagename}`, inputarr);
+      //   getData(`${pagename}`);
+      // }
+    }, [pagename] && [input]);
+
+    // && ([inputarr] || [input])
+
+    // if (prevPagename !== pagename) {
+    //   useEffect(() => {
+    //     storeData(`${pagename}`, input);
+    //     getData(`${pagename}`);
+    //   }, [pagename] && [input]);
+    // } else if (prevPagename === pagename) {
+    //   useEffect(() => {
+    //     inputarr.push(input);
+    //     setInputarr(inputarr);
+    //     storeData(`${pagename}`, inputarr);
+    //     getData(`${pagename}`);
+    //   }, [input]);
+    // }
+
+    // useEffect(() => {
+    //   storeMultiData(`userinput_${iterator}`, input);
+    //   getData(`userinput_${iterator}`);
+    // }, [input]);
   }
+
+  //임시 테스트
+  // function parentFunction_x(x: any) {
+  //   useEffect(() => {
+  //     setInput(x);
+  //   }, [x]);
+
+  //   useEffect(() => {
+  //     storeData(`userinput_${iterator}`, input);
+  //     // getData(`userinput_${iterator}`);
+  //   }, [input]);
+  // }
+  // function parentFunction_y(y: any) {
+  //   useEffect(() => {
+  //     setInput(y);
+  //   }, [y]);
+
+  //   useEffect(() => {
+  //     storeData(`userinput_${iterator}`, input);
+  //     // getData(`userinput_${iterator}`);
+  //   }, [input]);
+  // }
+  // function parentFunction_z(z: any) {
+  //   useEffect(() => {
+  //     setInput(z);
+  //   }, [z]);
+
+  //   useEffect(() => {
+  //     storeData(`userinput_${iterator}`, input);
+  //     // getData(`userinput_${iterator}`);
+  //   }, [input]);
+  // }
 
   // const [loading, setLoading] = useState(false);
   // const [error, setError] = useState('');
   // const [contents, setContents] = useState('');
 
-  var [iterator, setIterator] = useState(0);
-  const [contents, setContents] = useState(testing2[iterator]);
+  // var [iterator, setIterator] = useState(0);
+  // const [contents, setContents] = useState(testing2[iterator]);
 
   //각 페이지마다 입력받은 input들을 inputarr에 담아 handlePost 통해 서버로 inputarr을 전달
   // const [inputarr, setInputArr] = useState(
@@ -76,21 +183,34 @@ const Survey2 = () => {
       navigation.pop();
     }
     setContents(testing2[iterator]);
+    setPagename(contents.pagename);
   };
 
   const handleNext = () => {
     if (iterator < testing2.length) {
       if (iterator === testing2.length - 1) {
-        console.log('testing');
-        for (let i = 0; i < testing2.length; i++) {
-          getData(`userinput_${i}`);
-        }
+        // console.log('testing');
+        // setPagename(contents.pagename);
+        getData(`${pagename}`);
+        //
+        // for (let i = 0; i < testing2.length; i++) {
+        //   getData(`userinput_${i}`);
+        // }
+        //
+        // AsyncStorage.getAllKeys().then(keys =>
+        //   AsyncStorage.multiGet(keys).then(data => console.log(data)),
+        // );
+        //
         //navigation
       } else {
+        // setPagename(contents.pagename);
         ++iterator;
         setIterator(iterator);
       }
+      // getData(`${contents.pagename}`);
+      // setPagename(contents.pagename);
       setContents(testing2[iterator]);
+      // setPagename(contents.pagename);
     }
   };
 
