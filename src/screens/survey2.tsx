@@ -55,7 +55,7 @@ const Survey2 = () => {
 
   //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
 
-  const jsondata = handleGet(t); //t 에는 url 들어가있다
+  const jsondata = handleGet(t); //t 에는 url 들어가있다.
 
   var [iterator, setIterator] = useState(0);
 
