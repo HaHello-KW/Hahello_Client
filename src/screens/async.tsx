@@ -22,10 +22,12 @@ export const getData = async (key: string) => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
-      const data = JSON.parse(value);
+      //const data = JSON.parse(value);
       //   return data;
-      console.log(key, data);
-      return data;
+      console.log(value);
+      // console.log(typeof data);
+      //return data;
+      return value;
     }
   } catch (e: any) {
     console.log(e.message);

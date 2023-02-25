@@ -56,6 +56,13 @@ const Survey2 = () => {
   //   thirdlineTxt: '',
   //   nextpage: '',
   // });
+  //
+
+  const GETURL = async () => {
+    return await getData('typeUrl');
+  };
+
+  console.log(GETURL());
 
   const navigation = useNavigation();
 
