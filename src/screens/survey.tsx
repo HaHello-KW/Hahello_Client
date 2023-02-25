@@ -161,12 +161,11 @@ const Survey = () => {
   //다시 해볼 것 왜 마지막은 다음을 누른 다음에서야 입력이 되는거지?
   const handleNext = () => {
     if (iterator < testing.length) {
-      setPagename(contents.pagename);
       if (iterator === testing.length - 1) {
         //
         // setPagename(contents.pagename);
-        console.log('handlenext last iterator');
-        getData(`${pagename}`);
+        // console.log('handlenext last iterator');
+        // getData(`${pagename}`);
         //
         // AsyncStorage.setItem('userinput', data, () => {
         //   AsyncStorage.getItem('userinput', (err, result) => {
@@ -182,6 +181,7 @@ const Survey = () => {
         setIterator(iterator);
       }
       setContents(testing[iterator]);
+      setPagename(contents.pagename);
     }
   };
 
