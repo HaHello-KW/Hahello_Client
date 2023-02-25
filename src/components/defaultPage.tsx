@@ -38,7 +38,7 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
     const [isButtonSelect, setIsButtonSelect] = useState('');
     // const [newArr, setnewArr] = useState(Array(pageContents.selectionTxt.length).fill(false));
     const newArr = Array(pageContents.selectionTxt.length).fill(false);
-    const [getidx, setgetidx] = useState();
+    const [getidx, setgetidx] = useState(0);
     const handlePress = (idx: number) => {
       newArr[idx] = true;
       // setnewArr(newArr);
@@ -47,21 +47,17 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
       setgetidx(idx);
     };
 
-    //페이지마다 서버로 보내야하는 사용자의 선택지 답변 = getidx
-    //이에 따라 type이 정해진다 a-1, a-2, ..., e-5
-
+    //페이지마다 사용자의 선택지 답변 = getidx
     //부모 컴포넌트로 getidx 전달
     parentFunction(getidx);
-    //
-    //console.log(getidx);
 
-    if (pageContents.id == 2) {
-      //pageContents.id 값이 2 라면 디폴트페이지의 맨 마지막 페이지라는 뜻.
-      // AsyncStorage.setItem('UserChoice',String(getidx), () => {
-      //   console.log('유저 선택지 저장 완료')
-      // });
-      storeData('UserChoice', getidx); //store에 Key가 UserChoice고 value가 getidx(선택지의 인덱스)인 key-value쌍을 저장함
-    }
+    // if (pageContents.id == 2) {
+    //   //pageContents.id 값이 2 라면 디폴트페이지의 맨 마지막 페이지라는 뜻.
+    //   // AsyncStorage.setItem('UserChoice',String(getidx), () => {
+    //   //   console.log('유저 선택지 저장 완료')
+    //   // });
+    //   storeData('UserChoice', getidx); //store에 Key가 UserChoice고 value가 getidx(선택지의 인덱스)인 key-value쌍을 저장함
+    // }
 
     return (
       <>
