@@ -67,6 +67,19 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
             );
           })}
         </View>
+        <Image
+          //source={require('../../assets/images/userA.png')}
+          source={require(pageContents.imgpath)}
+          style={{
+            position: 'absolute',
+            left: '36%',
+            top: '13%',
+            width: 105,
+            height: 105,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
       </>
     );
   }
@@ -104,6 +117,19 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           </View>
         </View>
         <View style={[UserStyle.container_tlp_c]} />
+        <Image
+          //source={require('../../assets/images/userA.png')}
+          source={require(pageContents.imgpath)}
+          style={{
+            position: 'absolute',
+            left: '36%',
+            top: '13%',
+            width: 105,
+            height: 105,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
       </>
     );
   } else if (
@@ -138,6 +164,19 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
               pickDate={pickDateFunction}></PType>
           </View>
         </View>
+        <Image
+          //source={require('../../assets/images/userA.png')}
+          source={require(pageContents.imgpath)}
+          style={{
+            position: 'absolute',
+            left: '36%',
+            top: '13%',
+            width: 105,
+            height: 105,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
         {}
       </>
     );
@@ -145,7 +184,95 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
     pageContents.questionType == 'Hybrid_Picker' &&
     pageContents.selectionTxt == null
   ) {
-    return <></>;
+    const newArr2 = Array(pageContents.selectionTxt.length).fill(false);
+    const [isButtonSelect2, setIsButtonSelect2] = useState(newArr2);
+
+    const handlePress2 = (idx2: number | any) => {
+      newArr2[idx2] = true;
+      setIsButtonSelect2(newArr2);
+    };
+
+    return (
+      <>
+        <View style={styles.container}>
+          <View style={styles.container_question}>
+            <View style={{flex: 1.6}}></View>
+            <View style={{flex: 3}}>
+              <Text style={styles.text_H}>{pageContents.firstlineTxt}</Text>
+              <View style={styles.container_t}>
+                <PType Type_of_Picker={pageContents.firstPickerType}></PType>
+                <Text style={styles.text_H}>{pageContents.secondlineTxt}</Text>
+              </View>
+              <View style={styles.container_t}>
+                <Text style={styles.text_H}>{pageContents.thirdlineTxt}</Text>
+              </View>
+            </View>
+
+            <View style={{flex: 4.1}}>
+              {/* 여기부터 코드삽입 */}
+
+              <ScrollView>
+                {pageContents.selectionTxt.map(function (
+                  value2: any,
+                  index2: number,
+                ) {
+                  return (
+                    // <>
+                    //   <TouchableOpacity
+                    //     key={index2}
+                    //     style={[
+                    //       styles.button,
+                    //       {
+                    //         backgroundColor: isButtonSelect2[index2]
+                    //           ? '#F47100'
+                    //           : '#f2f2f2',
+                    //       },
+                    //     ]}
+                    //     onPress={() => handlePress2(index2)}>
+                    //     <Text
+                    //       style={[
+                    //         styles.bt_txt,
+                    //         {
+                    //           color: isButtonSelect2[index2]
+                    //             ? '#fbfbfb'
+                    //             : '#242424',
+                    //         },
+                    //       ]}>
+                    //       {value2}
+                    //     </Text>
+                    //   </TouchableOpacity>
+                    // </>
+                    <SelectionButton
+                      key={index2}
+                      isSelected={isButtonSelect2[index2]}
+                      handlePress={handlePress2}
+                      elementIndex={index2}
+                      txt={value2}
+                    />
+                  );
+                })}
+              </ScrollView>
+
+              {/* 이 위로 마침 */}
+            </View>
+          </View>
+          <View style={{flex: 0.2}}></View>
+          {/* <View style={styles.container_contents} /> */}
+        </View>
+        <Image
+          source={require('../../assets/images/userA.png')}
+          style={{
+            position: 'absolute',
+            left: '36%',
+            top: '13%',
+            width: 105,
+            height: 105,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
+      </>
+    );
   }
 }
 
