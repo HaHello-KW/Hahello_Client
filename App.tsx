@@ -28,6 +28,7 @@ import Survey2 from './src/screens/survey2';
 LogBox.ignoreAllLogs();
 
 enableScreens();
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {

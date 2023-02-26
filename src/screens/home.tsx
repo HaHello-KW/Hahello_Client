@@ -31,9 +31,12 @@ const Q_Home = () => {
       </View>
       <TouchableOpacity
         style={styles.startbutton}
+
         onPress={() => {
           navigation.navigate('Survey');
         }}>
+
+
         <Text style={styles.starttxt}>시작하기</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.laterbutton} onPress={() => null}>
