@@ -6,16 +6,18 @@ import MyUpBar from '../components/MyUpBar';
 import GobackButton from '../components/gobackButton';
 // import {useNavigation} from '@react-navigation/native';
 import DefaultPage from '../components/defaultPage';
-
+import {useNavigation} from '@react-navigation/native';
 //for testing
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
 import testing2 from '../txtCollection/testing2.json';
 import TypePage from '../components/typePage';
-import {useNavigation} from '@react-navigation/native';
+
 import UserImg from '../components/userImg';
 import UserAimg from '../../assets/images/userA.png';
+
+import handleGet from './axios';
 
 //asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -26,12 +28,12 @@ import {
   removeData,
   storeMultiData,
 } from './async';
-import handleGet from './axios';
+// import handleGet from './axios';
 
 //콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
 
-const MAX = 3;
+// const MAX = 3;
 
 export function usePrevState(state: any) {
   const ref = useRef(state);
@@ -42,26 +44,57 @@ export function usePrevState(state: any) {
 }
 
 const Survey2 = () => {
-  const [t, ff] = useState(null);
-  const GETURL = async () => {
-    ff(await getData('typeUrl'));
-  };
-
-  GETURL();
-  console.log(t);
-
   const navigation = useNavigation();
 
+  const [jsondata, setJson] = useState('');
+
+  const [input, setInput] = useState();
+  var [iterator, setIterator] = useState(0);
+
+  const [nowpage, setNowpage] = useState(jsondata);
+
+  const [url, setUrl] = useState('');
+
+  //store에 저장되어 있는 url을 이용하여 axios.get해온다
+  const GET = () => {
+    axios
+      .get(GETURL)
+      .then(res => {
+        //console.log(res.data);
+        setJson(res.data);
+        setNowpage(res.data[iterator]);
+
+        // return res.data
+      })
+      .catch(error => console.log(error));
+  };
+
+  //전역변수 moduel 사용
+  const {GETURL} = require('./survey');
+
+  //asyncstorage 사용
+  // const GETURL = async () => {
+  //   setUrl(await getData('typeUrl'));
+  // };
+  // GETURL();
+  // //console.log(`${url}`);
+  // console.log(url);
+
+  useEffect(() => {
+    GET();
+  }, []);
+  console.log(jsondata);
+  console.log(nowpage);
+
+  function parentFucntion(x: any) {
+    // setPagename(contents.pagename);
+    useEffect(() => {
+      setInput(x);
+    }, [x]);
+  }
+
   //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
-
-  const jsondata = handleGet(t); //t 에는 url 들어가있다.
-
-  var [iterator, setIterator] = useState(0);
-
-  const [nowpage, setNowpage] = useState(jsondata[0]);
-
-  var [iterator, setIterator] = useState(0);
-
+  //const jsondata = handleGet(t); //t 에는 url 들어가있다. 잠시 보류
   // const [inputarr, setInputArr] = useState(new Array(MAX).fill(null))
 
   const handleGoback = () => {
@@ -82,6 +115,8 @@ const Survey2 = () => {
         // setPagename(contents.pagename);
         ++iterator;
         setIterator(iterator);
+
+        // navigation.navigate('SurveyResult');
       }
       // setPagename(contents.pagename);
       setNowpage(jsondata[iterator]);
@@ -95,13 +130,14 @@ const Survey2 = () => {
     <>
       <MyUpBar level={nowpage.pgLevel} />
       <GobackButton onPress={handleGoback} />
-      <TypePage pageContents={nowpage} />
+      <TypePage pageContents={nowpage} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>
         {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>
           <Text style={styles.nxt_txt}>다음</Text>
         </TouchableOpacity>
       </View>
+      {/* <UserImg img={HQimg} /> */}
     </>
   );
 };

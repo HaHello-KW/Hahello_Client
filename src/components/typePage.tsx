@@ -10,14 +10,20 @@ import {
 import {defaultPageModel} from '../models/defaultPageModel';
 import {TypePageModel} from '../models/typePageModel';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
+
 import {UserStyle} from '../styles/typePageStyles';
+
 import PType from './dateConverter';
+
+import {Image} from 'react-native';
 //for test
 import UserImg from './userImg';
 import UserImgHQ from './userImgHQ';
 
+import SelectionButton from './selectionButton';
 type typePageProps = {
   pageContents: TypePageModel;
+
   parentFunction: any;
 };
 
@@ -28,6 +34,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
   ) {
     const [isButtonSelect, setIsButtonSelect] = useState('');
     const newArr = Array(pageContents.selectionTxt.length).fill(false);
+
     const [getidx, setgetidx] = useState(0);
     const handlePress = (idx: number) => {
       newArr[idx] = true;
@@ -113,6 +120,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
               Type_of_Picker={pageContents.thirdPickerType}
               pickDate={pickDateFunction}
             />
+
             <Text style={styles.tlp_txt}>{pageContents.thirdlineTxt}</Text>
           </View>
         </View>
@@ -139,12 +147,14 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
     function pickDateFunction(x: any) {
       parentFunction(x);
     }
+
     return (
       <>
         {}
         <View style={UserStyle.container_slp_q}>
           <View style={UserStyle.container3_1}>
             <Text style={UserStyle.blacktxt}>{pageContents.firstlineTxt}</Text>
+
             <PType
               Type_of_Picker={pageContents.firstPickerType}
               pickDate={pickDateFunction}></PType>
@@ -152,6 +162,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           <View style={UserStyle.container3_2}>
             <Text style={UserStyle.blacktxt}>{pageContents.secondlineTxt}</Text>
             <Text style={[UserStyle.descriptionGray]}>보충보충</Text>
+
             <PType
               Type_of_Picker={pageContents.secondPickerType}
               pickDate={pickDateFunction}></PType>
@@ -159,6 +170,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           <View style={UserStyle.container3_3}>
             <Text style={UserStyle.blacktxt}>{pageContents.thirdlineTxt}</Text>
             <Text style={[UserStyle.descriptionGray]}>보충보충</Text>
+
             <PType
               Type_of_Picker={pageContents.thirdPickerType}
               pickDate={pickDateFunction}></PType>
@@ -317,6 +329,61 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     color: '#000000',
     textAlign: 'center',
+  },
+
+  //밑 stlye 객체는 하이브리드타입 파일에서 가져옴
+  container: {
+    flex: 7,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container_t: {
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container_s: {
+    flexDirection: 'column',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container_question: {
+    flex: 4,
+    // flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container_contents: {
+    flex: 3,
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textInput: {
+    fontSize: 24,
+    fontWeight: '400',
+    color: '#f47100',
+    textAlign: 'center',
+  },
+  text_H: {
+    fontSize: 24,
+    fontWeight: '400',
+    color: '#000000',
+    textAlign: 'center',
+  },
+  image: {
+    position: 'absolute',
+    left: '36%',
+    top: '13%',
+    width: 105,
+    height: 105,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

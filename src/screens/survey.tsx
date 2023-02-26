@@ -4,15 +4,17 @@ import axios from 'axios';
 import {defaultPageModel} from '../models/defaultPageModel';
 import MyUpBar from '../components/MyUpBar';
 import GobackButton from '../components/gobackButton';
-// import {useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import DefaultPage from '../components/defaultPage';
 
 //for testing
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
+
+import Survey2 from './survey2';
+
 import testing1 from '../txtCollection/testing1.json';
-import {useNavigation} from '@react-navigation/native';
 
 //asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -28,22 +30,10 @@ import handleGet from './axios';
 //콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
 
-export function usePrevState(state: any) {
-  const ref = useRef(state);
-  useEffect(() => {
-    ref.current = state;
-  }, [state]);
-  return ref.current;
-}
-
 const Survey = () => {
-  //survey -> survey2
   const navigation = useNavigation();
 
-  //deafultpage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
-  // const [inputarr, setInputarr] = useState(new Array());
-
-  // const jsondata = handleGet('http://localhost:8080/defaultPage');
+  const [jsondata, setJson] = useState('');
 
   // 1
   // const [jsondata, setjsondata] = useState([]);
@@ -77,25 +67,25 @@ const Survey = () => {
   // });
 
   //3
-  useEffect(() => {
-    getTodos();
-  }, []);
+  // useEffect(() => {
+  //   getTodos();
+  // }, []);
 
-  const [jsondata, setjsondata] = useState([]);
+  // const [jsondata, setjsondata] = useState([]);
 
-  const getTodos = () => {
-    axios
-      .get('http://10.0.2.2:8080/defaultPage')
-      .then(res => {
-        setjsondata(res.data);
-        // console.log(jsondata);
-        // console.log(res.data);
-      })
-      .catch(error => console.log(error));
-  };
-  console.log('2');
-  console.log(jsondata);
-  console.log('3');
+  // const getTodos = () => {
+  //   axios
+  //     .get('http://10.0.2.2:8080/defaultPage')
+  //     .then(res => {
+  //       setjsondata(res.data);
+  //       // console.log(jsondata);
+  //       // console.log(res.data);
+  //     })
+  //     .catch(error => console.log(error));
+  // };
+  // console.log('2');
+  // console.log(jsondata);
+  // console.log('3');
 
   // console.log(jsondata[0]);
   // var value = JSON.parse(jsondata);
@@ -106,21 +96,31 @@ const Survey = () => {
   const [input, setInput] = useState();
   var [iterator, setIterator] = useState(0);
 
-  const [nowpage, setNowpage] = useState(jsondata[0]);
-  console.log(jsondata[0]);
-  console.log(jsondata[0].pgLevel);
-  // console.log(nowpage);
-  // console.log(nowpage.firstPickerType);
+  const [nowpage, setNowpage] = useState(jsondata);
 
-  // // const [pagename, setPagename] = useState(contents.pagename);
-  // // const prevPagename = usePrevState(pagename);
+  const GET = () => {
+    axios
+      .get('http://10.0.2.2:8080/defaultPage')
+      .then(res => {
+        //console.log(res.data);
+        setJson(res.data);
+        setNowpage(res.data[iterator]);
 
-  // function parentFucntion(x: any) {
-  //   // setPagename(contents.pagename);
-  //   useEffect(() => {
-  //     setInput(x);
-  //   }, [x]);
-  // }
+        // return res.data
+      })
+      .catch(error => console.log(error));
+  };
+  useEffect(() => {
+    GET();
+  }, []);
+  console.log(nowpage);
+
+  function parentFucntion(x: any) {
+    // setPagename(contents.pagename);
+    useEffect(() => {
+      setInput(x);
+    }, [x]);
+  }
 
   //다음 핸들러 함수들 안의 console.log들은 확인용임
   const handleGoback = () => {
@@ -133,33 +133,50 @@ const Survey = () => {
     setNowpage(jsondata[iterator]);
   };
 
-  // var [url, setUrl] = useState('');
-
+  //GET함수에서 로컬호스트 대신에 10.0.2.2를 넣어 주었으니 handleNext함수
+  //안에서도 똑같이 url을 바꿔줘야 한다
+  //'http://10.0.2.2:8080/defaultPage'
   const handleNext = async () => {
     if (iterator < jsondata.length) {
       if (iterator === jsondata.length - 1) {
         storeData(`userinput_${iterator}`, input);
 
+        var GETURL;
         switch (await getData(`userinput_${iterator}`)) {
           case 0:
             console.log('type a');
-            storeData('typeUrl', 'localhost:8080/typePage/A');
+            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+            // storeData('typeUrl', 'http://localhost:8080/typePage/A');
+            GETURL = 'http://10.0.2.2:8080/typePage/A';
+            module.exports = {GETURL};
             break;
           case 1:
             console.log('type b');
-            storeData('typeUrl', 'localhost:8080/typePage/B');
+            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/B');
+            // storeData('typeUrl', 'http://localhost:8080/typePage/B');
+            GETURL = 'http://10.0.2.2:8080/typePage/B';
+            module.exports = {GETURL};
             break;
           case 2:
             console.log('type c');
-            storeData('typeUrl', 'localhost:8080/typePage/C');
+            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+            // storeData('typeUrl', 'http://localhost:8080/typePage/C');
+            GETURL = 'http://10.0.2.2:8080/typePage/C';
+            module.exports = {GETURL};
             break;
           case 3:
             console.log('type d');
-            storeData('typeUrl', 'localhost:8080/typePage/D');
+            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+            // storeData('typeUrl', 'http://localhost:8080/typePage/D');
+            GETURL = 'http://10.0.2.2:8080/typePage/D';
+            module.exports = {GETURL};
             break;
           case 4:
             console.log('type e');
-            storeData('typeUrl', 'localhost:8080/typePage/E');
+            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+            // storeData('typeUrl', 'http://localhost:8080/typePage/E');
+            GETURL = 'http://10.0.2.2:8080/typePage/E';
+            module.exports = {GETURL};
             break;
           default:
             console.log('testing');
@@ -176,21 +193,20 @@ const Survey = () => {
       // setPagename(contents.pagename);
     }
   };
-  // // console.log(url);
-  // // getData(`userinput_${contents.length - 1}`);
+  //console.log(url);
+  //getData(`userinput_${contents.length - 1}`);
 
   // //jsx구성요소 오류 해결 필요
   return (
     <>
-      {/* <MyUpBar level={nowpage.pgLevel} />
+      <MyUpBar level={nowpage.pgLevel} />
       <GobackButton onPress={handleGoback} />
       <DefaultPage pageContents={nowpage} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>
-    
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>
           <Text style={styles.nxt_txt}>다음</Text>
         </TouchableOpacity>
-      </View> */}
+      </View>
     </>
   );
   // }

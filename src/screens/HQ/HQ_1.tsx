@@ -1,5 +1,6 @@
 import {View, Text, Button} from 'react-native';
 
+
 import {UserStyle} from '../../styling/userLayout';
 import NextButtonHQ from '../../Buttons/nextButtonHQ'; //HQ부터
 import SelectionButtonHQ from '../../Buttons/selectionButtonHQ'; //HQ부터
@@ -23,12 +24,14 @@ const HQ_1 = ({navigation, route}) => {
     setIsButtonSelect(newArr);
   };
 
+
   return (
     <>
       <MyUpBar_wq />
       <GobackButton onPress={() => navigation.pop()} />
       <View style={[UserStyle.container]} />
       <View style={[UserStyle.container0_2]}>
+
         <Text style={[UserStyle.onelinetxt]}>{TxtCollection.hq_1.title}</Text>
       </View>
       <View style={[UserStyle.container1_2]}>
@@ -46,10 +49,13 @@ const HQ_1 = ({navigation, route}) => {
       </View>
       <View style={[UserStyle.container2]}>
         <NextButton disabled={false} destination={'HQ_2'} />
+
       </View>
       <UserImg img={HQimg}></UserImg>
     </>
   );
 };
 
+
 export default HQ_1;
+

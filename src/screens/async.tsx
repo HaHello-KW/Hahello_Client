@@ -24,7 +24,7 @@ export const getData = async (key: string) => {
     if (value !== null) {
       const data = JSON.parse(value);
       //   return data;
-      // console.log(value);
+      //console.log(value);
       // console.log(typeof data);
       return data;
       // return value;
