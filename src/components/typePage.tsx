@@ -216,31 +216,6 @@ function TypePage({pageContents}: typePageProps) {
                   index2: number,
                 ) {
                   return (
-                    // <>
-                    //   <TouchableOpacity
-                    //     key={index2}
-                    //     style={[
-                    //       styles.button,
-                    //       {
-                    //         backgroundColor: isButtonSelect2[index2]
-                    //           ? '#F47100'
-                    //           : '#f2f2f2',
-                    //       },
-                    //     ]}
-                    //     onPress={() => handlePress2(index2)}>
-                    //     <Text
-                    //       style={[
-                    //         styles.bt_txt,
-                    //         {
-                    //           color: isButtonSelect2[index2]
-                    //             ? '#fbfbfb'
-                    //             : '#242424',
-                    //         },
-                    //       ]}>
-                    //       {value2}
-                    //     </Text>
-                    //   </TouchableOpacity>
-                    // </>
                     <SelectionButton
                       key={index2}
                       isSelected={isButtonSelect2[index2]}
