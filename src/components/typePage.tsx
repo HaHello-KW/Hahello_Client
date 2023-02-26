@@ -74,19 +74,6 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
             );
           })}
         </View>
-        <Image
-          source={require('../../assets/images/userA.png')}
-          // source={require(pageContents.imgpath)}
-          style={{
-            position: 'absolute',
-            left: '36%',
-            top: '13%',
-            width: 105,
-            height: 105,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        />
       </>
     );
   }
@@ -125,19 +112,6 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           </View>
         </View>
         <View style={[UserStyle.container_tlp_c]} />
-        <Image
-          source={require('../../assets/images/userA.png')}
-          // source={require(pageContents.imgpath)}
-          style={{
-            position: 'absolute',
-            left: '36%',
-            top: '13%',
-            width: 105,
-            height: 105,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        />
       </>
     );
   } else if (
@@ -176,19 +150,6 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
               pickDate={pickDateFunction}></PType>
           </View>
         </View>
-        <Image
-          source={require('../../assets/images/userA.png')}
-          // source={require(pageContents.imgpath)}
-          style={{
-            position: 'absolute',
-            left: '36%',
-            top: '13%',
-            width: 105,
-            height: 105,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        />
         {}
       </>
     );
