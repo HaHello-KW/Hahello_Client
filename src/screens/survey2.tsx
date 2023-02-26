@@ -42,33 +42,6 @@ export function usePrevState(state: any) {
 }
 
 const Survey2 = () => {
-  // const [contents, setContents] = useState([]);
-  // const [defaultpage, setDefaultPage] = useState<defaultPageModel>({
-  //   id: 0,
-  //   pgLevel: 0,
-  //   questionType: '',
-  //   questionTxt: '',
-  //   selectionTxt: [],
-  //   firstPickerType: '',
-  //   firstlineTxt: '',
-  //   secondPickerType: '',
-  //   secondlineTxt: '',
-  //   thirdPickerType: '',
-  //   thirdlineTxt: '',
-  //   nextpage: '',
-  // });
-  //
-
-  // const GETURL = async () => {
-  //   return await getData('typeUrl');
-  // };
-
-  // console.log(GETURL());
-
-  // const {typeUrl} = require('./survey');
-  // console.log(typeUrl);
-  // const jsondata = handleGet(typeUrl);
-
   const [t, ff] = useState(null);
   const GETURL = async () => {
     ff(await getData('typeUrl'));
@@ -80,129 +53,16 @@ const Survey2 = () => {
   const navigation = useNavigation();
 
   //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
-  const [inputarr, setInputarr] = useState(new Array());
-  const [input, setInput] = useState();
+
+  const jsondata = handleGet(t); //t 에는 url 들어가있다.
 
   var [iterator, setIterator] = useState(0);
-  const [contents, setContents] = useState(testing2);
-  //const [contents, setContents] = useState(jsondata);
 
-  const [nowpage, setNowpage] = useState(contents[0]);
+  const [nowpage, setNowpage] = useState(jsondata[0]);
 
-  const [pagename, setPagename] = useState(nowpage.pagename);
-  // const prevPagename = usePrevState(pagename);
+  var [iterator, setIterator] = useState(0);
+
   // const [inputarr, setInputArr] = useState(new Array(MAX).fill(null))
-  function parentFucntion(x: any) {
-    // useEffect(() => {
-    //   setInput(x);
-    //   inputarr.push(input);
-    //   setInputarr(inputarr);
-    // }, [x]);
-
-    // useEffect(() => {
-    //   storeData(`userinput_${iterator}`, inputarr);
-    //   // getData(`userinput_${iterator}`);
-    // }, [iterator] && [inputarr]);
-
-    // useEffect(() => {
-    //   storeData(`userinput_${iterator}`, input);
-    //   getData(`userinput_${iterator}`);
-    // }, [input]);
-
-    //얘를 어디다가 해야하나?
-    // setPagename(contents.pagename);
-
-    useEffect(() => {
-      setInput(x);
-    }, [x]);
-
-    useEffect(() => {
-      storeData(`${pagename}`, input);
-      // console.log('useeffect');
-      getData(`${pagename}`);
-    }, [pagename]);
-
-    // useEffect(() => {
-    //   // if (prevPagename !== pagename) {
-    //   // setInput(x);
-    //   storeData(`${pagename}`, input);
-    //   getData(`${pagename}`);
-    //   // }
-    //   // else if (prevPagename === pagename) {
-    //   //   // setInput(x);
-    //   //   inputarr.push(input);
-    //   //   setInputarr(inputarr);
-    //   //   // console.log(inputarr);
-    //   //   storeData(`${pagename}`, inputarr);
-    //   //   getData(`${pagename}`);
-    //   // }
-    // }, [pagename] && [input]);
-
-    // && ([inputarr] || [input])
-
-    // if (prevPagename !== pagename) {
-    //   useEffect(() => {
-    //     storeData(`${pagename}`, input);
-    //     getData(`${pagename}`);
-    //   }, [pagename] && [input]);
-    // } else if (prevPagename === pagename) {
-    //   useEffect(() => {
-    //     inputarr.push(input);
-    //     setInputarr(inputarr);
-    //     storeData(`${pagename}`, inputarr);
-    //     getData(`${pagename}`);
-    //   }, [input]);
-    // }
-
-    // useEffect(() => {
-    //   storeMultiData(`userinput_${iterator}`, input);
-    //   getData(`userinput_${iterator}`);
-    // }, [input]);
-  }
-
-  //임시 테스트
-  // function parentFunction_x(x: any) {
-  //   useEffect(() => {
-  //     setInput(x);
-  //   }, [x]);
-
-  //   useEffect(() => {
-  //     storeData(`userinput_${iterator}`, input);
-  //     // getData(`userinput_${iterator}`);
-  //   }, [input]);
-  // }
-  // function parentFunction_y(y: any) {
-  //   useEffect(() => {
-  //     setInput(y);
-  //   }, [y]);
-
-  //   useEffect(() => {
-  //     storeData(`userinput_${iterator}`, input);
-  //     // getData(`userinput_${iterator}`);
-  //   }, [input]);
-  // }
-  // function parentFunction_z(z: any) {
-  //   useEffect(() => {
-  //     setInput(z);
-  //   }, [z]);
-
-  //   useEffect(() => {
-  //     storeData(`userinput_${iterator}`, input);
-  //     // getData(`userinput_${iterator}`);
-  //   }, [input]);
-  // }
-
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState('');
-  // const [contents, setContents] = useState('');
-
-  // var [iterator, setIterator] = useState(0);
-  // const [contents, setContents] = useState(testing2[iterator]);
-
-  //각 페이지마다 입력받은 input들을 inputarr에 담아 handlePost 통해 서버로 inputarr을 전달
-  // const [inputarr, setInputArr] = useState(
-  //   new Array(testing.length).fill(null),
-  // );
 
   const handleGoback = () => {
     if (iterator > 0) {
@@ -211,34 +71,21 @@ const Survey2 = () => {
     } else {
       navigation.pop();
     }
-    setNowpage(contents[iterator]);
-    setPagename(nowpage.pagename);
+    setNowpage(jsondata[iterator]);
+    //setPagename(nowpage.pagename);
   };
 
   const handleNext = () => {
-    if (iterator < contents.length) {
-      if (iterator === contents.length - 1) {
-        // console.log('testing');
-        // setPagename(contents.pagename);
-        // getData(`${pagename}`);
-        //
-        // for (let i = 0; i < testing2.length; i++) {
-        //   getData(`userinput_${i}`);
-        // }
-        //
-        // AsyncStorage.getAllKeys().then(keys =>
-        //   AsyncStorage.multiGet(keys).then(data => console.log(data)),
-        // );
-        //
-        //navigation
+    if (iterator < jsondata.length) {
+      if (iterator === jsondata.length - 1) {
       } else {
         // setPagename(contents.pagename);
         ++iterator;
         setIterator(iterator);
       }
       // setPagename(contents.pagename);
-      setNowpage(contents[iterator]);
-      setPagename(nowpage.pagename);
+      setNowpage(jsondata[iterator]);
+      //setPagename(contents.pagename);
     }
   };
 
@@ -248,7 +95,7 @@ const Survey2 = () => {
     <>
       <MyUpBar level={nowpage.pgLevel} />
       <GobackButton onPress={handleGoback} />
-      <TypePage pageContents={nowpage} parentFunction={parentFucntion} />
+      <TypePage pageContents={nowpage} />
       <View style={[defaultPageStyles.container_next]}>
         {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>

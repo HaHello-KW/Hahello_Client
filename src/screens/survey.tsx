@@ -37,114 +37,90 @@ export function usePrevState(state: any) {
 }
 
 const Survey = () => {
-  // const [contents, setContents] = useState([]);
-  // const [defaultpage, setDefaultPage] = useState<defaultPageModel>({
-  //   id: 0,
-  //   pgLevel: 0,
-  //   questionType: '',
-  //   questionTxt: '',
-  //   selectionTxt: [],
-  //   firstPickerType: '',
-  //   firstlineTxt: '',
-  //   secondPickerType: '',
-  //   secondlineTxt: '',
-  //   thirdPickerType: '',
-  //   thirdlineTxt: '',
-  //   nextpage: '',
-  // });
-
   //survey -> survey2
   const navigation = useNavigation();
 
   //deafultpage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
   // const [inputarr, setInputarr] = useState(new Array());
 
-  //const jsondata = handleGet('http://localhost:8080/defaultPage');
+  // const jsondata = handleGet('http://localhost:8080/defaultPage');
+
+  // 1
+  // const [jsondata, setjsondata] = useState([]);
+  // // useEffect(() => {
+
+  // const testing = async () => {
+  //   try {
+  //     const response = await axios.get('http://10.0.2.2:8080/defaultPage');
+  //     console.log('111');
+  //     setjsondata(response.data);
+  //   } catch (e) {
+  //     console.log(e);
+  //     console.log('222');
+  //   }
+  // };
+  // console.log('1');
+  // testing();
+  // console.log('2');
+  // console.log(jsondata);
+  // console.log('3');
+  // var value = JSON.stringify(jsondata);
+  // console.log('4');
+  // console.log(value);
+
+  // }, []);
+  // console.log(JSON.stringify(jsondata));
+
+  // 2
+  // axios.get('http://localhost:8080/defaultPage').then(response => {
+  //   console.log(response.data);
+  // });
+
+  //3
+  useEffect(() => {
+    getTodos();
+  }, []);
+
+  const [jsondata, setjsondata] = useState([]);
+
+  const getTodos = () => {
+    axios
+      .get('http://10.0.2.2:8080/defaultPage')
+      .then(res => {
+        setjsondata(res.data);
+        // console.log(jsondata);
+        // console.log(res.data);
+      })
+      .catch(error => console.log(error));
+  };
+  console.log('2');
+  console.log(jsondata);
+  console.log('3');
+
+  // console.log(jsondata[0]);
+  // var value = JSON.parse(jsondata);
+  // console.log('4');
+  // console.log(value);
+  // console.log(typeof value);
 
   const [input, setInput] = useState();
   var [iterator, setIterator] = useState(0);
-  const [contents, setContents] = useState(testing);
-  // const [contents, setContents] = useState(jsondata);
 
-  const [nowpage, setNowpage] = useState(contents[0]);
+  const [nowpage, setNowpage] = useState(jsondata[0]);
+  console.log(jsondata[0]);
+  console.log(jsondata[0].pgLevel);
+  // console.log(nowpage);
+  // console.log(nowpage.firstPickerType);
 
-  // const [pagename, setPagename] = useState(contents.pagename);
-  // const prevPagename = usePrevState(pagename);
+  // // const [pagename, setPagename] = useState(contents.pagename);
+  // // const prevPagename = usePrevState(pagename);
 
-  function parentFucntion(x: any) {
-    // setPagename(contents.pagename);
-    useEffect(() => {
-      setInput(x);
-    }, [x]);
-
-    // useEffect(() => {
-    //   storeData(`${pagename}`, input);
-    //   console.log('useeffect');
-    //   getData(`${pagename}`);
-    // }, [pagename]);
-
-    // useEffect(() => {
-    //   storeData(`userinput_${iterator}`, input);
-    //   getData(`userinput_${iterator}`);
-    // }, [input]);
-
-    //usereducer...?
-    // const[state, dispatch] = useReducer(reducer, {
-    //   iterator: ,
-    //   input: ,
-    // })
-  }
-
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState('');
-
-  //handleget? home의 시작 버튼...? 음
-  //아예 따로 뽑아버려? -> 일단 빼버려
-  // const handleGet = async ({url}: any) => {
-  //   const [loading, setLoading] = useState(false);
-  //   const [error, setError] = useState('');
-  //   try {
-  //     //요청 시작 할 때에는 error, contents 초기화
-  //     setError('');
-  //     // setContents(null);
-  //     //loading 상태를 true로 바꿈
-  //     setLoading(true);
-
-  //     const response = await axios.get(url);
-  //     //데이터는 response.data 안에 들어있다. or response.data.data
-  //     // setContents(response.data);
-
-  //     return response.data;
-
-  //   } catch (error) {
-  //     setError('An error has occurred');
-  //   }
-  //   //loading 끄기
-  //   setLoading(false);
-  // };
-
-  // const handlePost = async (event: any) => {
-  //   try {
-  //     //loading 상태 true로 바꿔주고
-  //     setLoading(true);
-  //     //error, contents 초기화 안해도 되나..? 필요하다면 추가할 것
-  //     //input arr 값을 서버로 전달
-  //     const response = await axios.post(`~/survey`, form);
-
-  //     //요청이 성공적 + 결과로 새로운 리소스 생성 | POST, PUT
-  //     if (response.status === 201) {
-  //       console.log('success');
-  //       //loading 상태 false로 바꿔주고 inputarr값 reset
-  //       setLoading(false);
-  //       setInputArr(new Array());
-  //     } else {
-  //       throw new Error('An error has occurred');
-  //     }
-  //   } catch (error) {
-  //     setError('An error has occurred');
-  //     setLoading(false);
-  //   }
-  // };
+  // function parentFucntion(x: any) {
+  //   // setPagename(contents.pagename);
+  //   useEffect(() => {
+  //     setInput(x);
+  //   }, [x]);
+  // }
 
   //다음 핸들러 함수들 안의 console.log들은 확인용임
   const handleGoback = () => {
@@ -154,57 +130,36 @@ const Survey = () => {
     } else {
       navigation.pop();
     }
-    setNowpage(contents[iterator]);
+    setNowpage(jsondata[iterator]);
   };
 
   // var [url, setUrl] = useState('');
 
   const handleNext = async () => {
-    if (iterator < contents.length) {
-      if (iterator === contents.length - 1) {
-        //
-        // setPagename(contents.pagename);
-        // console.log('handlenext last iterator');
+    if (iterator < jsondata.length) {
+      if (iterator === jsondata.length - 1) {
         storeData(`userinput_${iterator}`, input);
 
-        var typeUrl;
         switch (await getData(`userinput_${iterator}`)) {
           case 0:
-            // console.log('type a');
-            //const a = testing2
-            //testing2를 리턴 어쩌고해서
-            //survery2에 던져준다?
-            //아니면 리턴한 값을 survey2가 쓸수있게끔 한다...
-            // typeUrl = 'type a';
-            // module.exports = {typeUrl};
-            //
-            storeData('typeUrl', 'type a');
-            // getData('typeUrl');
-            // return url;
+            console.log('type a');
+            storeData('typeUrl', 'localhost:8080/typePage/A');
             break;
           case 1:
-            // console.log('type b');
-            storeData('typeUrl', 'type b');
-            // typeUrl = 'type b';
-            // module.exports = {typeUrl};
+            console.log('type b');
+            storeData('typeUrl', 'localhost:8080/typePage/B');
             break;
           case 2:
-            // console.log('type c');
-            storeData('typeUrl', 'type c');
-            // typeUrl = 'type c';
-            // module.exports = {typeUrl};
+            console.log('type c');
+            storeData('typeUrl', 'localhost:8080/typePage/C');
             break;
           case 3:
-            // console.log('type d');
-            storeData('typeUrl', 'type d');
-            // typeUrl = 'type d';
-            // module.exports = {typeUrl};
+            console.log('type d');
+            storeData('typeUrl', 'localhost:8080/typePage/D');
             break;
           case 4:
-            // console.log('type e');
-            storeData('typeUrl', 'type e');
-            // typeUrl = 'type e';
-            // module.exports = {typeUrl};
+            console.log('type e');
+            storeData('typeUrl', 'localhost:8080/typePage/E');
             break;
           default:
             console.log('testing');
@@ -212,37 +167,34 @@ const Survey = () => {
 
         //navigation
         navigation.navigate('Survey2');
-        //asyncstorage 초기화(clear)
-        // AsyncStorage.clear();
       } else {
         // setPagename(nowpage.pagename);
         ++iterator;
         setIterator(iterator);
       }
-      setNowpage(contents[iterator]);
+      setNowpage(jsondata[iterator]);
       // setPagename(contents.pagename);
     }
   };
-  // console.log(url);
-  // getData(`userinput_${contents.length - 1}`);
+  // // console.log(url);
+  // // getData(`userinput_${contents.length - 1}`);
 
-  //jsx구성요소 오류 해결 필요
+  // //jsx구성요소 오류 해결 필요
   return (
     <>
-      <MyUpBar level={nowpage.pgLevel} />
+      {/* <MyUpBar level={nowpage.pgLevel} />
       <GobackButton onPress={handleGoback} />
       <DefaultPage pageContents={nowpage} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>
-        {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
+    
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>
           <Text style={styles.nxt_txt}>다음</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </>
   );
   // }
 };
-
 const styles = StyleSheet.create({
   nxt_bt: {
     justifyContent: 'center',
