@@ -37,19 +37,65 @@ console.warn = console.error = () => {};
 // }
 
 const Survey = () => {
+  //console.log('111');
+  // axios.get('http://localhost:8080/defaultPage').then(res => {
+  //   console.log(res.data[0]);
+  // });
+  // useEffect(() => {
+  //   try {
+  //     axios.get('http://localhost:8080/defaultPage').then(res => {
+  //       console.log(res.data[0]);
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //     console.log('222');
+  //   }
+  // }, []);
+
+  //////////////////////////////
   //survey -> survey2
   const navigation = useNavigation();
 
   //deafultpage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
   // const [inputarr, setInputarr] = useState(new Array());
-
-  const jsondata = handleGet('http://localhost:8080/defaultPage');
+  //let jsondata:any;
+  const [jsondata, setJson] = useState('');
+  // const [jsondata, setJson] = useState({
+  //   pagename: 'q_d_1',
+  //   id: 0,
+  //   pgLevel: 1,
+  //   questionType: 'Threeline_Picker',
+  //   questionTxt: null,
+  //   selectionTxt: null,
+  //   firstPickerType: 'none',
+  //   firstlineTxt: '나는',
+  //   secondPickerType: 'datePicker',
+  //   secondlineTxt: '에',
+  //   thirdPickerType: 'none',
+  //   thirdlineTxt: '태어났어',
+  //   nextpage: 'q_d_2',
+  // });
 
   const [input, setInput] = useState();
   var [iterator, setIterator] = useState(0);
 
-  const [nowpage, setNowpage] = useState(jsondata[0]);
+  const [nowpage, setNowpage] = useState(jsondata);
 
+  const GET = () => {
+    axios
+      .get('http://10.0.2.2:8080/defaultPage')
+      .then(res => {
+        //console.log(res.data);
+        setJson(res.data);
+      })
+      .catch(error => console.log(error));
+  };
+  useEffect(() => {
+    GET();
+    //console.log('확인');
+  }, []);
+  //console.log(jsondata[0]);
+  //console.log(jsondata);
   // const [pagename, setPagename] = useState(contents.pagename);
   // const prevPagename = usePrevState(pagename);
 
@@ -114,8 +160,8 @@ const Survey = () => {
       // setPagename(contents.pagename);
     }
   };
-  // console.log(url);
-  // getData(`userinput_${contents.length - 1}`);
+  //console.log(url);
+  //getData(`userinput_${contents.length - 1}`);
 
   //jsx구성요소 오류 해결 필요
   return (
@@ -124,7 +170,6 @@ const Survey = () => {
       <GobackButton onPress={handleGoback} />
       <DefaultPage pageContents={nowpage} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>
-        {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>
           <Text style={styles.nxt_txt}>다음</Text>
         </TouchableOpacity>
