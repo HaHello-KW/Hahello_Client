@@ -1,34 +1,27 @@
+import React, {useState} from 'react';
 import {
+  Button,
   View,
   Text,
-  Button,
-  Image,
+  Pressable,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
-import MyUpBar_wq from '../../upbar/UpBar_WQ';
-
-import {UserStyle} from '../../styling/userLayout';
-
-
-import NextButtonHQ from '../../Buttons/nextButtonHQ'; //HQ부터
-import SelectionButtonHQ from '../../Buttons/selectionButtonHQ'; //HQ부터
-
-import GobackButton from '../../Buttons/gobackButton';
-import SelectionButton_V2 from '../../Buttons/2selectionButton_v';
-
-import DateTimePicker from 'react-native-modal-datetime-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {DefaultStyle} from '../../styling/defaultLayout';
-import HQimg from '../../../assets/images/HQ1.png';
-
-import UserImg from '../../Buttons/userImgHQ'; //HQ부터
-import {useState} from 'react';
+import MyUpBar_1 from '../../upbar/UpBar_1';
 import NextButton from '../../Buttons/nextButton';
+import {DefaultStyle} from '../../styling/defaultLayout';
+import GobackButton from '../../Buttons/gobackButton';
 
-
-const HQ_2 = ({navigation, route}) => {
+const Picker_ThreeLine = ({
+  first,
+  second,
+  third,
+  first_pickerType,
+  second_pickerType,
+}) => {
   Date.prototype.format = function (f) {
     if (!this.valueOf()) return ' ';
 
@@ -166,11 +159,11 @@ const HQ_2 = ({navigation, route}) => {
 
   return (
     <>
-      <MyUpBar_wq />
+      <MyUpBar_1 />
       <GobackButton onPress={() => navigation.pop()} />
       {/* <View style={[Styling.container0]}></View> */}
       <View style={DefaultStyle.container0_1}>
-        <Text style={DefaultStyle.threelinetxt}>이 검사는</Text>
+        <Text style={DefaultStyle.threelinetxt}>나는</Text>
         <TouchableOpacity onPress={showDatePicker}>
           <TextInput
             pointerEvents="none"
@@ -189,19 +182,15 @@ const HQ_2 = ({navigation, route}) => {
             onCancel={hideDatePicker}
           />
         </TouchableOpacity>
-        <Text style={styles.text}>에 받았어</Text>
+        <Text style={styles.text}>에 태어났어</Text>
       </View>
       <View style={[DefaultStyle.container1_2]} />
       <View style={[DefaultStyle.container2]}>
-<<<<<<< HEAD
-        <NextButton disabled={false} destination={'HQ_3'} />
-=======
-        <NextButton onPress={() => navigation.navigate('HQ_3')}></NextButton>
->>>>>>> d94eb67f1bb1573ff1e83bfa25f3f0a6c0d954dc
+        <NextButton
+          onPress={() => navigation.navigate('Q_Default_2')}></NextButton>
       </View>
-      <UserImg img={HQimg}></UserImg>
     </>
   );
 };
 
-export default HQ_2;
+export default Picker_ThreeLine;

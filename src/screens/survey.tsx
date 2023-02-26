@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useReducer, useRef} from 'react';
 import defaultPage from '../components/defaultPage';
 import axios from 'axios';
 import {defaultPageModel} from '../models/defaultPageModel';
@@ -11,45 +11,56 @@ import DefaultPage from '../components/defaultPage';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
+
 import Survey2 from './survey2';
 
-//survey에 goback button, next button, myupbar를 넣으면 안되는 것인가??
-//됨 -> routing기능 넣어도? reducer? redux?
+import testing1 from '../txtCollection/testing1.json';
 
+//asyncstorage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  storeData,
+  getData,
+  containsKey,
+  removeData,
+  storeMultiData,
+} from './async';
+import handleGet from './axios';
+
+//콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
 
 const Survey = () => {
-  // const [contents, setContents] = useState([]);
-  // const [defaultpage, setDefaultPage] = useState<defaultPageModel>({
-  //   id: 0,
-  //   pgLevel: 0,
-  //   questionType: '',
-  //   questionTxt: '',
-  //   selectionTxt: [],
-  //   firstPickerType: '',
-  //   firstlineTxt: '',
-  //   secondPickerType: '',
-  //   secondlineTxt: '',
-  //   thirdPickerType: '',
-  //   thirdlineTxt: '',
-  //   nextpage: '',
-  // });
-
-  //서버로부터 데이터 받아오기
-  //이런느낌 같은데 맞을까...
-  // useEffect(() => {
-  //   axios.get(url).then(response => {
-  //     setDefaultPage(response.data);
-  //   });
-  // }, []);
-
-  //iterator 쓸거면 굳이 navigation 안갖고와도 될거같은데...?
-  // const navigation = useNavigation();
-
-  var [iterator, setIterator] = useState(0);
-  const [contents, setContents] = useState(testing[iterator]);
   const navigation = useNavigation();
 
+  const [jsondata, setJson] = useState('');
+
+  const [input, setInput] = useState();
+  var [iterator, setIterator] = useState(0);
+
+  const [nowpage, setNowpage] = useState(jsondata);
+
+  const GET = () => {
+    axios
+      .get('http://10.0.2.2:8080/defaultPage')
+      .then(res => {
+        //console.log(res.data);
+        setJson(res.data);
+      })
+      .catch(error => console.log(error));
+  };
+  useEffect(() => {
+    GET();
+  }, []);
+
+  function parentFucntion(x: any) {
+    // setPagename(contents.pagename);
+    useEffect(() => {
+      setInput(x);
+    }, [x]);
+  }
+
+  //다음 핸들러 함수들 안의 console.log들은 확인용임
   const handleGoback = () => {
     if (iterator > 0) {
       iterator--;
@@ -57,35 +68,71 @@ const Survey = () => {
     } else {
       navigation.pop();
     }
-    setContents(testing[iterator]);
+    setNowpage(jsondata[iterator]);
   };
 
-  const handleNext = () => {
-    if (iterator < testing.length) {
-      if (iterator === testing.length - 1) {
+  //GET함수에서 로컬호스트 대신에 10.0.2.2를 넣어 주었으니 handleNext함수
+  //안에서도 똑같이 url을 바꿔줘야 한다
+  //'http://10.0.2.2:8080/defaultPage'
+  const handleNext = async () => {
+    if (iterator < jsondata.length) {
+      if (iterator === jsondata.length - 1) {
+        storeData(`userinput_${iterator}`, input);
+
+        switch (await getData(`userinput_${iterator}`)) {
+          case 0:
+            console.log('type a');
+            storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+            break;
+          case 1:
+            console.log('type b');
+            //storeData('typeUrl', 'http://10.0.2.2:8080/typePage/B');
+            storeData('typeUrl', 'http://localhost:8080/typePage/B');
+            break;
+          case 2:
+            console.log('type c');
+            storeData('typeUrl', 'http://10.0.2.2:8080/typePage/C');
+            break;
+          case 3:
+            console.log('type d');
+            storeData('typeUrl', 'http://10.0.2.2:8080/typePage/D');
+            break;
+          case 4:
+            console.log('type e');
+            storeData('typeUrl', 'http://10.0.2.2:8080/typePage/E');
+            break;
+          default:
+            console.log('testing');
+        }
+
+        //navigation
         navigation.navigate('Survey2');
       } else {
-        setIterator(++iterator);
+        // setPagename(nowpage.pagename);
+        ++iterator;
+        setIterator(iterator);
       }
+      setNowpage(jsondata[iterator]);
+      // setPagename(contents.pagename);
     }
-    setContents(testing[iterator]);
   };
+  //console.log(url);
+  //getData(`userinput_${contents.length - 1}`);
 
   //jsx구성요소 오류 해결 필요
-  //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?
   return (
     <>
-      <MyUpBar level={contents.pgLevel} />
+      <MyUpBar level={nowpage.pgLevel} />
       <GobackButton onPress={handleGoback} />
-      <DefaultPage pageContents={contents} />
+      <DefaultPage pageContents={nowpage} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>
-        {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>
           <Text style={styles.nxt_txt}>다음</Text>
         </TouchableOpacity>
       </View>
     </>
   );
+  // }
 };
 
 const styles = StyleSheet.create({

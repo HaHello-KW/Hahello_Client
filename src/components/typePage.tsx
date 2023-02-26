@@ -10,10 +10,11 @@ import {
 import {defaultPageModel} from '../models/defaultPageModel';
 import {TypePageModel} from '../models/typePageModel';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
-//import {UserStyle} from '../styles/typePageStyles';
-import PType from './dateConverter';
 
 import {UserStyle} from '../styles/typePageStyles';
+
+import PType from './dateConverter';
+
 import {Image} from 'react-native';
 //for test
 import UserImg from './userImg';
@@ -22,33 +23,35 @@ import UserImgHQ from './userImgHQ';
 import SelectionButton from './selectionButton';
 type typePageProps = {
   pageContents: TypePageModel;
+
+  parentFunction: any;
 };
 
-function TypePage({pageContents}: typePageProps) {
+function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
   if (
     pageContents.questionType == 'Button_Selector' &&
     pageContents.selectionTxt != null
   ) {
     const [isButtonSelect, setIsButtonSelect] = useState('');
     const newArr = Array(pageContents.selectionTxt.length).fill(false);
+
+    const [getidx, setgetidx] = useState(0);
     const handlePress = (idx: number) => {
       newArr[idx] = true;
       setIsButtonSelect(newArr);
-      // console.log(idx);
+      setgetidx(idx);
     };
+
+    parentFunction(getidx);
 
     return (
       <>
-        {/* 여기에 넣는게 맞나? 아니면 screen의 survey에?  */}
-        {/* <MyUpBar level={pageContents.pgLevel} /> */}
-        {/* <GobackButton onPress={() => navigation.pop()} /> */}
         <View style={[UserStyle.container_bs_q]}>
           <Text style={[UserStyle.txt]}>{pageContents.questionTxt}</Text>
         </View>
         <View style={[UserStyle.container_bs_c]}>
           {pageContents.selectionTxt.map(function (value: any, index: number) {
             return (
-              //왜 가려져서 나오지?? scrollview의 문제인가? 스타일링 관련해서 알아볼 것
               <TouchableOpacity
                 key={index}
                 style={[
@@ -68,34 +71,9 @@ function TypePage({pageContents}: typePageProps) {
                   {value}
                 </Text>
               </TouchableOpacity>
-              // <SelectionButton
-              //   key={index}
-              //   isSelected={isButtonSelect[index]}
-              //   handlePress={handlePress}
-              //   elementIndex={index}
-              //   txt={value}
-              // />
             );
           })}
         </View>
-        <Image
-          //source={require('../../assets/images/userA.png')}
-          source={require(pageContents.imgpath)}
-          style={{
-            position: 'absolute',
-            left: '36%',
-            top: '13%',
-            width: 105,
-            height: 105,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        />
-        {/* 여기에 넣는게 맞나? 아니면 screen의 survey에?  */}
-        {/* <View style={[defaultPageStyles.container_next]}>
-              <NextButton destination={pageContents.nextpage} disabled={false} />
-              <Text>hi hello this is test</Text>
-            </View> */}
       </>
     );
   }
@@ -105,83 +83,80 @@ function TypePage({pageContents}: typePageProps) {
     pageContents.questionType == 'Threeline_Picker' &&
     pageContents.selectionTxt == null
   ) {
+    function pickDateFunction(x: any) {
+      parentFunction(x);
+    }
     return (
       <>
-        {/* <MyUpBar level={pageContents.pgLevel} /> */}
         <View style={[UserStyle.container_tlp_q]}>
           <View style={UserStyle.container_tlp_line}>
-            <PType Type_of_Picker={pageContents.firstPickerType}></PType>
+            <PType
+              Type_of_Picker={pageContents.firstPickerType}
+              pickDate={pickDateFunction}></PType>
             <Text style={styles.tlp_txt}>{pageContents.firstlineTxt}</Text>
           </View>
           <View style={UserStyle.container_tlp_line}>
-            <PType Type_of_Picker={pageContents.secondPickerType} />
+            <PType
+              Type_of_Picker={pageContents.secondPickerType}
+              pickDate={pickDateFunction}
+            />
             <Text style={styles.tlp_txt}>{pageContents.secondlineTxt}</Text>
           </View>
           <View style={UserStyle.container_tlp_line}>
-            <PType Type_of_Picker={pageContents.thirdPickerType} />
+            <PType
+              Type_of_Picker={pageContents.thirdPickerType}
+              pickDate={pickDateFunction}
+            />
+
             <Text style={styles.tlp_txt}>{pageContents.thirdlineTxt}</Text>
           </View>
         </View>
         <View style={[UserStyle.container_tlp_c]} />
-        {/* <View style={[defaultPageStyles.container_next]}>
-              <NextButton destination={pageContents.nextpage} disabled={false} />
-              <Text>hi hello this is test</Text>
-            </View> */}
-        <Image
-          source={require('../../assets/images/userA.png')}
-          style={{
-            position: 'absolute',
-            left: '36%',
-            top: '13%',
-            width: 105,
-            height: 105,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        />
       </>
     );
   } else if (
     pageContents.questionType == 'Sixline_Picker' &&
     pageContents.selectionTxt == null
   ) {
+    function pickDateFunction(x: any) {
+      parentFunction(x);
+    }
+
     return (
       <>
         {}
         <View style={UserStyle.container_slp_q}>
           <View style={UserStyle.container3_1}>
             <Text style={UserStyle.blacktxt}>{pageContents.firstlineTxt}</Text>
-            <PType Type_of_Picker={pageContents.firstPickerType}></PType>
+
+            <PType
+              Type_of_Picker={pageContents.firstPickerType}
+              pickDate={pickDateFunction}></PType>
           </View>
           <View style={UserStyle.container3_2}>
             <Text style={UserStyle.blacktxt}>{pageContents.secondlineTxt}</Text>
             <Text style={[UserStyle.descriptionGray]}>보충보충</Text>
-            <PType Type_of_Picker={pageContents.secondPickerType}></PType>
+
+            <PType
+              Type_of_Picker={pageContents.secondPickerType}
+              pickDate={pickDateFunction}></PType>
           </View>
           <View style={UserStyle.container3_3}>
             <Text style={UserStyle.blacktxt}>{pageContents.thirdlineTxt}</Text>
             <Text style={[UserStyle.descriptionGray]}>보충보충</Text>
-            <PType Type_of_Picker={pageContents.thirdPickerType}></PType>
+
+            <PType
+              Type_of_Picker={pageContents.thirdPickerType}
+              pickDate={pickDateFunction}></PType>
           </View>
         </View>
-        <Image
-          source={require('../../assets/images/userA.png')}
-          style={{
-            position: 'absolute',
-            left: '36%',
-            top: '13%',
-            width: 105,
-            height: 105,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        />
+
         {}
       </>
     );
   } else if (
     pageContents.questionType == 'Hybrid_Picker' &&
-    pageContents.selectionTxt != null
+    pageContents.selectionTxt == null
   ) {
     const newArr2 = Array(pageContents.selectionTxt.length).fill(false);
     const [isButtonSelect2, setIsButtonSelect2] = useState(newArr2);
@@ -216,6 +191,31 @@ function TypePage({pageContents}: typePageProps) {
                   index2: number,
                 ) {
                   return (
+                    // <>
+                    //   <TouchableOpacity
+                    //     key={index2}
+                    //     style={[
+                    //       styles.button,
+                    //       {
+                    //         backgroundColor: isButtonSelect2[index2]
+                    //           ? '#F47100'
+                    //           : '#f2f2f2',
+                    //       },
+                    //     ]}
+                    //     onPress={() => handlePress2(index2)}>
+                    //     <Text
+                    //       style={[
+                    //         styles.bt_txt,
+                    //         {
+                    //           color: isButtonSelect2[index2]
+                    //             ? '#fbfbfb'
+                    //             : '#242424',
+                    //         },
+                    //       ]}>
+                    //       {value2}
+                    //     </Text>
+                    //   </TouchableOpacity>
+                    // </>
                     <SelectionButton
                       key={index2}
                       isSelected={isButtonSelect2[index2]}
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  //여기밑은 합치기 전 백성현 파일의 하이브리드타입 파일에서 가져옴
+  //밑 stlye 객체는 하이브리드타입 파일에서 가져옴
   container: {
     flex: 7,
     backgroundColor: '#ffffff',
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  textInput_H: {
+  textInput: {
     fontSize: 24,
     fontWeight: '400',
     color: '#f47100',
@@ -337,6 +337,15 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: '#000000',
     textAlign: 'center',
+  },
+  image: {
+    position: 'absolute',
+    left: '36%',
+    top: '13%',
+    width: 105,
+    height: 105,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

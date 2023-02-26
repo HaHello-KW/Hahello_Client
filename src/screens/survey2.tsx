@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import defaultPage from '../components/defaultPage';
 import axios from 'axios';
 import {defaultPageModel} from '../models/defaultPageModel';
@@ -13,47 +13,73 @@ import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
 import testing2 from '../txtCollection/testing2.json';
 import TypePage from '../components/typePage';
+
 import UserImg from '../components/userImg';
-import Img from '../../assets/images/userA.png';
+import UserAimg from '../../assets/images/userA.png';
 
-import {Image} from 'react-native';
+import handleGet from './axios';
 
-//survey에 goback button, next button, myupbar를 넣으면 안되는 것인가??
-//됨 -> routing기능 넣어도? reducer? redux?
+//asyncstorage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  storeData,
+  getData,
+  containsKey,
+  removeData,
+  storeMultiData,
+} from './async';
+
+//콘솔창 에러 숨기기(임시)
+console.warn = console.error = () => {};
+
+const MAX = 3;
+
+export function usePrevState(state: any) {
+  const ref = useRef(state);
+  useEffect(() => {
+    ref.current = state;
+  }, [state]);
+  return ref.current;
+}
 
 const Survey2 = () => {
-  // const [contents, setContents] = useState([]);
-  // const [defaultpage, setDefaultPage] = useState<defaultPageModel>({
-  //   id: 0,
-  //   pgLevel: 0,
-  //   questionType: '',
-  //   questionTxt: '',
-  //   selectionTxt: [],
-  //   firstPickerType: '',
-  //   firstlineTxt: '',
-  //   secondPickerType: '',
-  //   secondlineTxt: '',
-  //   thirdPickerType: '',
-  //   thirdlineTxt: '',
-  //   nextpage: '',
-  // });
+  const [url, ff] = useState('');
+  const [jsondata, setJson] = useState('');
+  const GETURL = async () => {
+    ff(await getData('typeUrl'));
+  };
 
-  //서버로부터 데이터 받아오기
-  //이런느낌 같은데 맞을까...
-  // useEffect(() => {
-  //   axios.get(url).then(response => {
-  //     setDefaultPage(response.data);
-  //   });
-  // }, []);
+  GETURL();
+  //console.log(`${url}`);
+  console.log(url);
 
-  // iterator 쓸거면 굳이 navigation 안갖고와도 될거같은데...?
-  // const navigation = useNavigation();
+  //store에 저장되어 있는 url을 이용하여 axios.get해온다
+  const GET = () => {
+    axios
+      .get(url)
+      .then(res => {
+        //console.log(res.data);
+        setJson(res.data);
+      })
+      .catch(error => console.log(error));
+  };
+  useEffect(() => {
+    GET();
+  }, []);
 
-  var [iterator, setIterator] = useState(0);
-  const [contents, setContents] = useState(testing2[iterator]);
   const navigation = useNavigation();
 
-  let defaultCount;
+  //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
+
+  //const jsondata = handleGet(t); //t 에는 url 들어가있다. 잠시 보류
+
+  var [iterator, setIterator] = useState(0);
+
+  const [nowpage, setNowpage] = useState(jsondata);
+
+  var [iterator, setIterator] = useState(0);
+
+  // const [inputarr, setInputArr] = useState(new Array(MAX).fill(null))
 
   const handleGoback = () => {
     if (iterator > 0) {
@@ -62,39 +88,37 @@ const Survey2 = () => {
     } else {
       navigation.pop();
     }
-    setContents(testing2[iterator]);
+    setNowpage(jsondata[iterator]);
+    //setPagename(nowpage.pagename);
   };
 
   const handleNext = () => {
-    if (iterator < testing2.length) {
-      if (iterator === testing2.length - 1) {
-        //navigation
-        navigation.navigate('SurveyResult');
+    if (iterator < jsondata.length) {
+      if (iterator === jsondata.length - 1) {
       } else {
-        setIterator(++iterator);
+        // setPagename(contents.pagename);
+        ++iterator;
+        setIterator(iterator);
       }
+      // setPagename(contents.pagename);
+      setNowpage(jsondata[iterator]);
+      //setPagename(contents.pagename);
     }
-    setContents(testing2[iterator]);
   };
-
-  const axios_get = () => {
-    axios
-      .get('URL')
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
+  const [input, setInput] = useState();
+  function parentFucntion(x: any) {
+    // setPagename(contents.pagename);
+    useEffect(() => {
+      setInput(x);
+    }, [x]);
+  }
   //jsx구성요소 오류 해결 필요
   //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?
   return (
     <>
-      <MyUpBar level={contents.pgLevel} />
+      <MyUpBar level={nowpage.pgLevel} />
       <GobackButton onPress={handleGoback} />
-      <TypePage pageContents={contents} />
+      <TypePage pageContents={nowpage} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>
         {/* <NextButton destination={pageContents.nextpage} disabled={false} /> */}
         <TouchableOpacity style={styles.nxt_bt} onPress={handleNext}>

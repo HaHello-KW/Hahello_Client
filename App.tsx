@@ -24,12 +24,15 @@ import RESULT_HOME from './src/screens/result/result_home';
 import {LogBox} from 'react-native';
 import Survey from './src/screens/survey';
 import Survey2 from './src/screens/survey2';
+
 import SurveyResult from './src/components/surveyResult';
 // enableScreens();
 // const Stack = createNativeStackNavigator();
+
 LogBox.ignoreAllLogs();
 
 enableScreens();
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -53,6 +56,7 @@ const App = () => {
               name="Survey2"
               component={Survey2}
             />
+
             <Stack.Screen
               options={{headerShown: false}}
               name="SurveyResult"

@@ -1,4 +1,5 @@
 export interface TypePageModel {
+  pagename: string;
   id: number;
   imgpath: any;
   pgLevel: number;

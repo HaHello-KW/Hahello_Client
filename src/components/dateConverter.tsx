@@ -69,9 +69,10 @@ Number.prototype.zf = function (len) {
 
 type props = {
   Type_of_Picker: string;
+  pickDate: any;
 };
 
-function PType({Type_of_Picker}: props) {
+function PType({Type_of_Picker, pickDate}: props) {
   const date = new Date();
   const year = date.getFullYear();
   var month_ = date.getMonth() + 1;
@@ -98,6 +99,7 @@ function PType({Type_of_Picker}: props) {
       hideDatePicker();
       onChangeText(date.format('yyyy년 MM월 dd일'));
     };
+    pickDate(text);
 
     con_day = year + '년 ' + month + '월 ' + day + '일 ';
 
@@ -128,6 +130,7 @@ function PType({Type_of_Picker}: props) {
       hideDatePicker();
       onChangeText(date.format('yyyy년'));
     };
+    pickDate(text);
 
     con_day = year + '년 ';
 
@@ -154,6 +157,11 @@ function PType({Type_of_Picker}: props) {
       </>
     );
   } else if (Type_of_Picker == 'numberPicker') {
+    // const handleConfirm = date => {
+    //   hideDatePicker();
+    //   onChangeText(date.format('yyyy년'));
+    // };
+    pickDate(text);
     return (
       <>
         <TouchableOpacity onPress={showDatePicker}>
@@ -163,6 +171,7 @@ function PType({Type_of_Picker}: props) {
             placeholder="n"
             placeholderTextColor="#C1C1C1"
             underlineColorAndroid="transparent"
+            onChangeText={onChangeText}
           />
         </TouchableOpacity>
       </>
