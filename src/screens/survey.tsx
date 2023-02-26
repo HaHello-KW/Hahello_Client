@@ -113,7 +113,7 @@ const Survey = () => {
   useEffect(() => {
     GET();
   }, []);
-  console.log(nowpage);
+  //console.log(nowpage);
 
   function parentFucntion(x: any) {
     // setPagename(contents.pagename);
@@ -142,49 +142,57 @@ const Survey = () => {
         storeData(`userinput_${iterator}`, input);
 
         var GETURL;
+        var TYPE;
         switch (await getData(`userinput_${iterator}`)) {
           case 0:
-            console.log('type a');
+            //console.log('type a');
             // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
             // storeData('typeUrl', 'http://localhost:8080/typePage/A');
             GETURL = 'http://10.0.2.2:8080/typePage/A';
-            module.exports = {GETURL};
+            TYPE = 'A'
+            module.exports = {GETURL, TYPE};
             break;
           case 1:
-            console.log('type b');
+            //console.log('type b');
             // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/B');
             // storeData('typeUrl', 'http://localhost:8080/typePage/B');
             GETURL = 'http://10.0.2.2:8080/typePage/B';
-            module.exports = {GETURL};
+            TYPE = 'B'
+            module.exports = {GETURL, TYPE};
             break;
           case 2:
-            console.log('type c');
+            //console.log('type c');
             // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
             // storeData('typeUrl', 'http://localhost:8080/typePage/C');
             GETURL = 'http://10.0.2.2:8080/typePage/C';
-            module.exports = {GETURL};
+            TYPE = 'C'
+            module.exports = {GETURL, TYPE};
             break;
           case 3:
-            console.log('type d');
+            //console.log('type d');
             // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
             // storeData('typeUrl', 'http://localhost:8080/typePage/D');
             GETURL = 'http://10.0.2.2:8080/typePage/D';
-            module.exports = {GETURL};
+            TYPE = 'D'
+            module.exports = {GETURL, TYPE};
             break;
           case 4:
-            console.log('type e');
+            //console.log('type e');
             // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
             // storeData('typeUrl', 'http://localhost:8080/typePage/E');
             GETURL = 'http://10.0.2.2:8080/typePage/E';
-            module.exports = {GETURL};
+            TYPE = 'E'
+            module.exports = {GETURL, TYPE};
             break;
           default:
             console.log('testing');
         }
-
         //navigation
         navigation.navigate('Survey2');
       } else {
+        storeData(`userinput_${iterator}`, input);
+        //console.log(input);
+        
         // setPagename(nowpage.pagename);
         ++iterator;
         setIterator(iterator);

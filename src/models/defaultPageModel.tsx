@@ -12,6 +12,7 @@ export interface defaultPageModel {
   thirdPickerType: any;
   thirdlineTxt: any;
   nextpage: string;
+  //img : string;
 }
 
 //questiontxt, selectiontxt, pickertype -> array? object? string? any?

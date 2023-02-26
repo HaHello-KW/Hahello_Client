@@ -112,6 +112,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           </View>
         </View>
         <View style={[UserStyle.container_tlp_c]} />
+        
       </>
     );
   } else if (
@@ -154,16 +155,24 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
       </>
     );
   } else if (
-    pageContents.questionType == 'Hybrid_Picker' &&
-    pageContents.selectionTxt == null
+    pageContents.questionType == 'Hybrid_Type' &&
+    pageContents.questionTxt == null
   ) {
     const newArr2 = Array(pageContents.selectionTxt.length).fill(false);
     const [isButtonSelect2, setIsButtonSelect2] = useState(newArr2);
+    const [getidx, setgetidx] = useState(0);
 
     const handlePress2 = (idx2: number | any) => {
       newArr2[idx2] = true;
       setIsButtonSelect2(newArr2);
+      setgetidx(idx2);
     };
+
+    parentFunction(getidx);
+
+    function pickDateFunction(x: any) {
+      parentFunction(x);
+    }
 
     return (
       <>
@@ -173,7 +182,9 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
             <View style={{flex: 3}}>
               <Text style={styles.text_H}>{pageContents.firstlineTxt}</Text>
               <View style={styles.container_t}>
-                <PType Type_of_Picker={pageContents.firstPickerType}></PType>
+                <PType 
+                Type_of_Picker={pageContents.secondPickerType}
+                pickDate={pickDateFunction}></PType>
                 <Text style={styles.text_H}>{pageContents.secondlineTxt}</Text>
               </View>
               <View style={styles.container_t}>
@@ -190,31 +201,6 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
                   index2: number,
                 ) {
                   return (
-                    // <>
-                    //   <TouchableOpacity
-                    //     key={index2}
-                    //     style={[
-                    //       styles.button,
-                    //       {
-                    //         backgroundColor: isButtonSelect2[index2]
-                    //           ? '#F47100'
-                    //           : '#f2f2f2',
-                    //       },
-                    //     ]}
-                    //     onPress={() => handlePress2(index2)}>
-                    //     <Text
-                    //       style={[
-                    //         styles.bt_txt,
-                    //         {
-                    //           color: isButtonSelect2[index2]
-                    //             ? '#fbfbfb'
-                    //             : '#242424',
-                    //         },
-                    //       ]}>
-                    //       {value2}
-                    //     </Text>
-                    //   </TouchableOpacity>
-                    // </>
                     <SelectionButton
                       key={index2}
                       isSelected={isButtonSelect2[index2]}
@@ -232,8 +218,9 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           <View style={{flex: 0.2}}></View>
           {/* <View style={styles.container_contents} /> */}
         </View>
-        <Image
-          source={require('../../assets/images/userA.png')}
+        {/* <Image
+          //source={pageContents.imgpath}
+          source={{uri : pageContents.imgpath}}
           style={{
             position: 'absolute',
             left: '36%',
@@ -243,7 +230,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-        />
+        /> */}
       </>
     );
   }

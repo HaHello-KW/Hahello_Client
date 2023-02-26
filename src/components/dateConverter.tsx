@@ -172,6 +172,7 @@ function PType({Type_of_Picker, pickDate}: props) {
             placeholderTextColor="#C1C1C1"
             underlineColorAndroid="transparent"
             onChangeText={onChangeText}
+            value={text}
           />
         </TouchableOpacity>
       </>

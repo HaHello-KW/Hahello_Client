@@ -8,7 +8,7 @@ import GobackButton from '../components/gobackButton';
 import DefaultPage from '../components/defaultPage';
 import {useNavigation} from '@react-navigation/native';
 //for testing
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
 import testing2 from '../txtCollection/testing2.json';
@@ -18,6 +18,8 @@ import UserImg from '../components/userImg';
 import UserAimg from '../../assets/images/userA.png';
 
 import handleGet from './axios';
+
+import images from '../../assets/images/index';
 
 //asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -70,7 +72,25 @@ const Survey2 = () => {
   };
 
   //전역변수 moduel 사용
-  const {GETURL} = require('./survey');
+  const {GETURL , TYPE} = require('./survey');
+
+  var imgpath;
+
+  switch(TYPE){
+    case "A":
+      imgpath = images.userA; break;
+    case "B":
+      imgpath = images.userB; break;
+    case "C":
+      imgpath = images.userC; break;
+    case "D":
+      imgpath = images.userD; break;
+    case "E":
+      imgpath = images.userE; break;
+    default:
+      imgpath = null; break;
+  }
+  
 
   //asyncstorage 사용
   // const GETURL = async () => {
@@ -82,9 +102,10 @@ const Survey2 = () => {
 
   useEffect(() => {
     GET();
+    console.log(TYPE);
   }, []);
-  console.log(jsondata);
-  console.log(nowpage);
+  //console.log(jsondata);
+  //console.log(nowpage);
 
   function parentFucntion(x: any) {
     // setPagename(contents.pagename);
@@ -123,7 +144,8 @@ const Survey2 = () => {
       //setPagename(contents.pagename);
     }
   };
-
+  //imgpath형식 : ex) A-1
+  
   //jsx구성요소 오류 해결 필요
   //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?
   return (
@@ -137,6 +159,19 @@ const Survey2 = () => {
           <Text style={styles.nxt_txt}>다음</Text>
         </TouchableOpacity>
       </View>
+      <Image
+          //source={pageContents.imgpath}
+          source={imgpath}
+          style={{
+            position: 'absolute',
+            left: '36%',
+            top: '13%',
+            width: 105,
+            height: 105,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
       {/* <UserImg img={HQimg} /> */}
     </>
   );
