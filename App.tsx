@@ -24,7 +24,7 @@ import RESULT_HOME from './src/screens/result/result_home';
 import {LogBox} from 'react-native';
 import Survey from './src/screens/survey';
 import Survey2 from './src/screens/survey2';
-
+import SurveyResult from './src/components/surveyResult';
 // enableScreens();
 // const Stack = createNativeStackNavigator();
 LogBox.ignoreAllLogs();
@@ -35,7 +35,32 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <>
-      <Survey2></Survey2>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="Home"
+              component={Q_Home}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="Survey"
+              component={Survey}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="Survey2"
+              component={Survey2}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="SurveyResult"
+              component={SurveyResult}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </>
   );
 

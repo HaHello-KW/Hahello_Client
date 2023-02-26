@@ -14,7 +14,7 @@ import {defaultPageStyles} from '../styles/defaultPageStyles';
 import PType from './dateConverter';
 
 import {UserStyle} from '../styles/typePageStyles';
-
+import {Image} from 'react-native';
 //for test
 import UserImg from './userImg';
 import UserImgHQ from './userImgHQ';
@@ -25,21 +25,6 @@ type typePageProps = {
 };
 
 function TypePage({pageContents}: typePageProps) {
-  // const [isButtonSelect, setIsButtonSelect] = useState('');
-  // let newArr;
-  // if (pageContents.selectionTxt != null) {
-  //   newArr = Array(pageContents.selectionTxt.length).fill(false);
-  // } else {
-  //   newArr = Array(10).fill(false);
-  // }
-  // const handlePress = (idx: number | any) => {
-  //   newArr[idx] = true;
-  //   setIsButtonSelect(newArr);
-  // };
-  // useEffect(() => {
-  //   console.log(newArr);
-  // }, [newArr]);
-
   if (
     pageContents.questionType == 'Button_Selector' &&
     pageContents.selectionTxt != null
@@ -49,7 +34,7 @@ function TypePage({pageContents}: typePageProps) {
     const handlePress = (idx: number) => {
       newArr[idx] = true;
       setIsButtonSelect(newArr);
-      console.log(idx);
+      // console.log(idx);
     };
 
     return (
@@ -83,9 +68,29 @@ function TypePage({pageContents}: typePageProps) {
                   {value}
                 </Text>
               </TouchableOpacity>
+              // <SelectionButton
+              //   key={index}
+              //   isSelected={isButtonSelect[index]}
+              //   handlePress={handlePress}
+              //   elementIndex={index}
+              //   txt={value}
+              // />
             );
           })}
         </View>
+        <Image
+          //source={require('../../assets/images/userA.png')}
+          source={require(pageContents.imgpath)}
+          style={{
+            position: 'absolute',
+            left: '36%',
+            top: '13%',
+            width: 105,
+            height: 105,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
         {/* 여기에 넣는게 맞나? 아니면 screen의 survey에?  */}
         {/* <View style={[defaultPageStyles.container_next]}>
               <NextButton destination={pageContents.nextpage} disabled={false} />
@@ -122,6 +127,18 @@ function TypePage({pageContents}: typePageProps) {
               <NextButton destination={pageContents.nextpage} disabled={false} />
               <Text>hi hello this is test</Text>
             </View> */}
+        <Image
+          source={require('../../assets/images/userA.png')}
+          style={{
+            position: 'absolute',
+            left: '36%',
+            top: '13%',
+            width: 105,
+            height: 105,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
       </>
     );
   } else if (
@@ -147,6 +164,18 @@ function TypePage({pageContents}: typePageProps) {
             <PType Type_of_Picker={pageContents.thirdPickerType}></PType>
           </View>
         </View>
+        <Image
+          source={require('../../assets/images/userA.png')}
+          style={{
+            position: 'absolute',
+            left: '36%',
+            top: '13%',
+            width: 105,
+            height: 105,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
         {}
       </>
     );
@@ -154,13 +183,14 @@ function TypePage({pageContents}: typePageProps) {
     pageContents.questionType == 'Hybrid_Picker' &&
     pageContents.selectionTxt != null
   ) {
-    const [isButtonSelect2, setIsButtonSelect2] = useState('');
+    const newArr2 = Array(pageContents.selectionTxt.length).fill(false);
+    const [isButtonSelect2, setIsButtonSelect2] = useState(newArr2);
 
-    const newArr = Array(pageContents.selectionTxt.length).fill(false);
-    const handlePress2 = (idx: number | any) => {
-      newArr[idx] = true;
-      setIsButtonSelect2(newArr);
+    const handlePress2 = (idx2: number | any) => {
+      newArr2[idx2] = true;
+      setIsButtonSelect2(newArr2);
     };
+
     return (
       <>
         <View style={styles.container}>
@@ -182,16 +212,41 @@ function TypePage({pageContents}: typePageProps) {
 
               <ScrollView>
                 {pageContents.selectionTxt.map(function (
-                  value: any,
-                  index: number,
+                  value2: any,
+                  index2: number,
                 ) {
                   return (
+                    // <>
+                    //   <TouchableOpacity
+                    //     key={index2}
+                    //     style={[
+                    //       styles.button,
+                    //       {
+                    //         backgroundColor: isButtonSelect2[index2]
+                    //           ? '#F47100'
+                    //           : '#f2f2f2',
+                    //       },
+                    //     ]}
+                    //     onPress={() => handlePress2(index2)}>
+                    //     <Text
+                    //       style={[
+                    //         styles.bt_txt,
+                    //         {
+                    //           color: isButtonSelect2[index2]
+                    //             ? '#fbfbfb'
+                    //             : '#242424',
+                    //         },
+                    //       ]}>
+                    //       {value2}
+                    //     </Text>
+                    //   </TouchableOpacity>
+                    // </>
                     <SelectionButton
-                      key={index}
-                      isSelected={isButtonSelect2[index]}
+                      key={index2}
+                      isSelected={isButtonSelect2[index2]}
                       handlePress={handlePress2}
-                      elementIndex={index}
-                      txt={value}
+                      elementIndex={index2}
+                      txt={value2}
                     />
                   );
                 })}
@@ -203,6 +258,18 @@ function TypePage({pageContents}: typePageProps) {
           <View style={{flex: 0.2}}></View>
           {/* <View style={styles.container_contents} /> */}
         </View>
+        <Image
+          source={require('../../assets/images/userA.png')}
+          style={{
+            position: 'absolute',
+            left: '36%',
+            top: '13%',
+            width: 105,
+            height: 105,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
       </>
     );
   }

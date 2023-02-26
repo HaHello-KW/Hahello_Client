@@ -4,16 +4,19 @@ import axios from 'axios';
 import {defaultPageModel} from '../models/defaultPageModel';
 import MyUpBar from '../components/MyUpBar';
 import GobackButton from '../components/gobackButton';
-// import {useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import DefaultPage from '../components/defaultPage';
 
 //for testing
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
+import Survey2 from './survey2';
 
 //survey에 goback button, next button, myupbar를 넣으면 안되는 것인가??
 //됨 -> routing기능 넣어도? reducer? redux?
+
+console.warn = console.error = () => {};
 
 const Survey = () => {
   // const [contents, setContents] = useState([]);
@@ -45,25 +48,25 @@ const Survey = () => {
 
   var [iterator, setIterator] = useState(0);
   const [contents, setContents] = useState(testing[iterator]);
+  const navigation = useNavigation();
 
   const handleGoback = () => {
     if (iterator > 0) {
       iterator--;
       setIterator(iterator);
     } else {
-      iterator = 0;
-      setIterator(iterator);
+      navigation.pop();
     }
     setContents(testing[iterator]);
   };
 
   const handleNext = () => {
     if (iterator < testing.length) {
-      iterator++;
-      setIterator(iterator);
-    } else {
-      iterator = testing.length - 1;
-      setIterator(iterator);
+      if (iterator === testing.length - 1) {
+        navigation.navigate('Survey2');
+      } else {
+        setIterator(++iterator);
+      }
     }
     setContents(testing[iterator]);
   };

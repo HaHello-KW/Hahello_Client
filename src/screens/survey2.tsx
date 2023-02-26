@@ -6,13 +6,17 @@ import MyUpBar from '../components/MyUpBar';
 import GobackButton from '../components/gobackButton';
 // import {useNavigation} from '@react-navigation/native';
 import DefaultPage from '../components/defaultPage';
-
+import {useNavigation} from '@react-navigation/native';
 //for testing
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
 import testing2 from '../txtCollection/testing2.json';
 import TypePage from '../components/typePage';
+import UserImg from '../components/userImg';
+import Img from '../../assets/images/userA.png';
+
+import {Image} from 'react-native';
 
 //survey에 goback button, next button, myupbar를 넣으면 안되는 것인가??
 //됨 -> routing기능 넣어도? reducer? redux?
@@ -42,11 +46,12 @@ const Survey2 = () => {
   //   });
   // }, []);
 
-  //iterator 쓸거면 굳이 navigation 안갖고와도 될거같은데...?
+  // iterator 쓸거면 굳이 navigation 안갖고와도 될거같은데...?
   // const navigation = useNavigation();
 
   var [iterator, setIterator] = useState(0);
   const [contents, setContents] = useState(testing2[iterator]);
+  const navigation = useNavigation();
 
   let defaultCount;
 
@@ -55,21 +60,32 @@ const Survey2 = () => {
       iterator--;
       setIterator(iterator);
     } else {
-      iterator = 0;
-      setIterator(iterator);
+      navigation.pop();
     }
     setContents(testing2[iterator]);
   };
 
   const handleNext = () => {
     if (iterator < testing2.length) {
-      iterator++;
-      setIterator(iterator);
-    } else {
-      iterator = testing2.length - 1;
-      setIterator(iterator);
+      if (iterator === testing2.length - 1) {
+        //navigation
+        navigation.navigate('SurveyResult');
+      } else {
+        setIterator(++iterator);
+      }
     }
     setContents(testing2[iterator]);
+  };
+
+  const axios_get = () => {
+    axios
+      .get('URL')
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   //jsx구성요소 오류 해결 필요
@@ -85,6 +101,7 @@ const Survey2 = () => {
           <Text style={styles.nxt_txt}>다음</Text>
         </TouchableOpacity>
       </View>
+      {/* <UserImg img={HQimg} /> */}
     </>
   );
 };

@@ -6,8 +6,7 @@
       "questionTxt": "나는",
       "selectionTxt": [
         "첫째가 있어",
-        "둘째가 있어"
-        
+        "둘째가 있어"        
       ],
       "firstPickerType": null,
       "firstlineTxt": null,
@@ -23,7 +22,7 @@
       "questionTxt": null,
       "selectionTxt": [
         "둘째 생각이 있어",
-        "둘째 생각이 없어"
+        "둘째 생각이 없어"       
       ],
       "firstPickerType": "yearPicker",
       "firstlineTxt": "나는",
@@ -74,6 +73,7 @@
         "thirdPickerType": null,
         "thirdlineTxt": "셋째 아이를 갖고 싶어"
     },
+    
     {      
         "id": 6,
         "pgLevel": 5,
@@ -92,6 +92,7 @@
         "thirdPickerType": null,
         "thirdlineTxt": null
     },
+    
     {      
         "id": 7,
         "pgLevel": 5,
@@ -105,6 +106,7 @@
         "thirdPickerType": "numberPicker",
         "thirdlineTxt": "개의 난자를 얼려 놓았어"
     },
+
     {      
         "id": 8,
         "pgLevel": 5,
@@ -155,4 +157,4 @@
     
 
 
-  
+
