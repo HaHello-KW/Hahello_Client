@@ -103,17 +103,24 @@ const Survey = () => {
       .get('http://10.0.2.2:8080/defaultPage')
       .then(res => {
         //console.log(res.data);
+        console.log('1');
         setJson(res.data);
+        console.log(jsondata);
+        console.log('2');
         setNowpage(res.data[iterator]);
+        console.log(nowpage);
 
         // return res.data
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .then(function () {
+        console.log('loading');
+      });
   };
   useEffect(() => {
     GET();
   }, []);
-  console.log(nowpage);
+  // console.log(nowpage);
 
   function parentFucntion(x: any) {
     // setPagename(contents.pagename);
@@ -197,6 +204,7 @@ const Survey = () => {
   //getData(`userinput_${contents.length - 1}`);
 
   // //jsx구성요소 오류 해결 필요
+
   return (
     <>
       <MyUpBar level={nowpage.pgLevel} />

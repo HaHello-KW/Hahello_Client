@@ -154,16 +154,32 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
       </>
     );
   } else if (
-    pageContents.questionType == 'Hybrid_Picker' &&
-    pageContents.selectionTxt == null
+    pageContents.questionType == 'Hybrid_Type'
+    // && pageContents.selectionTxt == null
   ) {
     const newArr2 = Array(pageContents.selectionTxt.length).fill(false);
     const [isButtonSelect2, setIsButtonSelect2] = useState(newArr2);
+    const [getidx, setgetidx] = useState(0);
 
     const handlePress2 = (idx2: number | any) => {
       newArr2[idx2] = true;
       setIsButtonSelect2(newArr2);
+      setgetidx(idx2);
     };
+    // const [isButtonSelect, setIsButtonSelect] = useState('');
+    // const newArr = Array(pageContents.selectionTxt.length).fill(false);
+
+    // const handlePress = (idx: number) => {
+    //   newArr[idx] = true;
+    //   setIsButtonSelect(newArr);
+    //   setgetidx(idx);
+    // };
+
+    parentFunction(getidx);
+
+    function pickDateFunction(x: any) {
+      parentFunction(x);
+    }
 
     return (
       <>
@@ -173,7 +189,9 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
             <View style={{flex: 3}}>
               <Text style={styles.text_H}>{pageContents.firstlineTxt}</Text>
               <View style={styles.container_t}>
-                <PType Type_of_Picker={pageContents.firstPickerType}></PType>
+                <PType
+                  Type_of_Picker={pageContents.secondPickerType}
+                  pickDate={pickDateFunction}></PType>
                 <Text style={styles.text_H}>{pageContents.secondlineTxt}</Text>
               </View>
               <View style={styles.container_t}>
