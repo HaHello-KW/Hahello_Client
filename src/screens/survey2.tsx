@@ -81,23 +81,37 @@ const Survey2 = () => {
   const {GETURL , TYPE} = require('./survey');
 
   var imgpath;
-
+  var TypeURL;
   switch(TYPE){
     case "A":
-      imgpath = images.userA; break;
+      imgpath = images.userA;
+      TypeURL = 'http://10.0.2.2:8080/resultPage/A';
+      module.exports = {TypeURL, imgpath};
+      break;
     case "B":
-      imgpath = images.userB; break;
+      imgpath = images.userB;
+      TypeURL = 'http://10.0.2.2:8080/resultPage/B';
+      module.exports = {TypeURL, imgpath};
+      break;
     case "C":
-      imgpath = images.userC; break;
+      imgpath = images.userC;
+      TypeURL = 'http://10.0.2.2:8080/resultPage/C';
+      module.exports = {TypeURL, imgpath};
+      break;
     case "D":
-      imgpath = images.userD; break;
+      imgpath = images.userD;
+      TypeURL = 'http://10.0.2.2:8080/resultPage/D';
+      module.exports = {TypeURL, imgpath};
+      break;
     case "E":
-      imgpath = images.userE; break;
+      imgpath = images.userE;
+      TypeURL = 'http://10.0.2.2:8080/resultPage/E';
+      module.exports = {TypeURL, imgpath};
+      break;
     default:
       imgpath = null; break;
   }
   
-
   //asyncstorage 사용
   // const GETURL = async () => {
   //   setUrl(await getData('typeUrl'));
@@ -143,7 +157,7 @@ const Survey2 = () => {
         ++iterator;
         setIterator(iterator);
 
-        // navigation.navigate('SurveyResult');
+        navigation.navigate('SurveyResult');
       }
       // setPagename(contents.pagename);
       setNowpage(jsondata[iterator]);
@@ -166,7 +180,6 @@ const Survey2 = () => {
         </TouchableOpacity>
       </View>
       <Image
-          //source={pageContents.imgpath}
           source={imgpath}
           style={{
             position: 'absolute',

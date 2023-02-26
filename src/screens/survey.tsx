@@ -35,64 +35,6 @@ const Survey = () => {
 
   const [jsondata, setJson] = useState('');
 
-  // 1
-  // const [jsondata, setjsondata] = useState([]);
-  // // useEffect(() => {
-
-  // const testing = async () => {
-  //   try {
-  //     const response = await axios.get('http://10.0.2.2:8080/defaultPage');
-  //     console.log('111');
-  //     setjsondata(response.data);
-  //   } catch (e) {
-  //     console.log(e);
-  //     console.log('222');
-  //   }
-  // };
-  // console.log('1');
-  // testing();
-  // console.log('2');
-  // console.log(jsondata);
-  // console.log('3');
-  // var value = JSON.stringify(jsondata);
-  // console.log('4');
-  // console.log(value);
-
-  // }, []);
-  // console.log(JSON.stringify(jsondata));
-
-  // 2
-  // axios.get('http://localhost:8080/defaultPage').then(response => {
-  //   console.log(response.data);
-  // });
-
-  //3
-  // useEffect(() => {
-  //   getTodos();
-  // }, []);
-
-  // const [jsondata, setjsondata] = useState([]);
-
-  // const getTodos = () => {
-  //   axios
-  //     .get('http://10.0.2.2:8080/defaultPage')
-  //     .then(res => {
-  //       setjsondata(res.data);
-  //       // console.log(jsondata);
-  //       // console.log(res.data);
-  //     })
-  //     .catch(error => console.log(error));
-  // };
-  // console.log('2');
-  // console.log(jsondata);
-  // console.log('3');
-
-  // console.log(jsondata[0]);
-  // var value = JSON.parse(jsondata);
-  // console.log('4');
-  // console.log(value);
-  // console.log(typeof value);
-
   const [input, setInput] = useState();
   var [iterator, setIterator] = useState(0);
 
