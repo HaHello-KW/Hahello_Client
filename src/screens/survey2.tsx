@@ -63,12 +63,18 @@ const Survey2 = () => {
       .get(GETURL)
       .then(res => {
         //console.log(res.data);
+        console.log('1');
         setJson(res.data);
+        console.log(jsondata);
+        console.log('2');
         setNowpage(res.data[iterator]);
-
+        console.log(nowpage);
         // return res.data
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .then(function () {
+        console.log('loading');
+      });
   };
 
   //전역변수 moduel 사용

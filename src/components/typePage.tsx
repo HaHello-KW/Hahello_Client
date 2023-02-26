@@ -155,8 +155,8 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
       </>
     );
   } else if (
-    pageContents.questionType == 'Hybrid_Type' &&
-    pageContents.questionTxt == null
+    pageContents.questionType == 'Hybrid_Type'
+    // && pageContents.selectionTxt == null
   ) {
     const newArr2 = Array(pageContents.selectionTxt.length).fill(false);
     const [isButtonSelect2, setIsButtonSelect2] = useState(newArr2);
@@ -182,9 +182,9 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
             <View style={{flex: 3}}>
               <Text style={styles.text_H}>{pageContents.firstlineTxt}</Text>
               <View style={styles.container_t}>
-                <PType 
-                Type_of_Picker={pageContents.secondPickerType}
-                pickDate={pickDateFunction}></PType>
+                <PType
+                  Type_of_Picker={pageContents.secondPickerType}
+                  pickDate={pickDateFunction}></PType>
                 <Text style={styles.text_H}>{pageContents.secondlineTxt}</Text>
               </View>
               <View style={styles.container_t}>
