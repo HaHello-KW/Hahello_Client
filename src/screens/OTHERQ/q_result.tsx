@@ -15,7 +15,7 @@ import Homebg from '../../../assets/images/home_start.png';
 import NextButton from '../../Buttons/nextButton';
 
 import {UserStyle} from '../../styling/userLayout';
-import GobackButton from '../../Buttons/gobackButton';
+import GobackButton from '../../components/gobackButton';
 
 const Q_RESULT = ({navigation, route}) => {
   return (

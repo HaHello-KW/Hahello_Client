@@ -24,24 +24,27 @@ import testresult from '../txtCollection/testresult.json';
 const SurveyResult = () => {
   const navigation = useNavigation();
 
-  // const [jsondata, setJson] = useState('');
+  const [jsondata, setJson] = useState('');
 
-  // const [nowpage, setNowpage] = useState(jsondata);
+  const [nowpage, setNowpage] = useState(jsondata);
 
-  // const GET = () => {
-  //   axios.get(TypeURL)
-  //     .then(res=>{
-  //       setJson(res.data);
-  //       setNowpage(res.data[0]);
-  //     })
-  //     .catch(error => console.log(error))
-  // }
-  // //TypeURL = 'http://10.0.2.2:8080/resultPage/A~E'
+  const GET = () => {
+    axios.get(TypeURL)
+      .then(res=>{
+        setJson(res.data);
+        setNowpage(res.data[NUM-1]);
+      })
+      .catch(error => console.log(error))
+  }
+  //TypeURL = 'http://10.0.2.2:8080/resultPage/A~E'
   const {TypeURL, imgpath} = require('./survey2');
 
-  // useEffect(() => {
-  //   GET();
-  // }, []);
+  //TYPE : A~E, NUM : 1~5
+  const {NUM} = require('./survey');
+
+  useEffect(() => {
+    GET();
+  }, []);
 
   const handleGoback = () => {
     navigation.pop();
@@ -50,7 +53,7 @@ const SurveyResult = () => {
   return (
     <>
       <GobackButton onPress={handleGoback} />
-      <ResultPage pageContents={testresult} />
+      <ResultPage pageContents={nowpage} />
       <View style={[UserStyle.containerR_2]}>
         <Image source={imgpath} style={styles.image} />
       </View>
@@ -58,7 +61,7 @@ const SurveyResult = () => {
         <TouchableOpacity
           style={styles.startbutton}
           onPress={() => navigation.navigate('HQ_1')}>
-          <Text style={styles.starttxt}>컨텐츠 추천 받기</Text>
+          <Text style={styles.starttxt}>내 호르몬 맞춤 콘텐츠 추천</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.laterbutton}

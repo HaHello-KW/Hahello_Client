@@ -14,7 +14,7 @@ import {UserStyle} from '../../styling/userLayout';
 import NextButtonHQ from '../../Buttons/nextButtonHQ'; //HQ부터
 import SelectionButtonHQ from '../../Buttons/selectionButtonHQ'; //HQ부터
 
-import GobackButton from '../../Buttons/gobackButton';
+import GobackButton from '../../components/gobackButton';
 import SelectionButton_V2 from '../../Buttons/2selectionButton_v';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';

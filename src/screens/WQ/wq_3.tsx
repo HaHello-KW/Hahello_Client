@@ -14,7 +14,7 @@ import MyUpBar_wq from '../../upbar/UpBar_WQ';
 import NextButtonHQ from '../../Buttons/nextButtonHQ'; //HQ부터
 import SelectionButtonHQ from '../../Buttons/selectionButtonHQ'; //HQ부터
 import {DefaultStyle} from '../../styling/defaultLayout';
-import GobackButton from '../../Buttons/gobackButton';
+import GobackButton from '../../components/gobackButton';
 
 import UserAimg from '../../../assets/images/WQ-1.png';
 import UserImg from '../../Buttons/userImgHQ'; //HQ부터

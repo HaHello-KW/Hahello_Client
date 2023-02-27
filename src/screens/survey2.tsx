@@ -82,27 +82,58 @@ const Survey2 = () => {
   var TypeURL;
   switch (TYPE) {
     case 'A':
-      imgpath = images.userA;
+      {
+        if (NUM == 1) imgpath = images.userA1;
+        else if (NUM == 2) imgpath = images.userA2;
+        else if (NUM == 3) imgpath = images.userA3;
+        else if (NUM == 4) imgpath = images.userA4;
+        else if (NUM == 5) imgpath = images.userA5;
+      }
+      // imgpath = images.userA;
       TypeURL = 'http://10.0.2.2:8080/resultPage/A';
       module.exports = {TypeURL, imgpath};
       break;
     case 'B':
-      imgpath = images.userB;
+      {
+        if (NUM == 1) imgpath = images.userB1;
+        else if (NUM == 2) imgpath = images.userB2;
+        else if (NUM == 3) imgpath = images.userB3;
+        else if (NUM == 4) imgpath = images.userB4;
+        else if (NUM == 5) imgpath = images.userB5;
+      }
       TypeURL = 'http://10.0.2.2:8080/resultPage/B';
       module.exports = {TypeURL, imgpath};
       break;
     case 'C':
-      imgpath = images.userC;
+      {
+        if (NUM == 1) imgpath = images.userC1;
+        else if (NUM == 2) imgpath = images.userC2;
+        else if (NUM == 3) imgpath = images.userC3;
+        else if (NUM == 4) imgpath = images.userC4;
+        else if (NUM == 5) imgpath = images.userC5;
+      }
       TypeURL = 'http://10.0.2.2:8080/resultPage/C';
       module.exports = {TypeURL, imgpath};
       break;
     case 'D':
-      imgpath = images.userD;
+      {
+        if (NUM == 1) imgpath = images.userD1;
+        else if (NUM == 2) imgpath = images.userD2;
+        else if (NUM == 3) imgpath = images.userD3;
+        else if (NUM == 4) imgpath = images.userD4;
+        else if (NUM == 5) imgpath = images.userD5;
+      }
       TypeURL = 'http://10.0.2.2:8080/resultPage/D';
       module.exports = {TypeURL, imgpath};
       break;
     case 'E':
-      imgpath = images.userE;
+      {
+        if (NUM == 1) imgpath = images.userE1;
+        else if (NUM == 2) imgpath = images.userE2;
+        else if (NUM == 3) imgpath = images.userE3;
+        else if (NUM == 4) imgpath = images.userE4;
+        else if (NUM == 5) imgpath = images.userE5;
+      }
       TypeURL = 'http://10.0.2.2:8080/resultPage/E';
       module.exports = {TypeURL, imgpath};
       break;

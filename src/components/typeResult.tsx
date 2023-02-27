@@ -96,14 +96,14 @@ function ResultPage({pageContents}: resultPageProps) {
     <>
       <View style={[UserStyle.containerR_0]} />
       <View style={[UserStyle.containerR_1]}>
-        <Text style={styles.title}>this is title</Text>
+        <Text style={styles.title}>{pageContents.title}</Text>
         <Text style={styles.description}>
           {/* {pageContents.description[0]} */}
-          hihello
+          하해호님의 호르몬에 맞춤화한 건강정보를 추천해드려요.
         </Text>
         <Text style={styles.description}>
           {/* {pageContents.description[1]} */}
-          this is test
+          더 구체적인 건강상태를 입력해보세요.
         </Text>
       </View>
       {/* <View style={[UserStyle.containerR_2]}>

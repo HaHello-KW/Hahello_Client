@@ -4,7 +4,7 @@ import {View, Text, Button} from 'react-native';
 import {UserStyle} from '../../styling/userLayout';
 import NextButtonHQ from '../../Buttons/nextButtonHQ'; //HQ부터
 import SelectionButtonHQ from '../../Buttons/selectionButtonHQ'; //HQ부터
-import GobackButton from '../../Buttons/gobackButton';
+import GobackButton from '../../components/gobackButton';
 
 import HQimg from '../../../assets/images/HQ1.png';
 //import HQimg from '../../../assets/images/HQ1.png'
