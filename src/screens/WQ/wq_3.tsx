@@ -16,7 +16,7 @@ import SelectionButtonHQ from '../../Buttons/selectionButtonHQ'; //HQ부터
 import {DefaultStyle} from '../../styling/defaultLayout';
 import GobackButton from '../../Buttons/gobackButton';
 
-import UserAimg from '../../../assets/images/userA.png';
+import UserAimg from '../../../assets/images/WQ-1.png';
 import UserImg from '../../Buttons/userImgHQ'; //HQ부터
 import NextButton from '../../Buttons/nextButton';
 const WQ_3 = ({navigation, route}) => {

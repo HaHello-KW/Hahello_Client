@@ -58,6 +58,72 @@ const App = () => {
               name="SurveyResult"
               component={SurveyResult}
             />
+            {/* 호르몬페이지 추가부분 */}
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="HQ_1"
+              component={HQ_1}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="HQ_2"
+              component={HQ_2}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="HQ_3"
+              component={HQ_3}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="WQ_1"
+              component={WQ_1}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="WQ_2"
+              component={WQ_2}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="WQ_3"
+              component={WQ_3}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="WQ_4"
+              component={WQ_4}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="FQ_1"
+              component={FQ_1}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="NQ_1"
+              component={NQ_1}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="ALQ_1"
+              component={ALQ_1}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="IQ_1"
+              component={IQ_1}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="Q_RESULT"
+              component={Q_RESULT}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="RESULT_HOME"
+              component={RESULT_HOME}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>

@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 //import {UserStyle} from '../../styling/userLayout';
 import {UserStyle} from '../styling/userLayout';
@@ -14,12 +14,12 @@ import GobackButton from '../components/gobackButton';
 
 //import TxtCollection from '../../txtCollection/txtcolletion';
 import TxtCollection from '../txtCollection/txtcolletion';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 //import {UserStyle} from '../styles/typePageStyles';
 import images from '../../assets/images/index';
 import ResultPage from '../components/typeResult';
-import testresult from '../txtCollection/testresult.json'
+import testresult from '../txtCollection/testresult.json';
 
 const SurveyResult = () => {
   const navigation = useNavigation();
@@ -45,7 +45,7 @@ const SurveyResult = () => {
 
   const handleGoback = () => {
     navigation.pop();
-  }
+  };
 
   return (
     <>
@@ -57,19 +57,19 @@ const SurveyResult = () => {
       <View style={[UserStyle.containerR_3]}>
         <TouchableOpacity
           style={styles.startbutton}
-          onPress={() => alert('호르몬 입력페이지로 이동')}>
+          onPress={() => navigation.navigate('HQ_1')}>
           <Text style={styles.starttxt}>컨텐츠 추천 받기</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.laterbutton}
-          onPress={() => alert('호르몬 입력페이지로 이동')}>
+          onPress={() => navigation.navigate('RESULT_HOME')}>
           <Text style={styles.latertxt}>나중에 할래요</Text>
         </TouchableOpacity>
       </View>
       {/* <Image source={TxtCollection.q_a_type.imgPath} /> */}
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   title: {

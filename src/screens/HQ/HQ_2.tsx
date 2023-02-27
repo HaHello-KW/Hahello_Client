@@ -11,7 +11,6 @@ import MyUpBar_wq from '../../upbar/UpBar_WQ';
 
 import {UserStyle} from '../../styling/userLayout';
 
-
 import NextButtonHQ from '../../Buttons/nextButtonHQ'; //HQ부터
 import SelectionButtonHQ from '../../Buttons/selectionButtonHQ'; //HQ부터
 
@@ -26,7 +25,6 @@ import HQimg from '../../../assets/images/HQ1.png';
 import UserImg from '../../Buttons/userImgHQ'; //HQ부터
 import {useState} from 'react';
 import NextButton from '../../Buttons/nextButton';
-
 
 const HQ_2 = ({navigation, route}) => {
   Date.prototype.format = function (f) {
@@ -193,11 +191,7 @@ const HQ_2 = ({navigation, route}) => {
       </View>
       <View style={[DefaultStyle.container1_2]} />
       <View style={[DefaultStyle.container2]}>
-<<<<<<< HEAD
         <NextButton disabled={false} destination={'HQ_3'} />
-=======
-        <NextButton onPress={() => navigation.navigate('HQ_3')}></NextButton>
->>>>>>> d94eb67f1bb1573ff1e83bfa25f3f0a6c0d954dc
       </View>
       <UserImg img={HQimg}></UserImg>
     </>
