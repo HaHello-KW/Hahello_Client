@@ -67,17 +67,14 @@ const Survey2 = () => {
     GET();
   }, []);
 
+  console.log(jsondata[1]);
   const navigation = useNavigation();
 
   //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
 
-  //const jsondata = handleGet(t); //t 에는 url 들어가있다. 잠시 보류
-
   var [iterator, setIterator] = useState(0);
 
   const [nowpage, setNowpage] = useState(jsondata);
-
-  var [iterator, setIterator] = useState(0);
 
   // const [inputarr, setInputArr] = useState(new Array(MAX).fill(null))
 
