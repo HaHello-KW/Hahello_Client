@@ -1,0 +1,18 @@
+[
+    {
+        "birth" : "19980402",
+        "ovary_type" : 1, 
+        "married_type" : "A",
+        "User_type" : "A",
+        "Married_age" : "30",
+        "first_pregnant" : "31",
+        "second_pregnant" : "33",
+        "third_pregnant" : null,
+        "Freezing_past_experience" : 1,
+        "Freezing_egg_count" : null,
+        "last_menstruation_date" : "19901111",
+        "duration" : 28,
+        "term" : 5,
+        "is_repetitive" : true
+    }
+]

@@ -45,13 +45,24 @@ const Survey = () => {
       .get('http://10.0.2.2:8080/defaultPage')
       .then(res => {
         //console.log(res.data);
+        console.log('1');
         setJson(res.data);
+        console.log(jsondata);
+        console.log('2');
+        setNowpage(res.data[iterator]);
+        console.log(nowpage);
+
+        // return res.data
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .then(function () {
+        console.log('loading');
+      });
   };
   useEffect(() => {
     GET();
   }, []);
+  // console.log(nowpage);
 
   function parentFucntion(x: any) {
     // setPagename(contents.pagename);
@@ -79,35 +90,59 @@ const Survey = () => {
       if (iterator === jsondata.length - 1) {
         storeData(`userinput_${iterator}`, input);
 
+        var GETURL;
+        var TYPE;
         switch (await getData(`userinput_${iterator}`)) {
           case 0:
-            console.log('type a');
-            storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+            //console.log('type a');
+            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+            // storeData('typeUrl', 'http://localhost:8080/typePage/A');
+            GETURL = 'http://10.0.2.2:8080/typePage/A';
+            TYPE = 'A';
+            module.exports = {GETURL, TYPE};
             break;
           case 1:
-            console.log('type b');
-            storeData('typeUrl', 'http://10.0.2.2:8080/typePage/B');
-            //storeData('typeUrl', 'http://localhost:8080/typePage/B');
+            //console.log('type b');
+            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/B');
+            // storeData('typeUrl', 'http://localhost:8080/typePage/B');
+            GETURL = 'http://10.0.2.2:8080/typePage/B';
+            TYPE = 'B';
+            module.exports = {GETURL, TYPE};
+
             break;
           case 2:
-            console.log('type c');
-            storeData('typeUrl', 'http://10.0.2.2:8080/typePage/C');
+            //console.log('type c');
+            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+            // storeData('typeUrl', 'http://localhost:8080/typePage/C');
+            GETURL = 'http://10.0.2.2:8080/typePage/C';
+            TYPE = 'C';
+            module.exports = {GETURL, TYPE};
             break;
           case 3:
-            console.log('type d');
-            storeData('typeUrl', 'http://10.0.2.2:8080/typePage/D');
+            //console.log('type d');
+            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+            // storeData('typeUrl', 'http://localhost:8080/typePage/D');
+            GETURL = 'http://10.0.2.2:8080/typePage/D';
+            TYPE = 'D';
+            module.exports = {GETURL, TYPE};
             break;
           case 4:
-            console.log('type e');
-            storeData('typeUrl', 'http://10.0.2.2:8080/typePage/E');
+            //console.log('type e');
+            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+            // storeData('typeUrl', 'http://localhost:8080/typePage/E');
+            GETURL = 'http://10.0.2.2:8080/typePage/E';
+            TYPE = 'E';
+            module.exports = {GETURL, TYPE};
             break;
           default:
             console.log('testing');
         }
-
         //navigation
         navigation.navigate('Survey2');
       } else {
+        storeData(`userinput_${iterator}`, input);
+        //console.log(input);
+
         // setPagename(nowpage.pagename);
         ++iterator;
         setIterator(iterator);
@@ -119,7 +154,8 @@ const Survey = () => {
   //console.log(url);
   //getData(`userinput_${contents.length - 1}`);
 
-  //jsx구성요소 오류 해결 필요
+  // //jsx구성요소 오류 해결 필요
+
   return (
     <>
       <MyUpBar level={nowpage.pgLevel} />
@@ -134,7 +170,6 @@ const Survey = () => {
   );
   // }
 };
-
 const styles = StyleSheet.create({
   nxt_bt: {
     justifyContent: 'center',

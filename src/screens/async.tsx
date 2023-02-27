@@ -27,7 +27,7 @@ export const getData = async (key: string) => {
       //console.log(value);
       // console.log(typeof data);
       return data;
-      return value;
+      // return value;
     }
   } catch (e: any) {
     console.log(e.message);
