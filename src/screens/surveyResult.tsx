@@ -6,37 +6,53 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import MyUpBar_4 from '../../upbar/UpBar_4';
+import { useState, useEffect } from 'react';
 
 //import {UserStyle} from '../../styling/userLayout';
 import {UserStyle} from '../styling/userLayout';
-import NextButton from '../../Buttons/nextButton';
-import SelectionButton from '../../Buttons/selectionButton';
-import GobackButton from './gobackButton';
-import SelectionButton_V2 from '../../Buttons/2selectionButton_v';
+import GobackButton from '../components/gobackButton';
 
-import UserAimg from '../../../assets/images/userA.png';
-import UserImg from '../../Buttons/userImg';
-import TypeResult from '../component/typeResult';
 //import TxtCollection from '../../txtCollection/txtcolletion';
 import TxtCollection from '../txtCollection/txtcolletion';
+import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 //import {UserStyle} from '../styles/typePageStyles';
+import images from '../../assets/images/index';
+import ResultPage from '../components/typeResult';
+import testresult from '../txtCollection/testresult.json'
 
-function SurveyResult() {
+const SurveyResult = () => {
+  const navigation = useNavigation();
+
+  // const [jsondata, setJson] = useState('');
+
+  // const [nowpage, setNowpage] = useState(jsondata);
+
+  // const GET = () => {
+  //   axios.get(TypeURL)
+  //     .then(res=>{
+  //       setJson(res.data);
+  //       setNowpage(res.data[0]);
+  //     })
+  //     .catch(error => console.log(error))
+  // }
+  // //TypeURL = 'http://10.0.2.2:8080/resultPage/A~E'
+  const {TypeURL, imgpath} = require('./survey2');
+
+  // useEffect(() => {
+  //   GET();
+  // }, []);
+
+  const handleGoback = () => {
+    navigation.pop();
+  }
+
   return (
     <>
-      <View style={[UserStyle.containerR_0]} />
-      <View style={[UserStyle.containerR_1]}>
-        <Text style={styles.title}>{TxtCollection.q_a_type.title}</Text>
-        <Text style={styles.description}>
-          {TxtCollection.q_a_type.description[0]}
-        </Text>
-        <Text style={styles.description}>
-          {TxtCollection.q_a_type.description[1]}
-        </Text>
-      </View>
+      <GobackButton onPress={handleGoback} />
+      <ResultPage pageContents={testresult} />
       <View style={[UserStyle.containerR_2]}>
-        <Image source={TxtCollection.q_a_type.imgPath} style={styles.image} />
+        <Image source={imgpath} style={styles.image} />
       </View>
       <View style={[UserStyle.containerR_3]}>
         <TouchableOpacity
@@ -51,7 +67,6 @@ function SurveyResult() {
         </TouchableOpacity>
       </View>
       {/* <Image source={TxtCollection.q_a_type.imgPath} /> */}
-      <GobackButton onPress={() => navigation.pop()}></GobackButton>
     </>
   );
 }

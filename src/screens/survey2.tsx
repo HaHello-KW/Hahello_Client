@@ -8,7 +8,7 @@ import GobackButton from '../components/gobackButton';
 import DefaultPage from '../components/defaultPage';
 import {useNavigation} from '@react-navigation/native';
 //for testing
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {Image, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
 import testing2 from '../txtCollection/testing2.json';
@@ -75,7 +75,40 @@ const Survey2 = () => {
   };
 
   //전역변수 moduel 사용
-  const {GETURL} = require('./survey');
+  const {GETURL, TYPE, NUM} = require('./survey');
+
+  var imgpath;
+  var TypeURL;
+  switch (TYPE) {
+    case 'A':
+      imgpath = images.userA;
+      TypeURL = 'http://10.0.2.2:8080/resultPage/A';
+      module.exports = {TypeURL, imgpath};
+      break;
+    case 'B':
+      imgpath = images.userB;
+      TypeURL = 'http://10.0.2.2:8080/resultPage/B';
+      module.exports = {TypeURL, imgpath};
+      break;
+    case 'C':
+      imgpath = images.userC;
+      TypeURL = 'http://10.0.2.2:8080/resultPage/C';
+      module.exports = {TypeURL, imgpath};
+      break;
+    case 'D':
+      imgpath = images.userD;
+      TypeURL = 'http://10.0.2.2:8080/resultPage/D';
+      module.exports = {TypeURL, imgpath};
+      break;
+    case 'E':
+      imgpath = images.userE;
+      TypeURL = 'http://10.0.2.2:8080/resultPage/E';
+      module.exports = {TypeURL, imgpath};
+      break;
+    default:
+      imgpath = null;
+      break;
+  }
 
   //asyncstorage 사용
   // const GETURL = async () => {
@@ -87,9 +120,11 @@ const Survey2 = () => {
 
   useEffect(() => {
     GET();
+    console.log(TYPE);
+    console.log(NUM);
   }, []);
-  // console.log(jsondata);
-  // console.log(nowpage);
+  //console.log(jsondata);
+  //console.log(nowpage);
 
   function parentFucntion(x: any) {
     // setPagename(contents.pagename);
@@ -116,66 +151,18 @@ const Survey2 = () => {
   const handleNext = () => {
     if (iterator < jsondata.length) {
       if (iterator === jsondata.length - 1) {
+        navigation.navigate('SurveyResult');
       } else {
         // setPagename(contents.pagename);
         ++iterator;
         setIterator(iterator);
-
-        // navigation.navigate('SurveyResult');
       }
       // setPagename(contents.pagename);
       setNowpage(jsondata[iterator]);
       //setPagename(contents.pagename);
     }
   };
-
-  // var default_second_res: string;
-  // var default_third_res: string;
-
-  // useEffect(() => {
-  //   Test();
-  // }, []);
-
-  // const Test = async () => {
-  //   //Default-3에 대한 답변
-  //   switch (await getData(`userinput_2`)) {
-  //     case 0:
-  //       default_third_res = 'A';
-  //       break;
-  //     case 1:
-  //       default_third_res = 'B';
-  //       break;
-  //     case 2:
-  //       default_third_res = 'C';
-  //       break;
-  //     case 3:
-  //       default_third_res = 'D';
-  //       break;
-  //     case 4:
-  //       default_third_res = 'E';
-  //       break;
-  //   }
-
-  //   //Default-2에 대한 답변
-  //   switch (await getData(`userinput_1`)) {
-  //     case 0:
-  //       default_second_res = '1';
-  //       break;
-  //     case 1:
-  //       default_second_res = '2';
-  //       break;
-  //     case 2:
-  //       default_second_res = '3';
-  //       break;
-  //     case 3:
-  //       default_second_res = '4';
-  //       break;
-  //     case 4:
-  //       default_second_res = '5';
-  //       break;
-  //   }
-
-  // };
+  //imgpath형식 : ex) A-1
 
   //jsx구성요소 오류 해결 필요
   //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?
@@ -190,8 +177,8 @@ const Survey2 = () => {
           <Text style={styles.nxt_txt}>다음</Text>
         </TouchableOpacity>
       </View>
-      {/* <Image
-        source={img}
+      <Image
+        source={imgpath}
         style={{
           position: 'absolute',
           left: '36%',
@@ -201,7 +188,8 @@ const Survey2 = () => {
           alignItems: 'center',
           justifyContent: 'center',
         }}
-      /> */}
+      />
+      {/* <UserImg img={HQimg} /> */}
     </>
   );
 };

@@ -35,64 +35,6 @@ const Survey = () => {
 
   const [jsondata, setJson] = useState('');
 
-  // 1
-  // const [jsondata, setjsondata] = useState([]);
-  // // useEffect(() => {
-
-  // const testing = async () => {
-  //   try {
-  //     const response = await axios.get('http://10.0.2.2:8080/defaultPage');
-  //     console.log('111');
-  //     setjsondata(response.data);
-  //   } catch (e) {
-  //     console.log(e);
-  //     console.log('222');
-  //   }
-  // };
-  // console.log('1');
-  // testing();
-  // console.log('2');
-  // console.log(jsondata);
-  // console.log('3');
-  // var value = JSON.stringify(jsondata);
-  // console.log('4');
-  // console.log(value);
-
-  // }, []);
-  // console.log(JSON.stringify(jsondata));
-
-  // 2
-  // axios.get('http://localhost:8080/defaultPage').then(response => {
-  //   console.log(response.data);
-  // });
-
-  //3
-  // useEffect(() => {
-  //   getTodos();
-  // }, []);
-
-  // const [jsondata, setjsondata] = useState([]);
-
-  // const getTodos = () => {
-  //   axios
-  //     .get('http://10.0.2.2:8080/defaultPage')
-  //     .then(res => {
-  //       setjsondata(res.data);
-  //       // console.log(jsondata);
-  //       // console.log(res.data);
-  //     })
-  //     .catch(error => console.log(error));
-  // };
-  // console.log('2');
-  // console.log(jsondata);
-  // console.log('3');
-
-  // console.log(jsondata[0]);
-  // var value = JSON.parse(jsondata);
-  // console.log('4');
-  // console.log(value);
-  // console.log(typeof value);
-
   const [input, setInput] = useState();
   var [iterator, setIterator] = useState(0);
 
@@ -140,6 +82,7 @@ const Survey = () => {
     setNowpage(jsondata[iterator]);
   };
 
+  // var NUM: any;
   //GET함수에서 로컬호스트 대신에 10.0.2.2를 넣어 주었으니 handleNext함수
   //안에서도 똑같이 url을 바꿔줘야 한다
   //'http://10.0.2.2:8080/defaultPage'
@@ -149,49 +92,64 @@ const Survey = () => {
         storeData(`userinput_${iterator}`, input);
 
         var GETURL;
-        switch (await getData(`userinput_${iterator}`)) {
+        var TYPE;
+        var NUM;
+
+        switch (await getData(`userinput_${iterator - 1}`)) {
           case 0:
-            console.log('type a');
-            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
-            // storeData('typeUrl', 'http://localhost:8080/typePage/A');
-            GETURL = 'http://10.0.2.2:8080/typePage/A';
-            module.exports = {GETURL};
+            NUM = 1;
             break;
           case 1:
-            console.log('type b');
-            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/B');
-            // storeData('typeUrl', 'http://localhost:8080/typePage/B');
-            GETURL = 'http://10.0.2.2:8080/typePage/B';
-            module.exports = {GETURL};
+            NUM = 2;
             break;
           case 2:
-            console.log('type c');
-            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
-            // storeData('typeUrl', 'http://localhost:8080/typePage/C');
-            GETURL = 'http://10.0.2.2:8080/typePage/C';
-            module.exports = {GETURL};
+            NUM = 3;
             break;
           case 3:
-            console.log('type d');
-            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
-            // storeData('typeUrl', 'http://localhost:8080/typePage/D');
-            GETURL = 'http://10.0.2.2:8080/typePage/D';
-            module.exports = {GETURL};
+            NUM = 4;
             break;
           case 4:
-            console.log('type e');
-            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
-            // storeData('typeUrl', 'http://localhost:8080/typePage/E');
+            NUM = 5;
+            break;
+          default:
+            console.log('testing2');
+        }
+
+        switch (await getData(`userinput_${iterator}`)) {
+          case 0:
+            GETURL = 'http://10.0.2.2:8080/typePage/A';
+            TYPE = 'A';
+            module.exports = {GETURL, TYPE, NUM};
+            break;
+          case 1:
+            GETURL = 'http://10.0.2.2:8080/typePage/B';
+            TYPE = 'B';
+            module.exports = {GETURL, TYPE, NUM};
+
+            break;
+          case 2:
+            GETURL = 'http://10.0.2.2:8080/typePage/C';
+            TYPE = 'C';
+            module.exports = {GETURL, TYPE, NUM};
+            break;
+          case 3:
+            GETURL = 'http://10.0.2.2:8080/typePage/D';
+            TYPE = 'D';
+            module.exports = {GETURL, TYPE, NUM};
+            break;
+          case 4:
             GETURL = 'http://10.0.2.2:8080/typePage/E';
-            module.exports = {GETURL};
+            TYPE = 'E';
+            module.exports = {GETURL, TYPE, NUM};
             break;
           default:
             console.log('testing');
         }
-
         //navigation
         navigation.navigate('Survey2');
       } else {
+        //console.log(input);
+
         // setPagename(nowpage.pagename);
         storeData(`userinput_${iterator}`, input);
         ++iterator;
@@ -202,7 +160,49 @@ const Survey = () => {
     }
   };
   //console.log(url);
-  //getData(`userinput_${contents.length - 1}`);
+
+  var NUM;
+  const getNUM = async () => {
+    switch (await getData(`userinput_1`)) {
+      case 0:
+        //console.log('type a');
+        // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+        // storeData('typeUrl', 'http://localhost:8080/typePage/A');
+        NUM = 1;
+        module.exports = {NUM};
+        break;
+      case 1:
+        //console.log('type b');
+        // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/B');
+        // storeData('typeUrl', 'http://localhost:8080/typePage/B');
+        NUM = 2;
+        module.exports = {NUM};
+        break;
+      case 2:
+        //console.log('type c');
+        // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+        // storeData('typeUrl', 'http://localhost:8080/typePage/C');
+        NUM = 3;
+        module.exports = {NUM};
+        break;
+      case 3:
+        //console.log('type d');
+        // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+        // storeData('typeUrl', 'http://localhost:8080/typePage/D');
+        NUM = 4;
+        module.exports = {NUM};
+        break;
+      case 4:
+        //console.log('type e');
+        // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+        // storeData('typeUrl', 'http://localhost:8080/typePage/E');
+        NUM = 5;
+        module.exports = {NUM};
+        break;
+      default:
+        console.log('testing2');
+    }
+  };
 
   // //jsx구성요소 오류 해결 필요
 

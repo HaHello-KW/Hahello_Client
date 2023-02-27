@@ -166,14 +166,6 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
       setIsButtonSelect2(newArr2);
       setgetidx(idx2);
     };
-    // const [isButtonSelect, setIsButtonSelect] = useState('');
-    // const newArr = Array(pageContents.selectionTxt.length).fill(false);
-
-    // const handlePress = (idx: number) => {
-    //   newArr[idx] = true;
-    //   setIsButtonSelect(newArr);
-    //   setgetidx(idx);
-    // };
 
     parentFunction(getidx);
 
@@ -208,31 +200,6 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
                   index2: number,
                 ) {
                   return (
-                    // <>
-                    //   <TouchableOpacity
-                    //     key={index2}
-                    //     style={[
-                    //       styles.button,
-                    //       {
-                    //         backgroundColor: isButtonSelect2[index2]
-                    //           ? '#F47100'
-                    //           : '#f2f2f2',
-                    //       },
-                    //     ]}
-                    //     onPress={() => handlePress2(index2)}>
-                    //     <Text
-                    //       style={[
-                    //         styles.bt_txt,
-                    //         {
-                    //           color: isButtonSelect2[index2]
-                    //             ? '#fbfbfb'
-                    //             : '#242424',
-                    //         },
-                    //       ]}>
-                    //       {value2}
-                    //     </Text>
-                    //   </TouchableOpacity>
-                    // </>
                     <SelectionButton
                       key={index2}
                       isSelected={isButtonSelect2[index2]}
@@ -251,7 +218,8 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           {/* <View style={styles.container_contents} /> */}
         </View>
         {/* <Image
-          source={require('../../assets/images/userA.png')}
+          //source={pageContents.imgpath}
+          source={{uri : pageContents.imgpath}}
           style={{
             position: 'absolute',
             left: '36%',
