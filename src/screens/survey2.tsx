@@ -8,7 +8,7 @@ import GobackButton from '../components/gobackButton';
 import DefaultPage from '../components/defaultPage';
 import {useNavigation} from '@react-navigation/native';
 //for testing
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import testing from '../txtCollection/testing.json';
 import testing2 from '../txtCollection/testing2.json';
@@ -18,6 +18,8 @@ import UserImg from '../components/userImg';
 import UserAimg from '../../assets/images/userA.png';
 
 import handleGet from './axios';
+
+import images from '../../assets/images/index';
 
 //asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -61,18 +63,15 @@ const Survey2 = () => {
       .get(GETURL)
       .then(res => {
         //console.log(res.data);
-        console.log('1');
+        // console.log('1');
         setJson(res.data);
-        console.log(jsondata);
-        console.log('2');
+        // console.log(jsondata);
+        // console.log('2');
         setNowpage(res.data[iterator]);
-        console.log(nowpage);
+        // console.log(nowpage);
         // return res.data
       })
-      .catch(error => console.log(error))
-      .then(function () {
-        console.log('loading');
-      });
+      .catch(error => console.log(error));
   };
 
   //전역변수 moduel 사용
@@ -89,8 +88,8 @@ const Survey2 = () => {
   useEffect(() => {
     GET();
   }, []);
-  console.log(jsondata);
-  console.log(nowpage);
+  // console.log(jsondata);
+  // console.log(nowpage);
 
   function parentFucntion(x: any) {
     // setPagename(contents.pagename);
@@ -130,6 +129,54 @@ const Survey2 = () => {
     }
   };
 
+  // var default_second_res: string;
+  // var default_third_res: string;
+
+  // useEffect(() => {
+  //   Test();
+  // }, []);
+
+  // const Test = async () => {
+  //   //Default-3에 대한 답변
+  //   switch (await getData(`userinput_2`)) {
+  //     case 0:
+  //       default_third_res = 'A';
+  //       break;
+  //     case 1:
+  //       default_third_res = 'B';
+  //       break;
+  //     case 2:
+  //       default_third_res = 'C';
+  //       break;
+  //     case 3:
+  //       default_third_res = 'D';
+  //       break;
+  //     case 4:
+  //       default_third_res = 'E';
+  //       break;
+  //   }
+
+  //   //Default-2에 대한 답변
+  //   switch (await getData(`userinput_1`)) {
+  //     case 0:
+  //       default_second_res = '1';
+  //       break;
+  //     case 1:
+  //       default_second_res = '2';
+  //       break;
+  //     case 2:
+  //       default_second_res = '3';
+  //       break;
+  //     case 3:
+  //       default_second_res = '4';
+  //       break;
+  //     case 4:
+  //       default_second_res = '5';
+  //       break;
+  //   }
+
+  // };
+
   //jsx구성요소 오류 해결 필요
   //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?
   return (
@@ -143,7 +190,18 @@ const Survey2 = () => {
           <Text style={styles.nxt_txt}>다음</Text>
         </TouchableOpacity>
       </View>
-      {/* <UserImg img={HQimg} /> */}
+      {/* <Image
+        source={img}
+        style={{
+          position: 'absolute',
+          left: '36%',
+          top: '13%',
+          width: 105,
+          height: 105,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      /> */}
     </>
   );
 };

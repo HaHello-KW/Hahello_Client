@@ -193,6 +193,7 @@ const Survey = () => {
         navigation.navigate('Survey2');
       } else {
         // setPagename(nowpage.pagename);
+        storeData(`userinput_${iterator}`, input);
         ++iterator;
         setIterator(iterator);
       }
