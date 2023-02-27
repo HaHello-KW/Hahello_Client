@@ -112,7 +112,6 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           </View>
         </View>
         <View style={[UserStyle.container_tlp_c]} />
-        
       </>
     );
   } else if (

@@ -82,6 +82,7 @@ const Survey = () => {
     setNowpage(jsondata[iterator]);
   };
 
+  // var NUM: any;
   //GET함수에서 로컬호스트 대신에 10.0.2.2를 넣어 주었으니 handleNext함수
   //안에서도 똑같이 url을 바꿔줘야 한다
   //'http://10.0.2.2:8080/defaultPage'
@@ -92,47 +93,63 @@ const Survey = () => {
 
         var GETURL;
         var TYPE;
-        switch (await getData(`userinput_${iterator}`)) {
+        var NUM;
+
+        switch (await getData(`userinput_${iterator - 1}`)) {
           case 0:
-            //console.log('type a');
-            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
-            // storeData('typeUrl', 'http://localhost:8080/typePage/A');
-            GETURL = 'http://10.0.2.2:8080/typePage/A';
-            TYPE = 'A';
-            module.exports = {GETURL, TYPE};
+            NUM = 1;
             break;
           case 1:
-            //console.log('type b');
-            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/B');
-            // storeData('typeUrl', 'http://localhost:8080/typePage/B');
+            NUM = 2;
+            break;
+          case 2:
+            NUM = 3;
+            break;
+          case 3:
+            NUM = 4;
+            break;
+          case 4:
+            NUM = 5;
+            break;
+          default:
+            console.log('testing2');
+        }
+
+        switch (await getData(`userinput_${iterator}`)) {
+          case 0:
+            GETURL = 'http://10.0.2.2:8080/typePage/A';
+            TYPE = 'A';
+
+            module.exports = {GETURL, TYPE, NUM};
+
+            break;
+          case 1:
             GETURL = 'http://10.0.2.2:8080/typePage/B';
             TYPE = 'B';
-            module.exports = {GETURL, TYPE};
+
+            module.exports = {GETURL, TYPE, NUM};
 
             break;
           case 2:
-            //console.log('type c');
-            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
-            // storeData('typeUrl', 'http://localhost:8080/typePage/C');
             GETURL = 'http://10.0.2.2:8080/typePage/C';
             TYPE = 'C';
-            module.exports = {GETURL, TYPE};
+
+            module.exports = {GETURL, TYPE, NUM};
+
             break;
           case 3:
-            //console.log('type d');
-            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
-            // storeData('typeUrl', 'http://localhost:8080/typePage/D');
             GETURL = 'http://10.0.2.2:8080/typePage/D';
             TYPE = 'D';
-            module.exports = {GETURL, TYPE};
+
+            module.exports = {GETURL, TYPE, NUM};
+
             break;
           case 4:
-            //console.log('type e');
-            // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
-            // storeData('typeUrl', 'http://localhost:8080/typePage/E');
             GETURL = 'http://10.0.2.2:8080/typePage/E';
             TYPE = 'E';
-            module.exports = {GETURL, TYPE};
+
+            module.exports = {GETURL, TYPE, NUM};
+
             break;
           default:
             console.log('testing');
@@ -140,10 +157,10 @@ const Survey = () => {
         //navigation
         navigation.navigate('Survey2');
       } else {
-        storeData(`userinput_${iterator}`, input);
         //console.log(input);
 
         // setPagename(nowpage.pagename);
+        storeData(`userinput_${iterator}`, input);
         ++iterator;
         setIterator(iterator);
       }
@@ -152,7 +169,49 @@ const Survey = () => {
     }
   };
   //console.log(url);
-  //getData(`userinput_${contents.length - 1}`);
+
+  var NUM;
+  const getNUM = async () => {
+    switch (await getData(`userinput_1`)) {
+      case 0:
+        //console.log('type a');
+        // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+        // storeData('typeUrl', 'http://localhost:8080/typePage/A');
+        NUM = 1;
+        module.exports = {NUM};
+        break;
+      case 1:
+        //console.log('type b');
+        // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/B');
+        // storeData('typeUrl', 'http://localhost:8080/typePage/B');
+        NUM = 2;
+        module.exports = {NUM};
+        break;
+      case 2:
+        //console.log('type c');
+        // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+        // storeData('typeUrl', 'http://localhost:8080/typePage/C');
+        NUM = 3;
+        module.exports = {NUM};
+        break;
+      case 3:
+        //console.log('type d');
+        // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+        // storeData('typeUrl', 'http://localhost:8080/typePage/D');
+        NUM = 4;
+        module.exports = {NUM};
+        break;
+      case 4:
+        //console.log('type e');
+        // storeData('typeUrl', 'http://10.0.2.2:8080/typePage/A');
+        // storeData('typeUrl', 'http://localhost:8080/typePage/E');
+        NUM = 5;
+        module.exports = {NUM};
+        break;
+      default:
+        console.log('testing2');
+    }
+  };
 
   // //jsx구성요소 오류 해결 필요
 

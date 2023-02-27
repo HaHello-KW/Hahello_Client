@@ -63,22 +63,20 @@ const Survey2 = () => {
       .get(GETURL)
       .then(res => {
         //console.log(res.data);
-        console.log('1');
+        // console.log('1');
         setJson(res.data);
-        console.log(jsondata);
-        console.log('2');
+        // console.log(jsondata);
+        // console.log('2');
         setNowpage(res.data[iterator]);
-        console.log(nowpage);
+        // console.log(nowpage);
         // return res.data
       })
-      .catch(error => console.log(error))
-      .then(function () {
-        console.log('loading');
-      });
+      .catch(error => console.log(error));
   };
 
   //전역변수 moduel 사용
-  const {GETURL, TYPE} = require('./survey');
+
+  const {GETURL, TYPE, NUM} = require('./survey');
 
   var imgpath;
   var TypeURL;
@@ -124,6 +122,7 @@ const Survey2 = () => {
   useEffect(() => {
     GET();
     console.log(TYPE);
+    console.log(NUM);
   }, []);
   //console.log(jsondata);
   //console.log(nowpage);
@@ -154,12 +153,11 @@ const Survey2 = () => {
   const handleNext = () => {
     if (iterator < jsondata.length) {
       if (iterator === jsondata.length - 1) {
+        navigation.navigate('SurveyResult');
       } else {
         // setPagename(contents.pagename);
         ++iterator;
         setIterator(iterator);
-
-        navigation.navigate('SurveyResult');
       }
       // setPagename(contents.pagename);
       setNowpage(jsondata[iterator]);
