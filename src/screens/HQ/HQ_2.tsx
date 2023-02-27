@@ -13,13 +13,15 @@ import {UserStyle} from '../../styling/userLayout';
 
 import NextButtonHQ from '../../Buttons/nextButtonHQ'; //HQ부터
 import SelectionButtonHQ from '../../Buttons/selectionButtonHQ'; //HQ부터
-import GobackButton from '../../Buttons/gobackButton';
+
+import GobackButton from '../../components/gobackButton';
 import SelectionButton_V2 from '../../Buttons/2selectionButton_v';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {DefaultStyle} from '../../styling/defaultLayout';
 import HQimg from '../../../assets/images/HQ1.png';
+
 import UserImg from '../../Buttons/userImgHQ'; //HQ부터
 import {useState} from 'react';
 import NextButton from '../../Buttons/nextButton';

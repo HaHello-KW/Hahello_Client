@@ -11,23 +11,27 @@ import {
 } from 'react-native';
 
 import {UserStyle} from '../../styling/userLayout';
+
 import NextButtonHQ from '../../Buttons/nextButtonHQ'; //HQ부터
 import SelectionButtonHQ from '../../Buttons/selectionButtonHQ'; //HQ부터
-import GobackButton from '../../Buttons/gobackButton';
+import GobackButton from '../../components/gobackButton';
 
 import HQimg from '../../../assets/images/HQ1.png';
 import UserImg from '../../Buttons/userImgHQ'; //HQ부터
+
 
 import MyUpBar_wq from '../../upbar/UpBar_WQ';
 //import {Image} from 'react-native-paper/lib/typescript/components/Avatar/Avatar';
 
 import {useState} from 'react';
 import {Alert, alertClasses} from '@mui/material';
+
 import NextButton from '../../Buttons/nextButton';
 
 const HQ_3 = ({navigation, route}) => {
   //0: AMH, 1: FSH, 2: LH, 3: TSH, 4: E2
   const [isSelect, selectFunc] = useState([false, false, false, false, false]); //버튼 다중선택을 위한 state
+
   const selectChange = (num: number) => {
     selectFunc([
       ...isSelect.slice(0, num),
@@ -38,6 +42,7 @@ const HQ_3 = ({navigation, route}) => {
 
   // amh는 버튼 amh의 수치값을 보관하기 위한 state, 초기에 null로 세팅
   const [amh, amhChange] = useState(null);
+
   const [lh, lhChange] = useState(null);
   const [fsh, fshChange] = useState(null);
   const [e2, e2Change] = useState(null);
@@ -46,12 +51,14 @@ const HQ_3 = ({navigation, route}) => {
   const [selection1, select1F] = useState(false);
   //만약 amh의 수치값이 입력되지 않았으면(null값이면) false를 리턴함.
   const isNullAmh = () => {
+
     if (amh !== null) {
       return false;
     } else {
       return true;
     }
   };
+
   const isNullFsh = () => {
     if (fsh !== null) {
       return false;
@@ -80,6 +87,7 @@ const HQ_3 = ({navigation, route}) => {
       return true;
     }
   };
+
   const isSelected1 = () => {
     if (selection1 == false) {
       return false;
@@ -307,8 +315,10 @@ const HQ_3 = ({navigation, route}) => {
           <Image
             style={{
               position: 'absolute',
+
               left: -160,
               top: 40,
+
               width: 100,
               height: 100,
               borderRadius: 100,
@@ -329,15 +339,19 @@ const HQ_3 = ({navigation, route}) => {
         {/* FSH버튼.. */}
         <Pressable
           onPress={() => {
+
             setModalVisiblefsh(true);
+
             selectChange(1);
           }}>
           <Image
             style={{
               position: 'absolute',
+
               left: -100,
               // left: '21.03%',
               top: 160,
+
               //bottom: '20%',
               width: 100,
               height: 100,
@@ -355,6 +369,7 @@ const HQ_3 = ({navigation, route}) => {
             }
           />
         </Pressable>
+
 
         {/* LH버튼.. */}
         <Pressable
@@ -447,6 +462,7 @@ const HQ_3 = ({navigation, route}) => {
       {/* </View> */}
       <UserImg img={HQimg} />
       {/* </View> */}
+
     </>
   );
 };
@@ -457,15 +473,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   text: {
+
     // position: 'absolute',
     // top: 240,
     // left: 70,
+
     fontSize: 24,
     fontWeight: '400',
     color: '#000000',
     textAlign: 'center',
     lineHeight: 34.75,
+
     backgroundColor: '#',
+
   },
   //
   centeredView: {
@@ -527,6 +547,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     padding: 10,
   },
+
   topContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -546,6 +567,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // left: '16%',
     // top: 650,
+
   },
 });
 

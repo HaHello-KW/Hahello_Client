@@ -1,4 +1,5 @@
 import {View, Text, Button, Image, StyleSheet} from 'react-native';
+import MyUpBar_5 from '../../upbar/UpBar_5';
 
 import {UserStyle} from '../../styling/userLayout';
 
@@ -9,12 +10,11 @@ import SelectionButton_V2 from '../../Buttons/2selectionButton_v';
 
 import UserAimg from '../../../assets/images/userA.png';
 import UserImg from '../../Buttons/userImg';
-import MyUpBar from '../../upbar/MyUpBar';
 
 const Q_D_1 = ({navigation, route}) => {
   return (
     <>
-      <MyUpBar level="5" />
+      <MyUpBar_5 />
       <GobackButton onPress={() => navigation.pop()} />
       <View style={[UserStyle.container]} />
       <View style={[UserStyle.container0_2]}>
@@ -22,23 +22,18 @@ const Q_D_1 = ({navigation, route}) => {
       </View>
       <View style={[UserStyle.container1_2]}>
         <SelectionButton
-          text={'결혼 생각이 있어 user D'}
+          text={'첮째가 있어'}
           textColor={'#000000'}
           onPress={() => alert('want')}
         />
         <SelectionButton
-          text={'결혼 생각이 없어'}
+          text={'둘째가 있어'}
           textColor={'#000000'}
           onPress={() => alert('do not')}
         />
-        <SelectionButton
-          text={'아직 모르겠어'}
-          textColor={'#000000'}
-          onPress={() => alert('do not know')}
-        />
       </View>
       <View style={[UserStyle.container2]}>
-        <NextButton onPress={() => null}></NextButton>
+        <NextButton onPress={() => navigation.navigate('Q_A_2_1')}></NextButton>
       </View>
       <UserImg img={UserAimg}></UserImg>
     </>

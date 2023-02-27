@@ -183,6 +183,3 @@ export const UserStyle = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-//container 설명 필요!!
-//container flex -> 7 기준, 1 : 2: 4, ...
