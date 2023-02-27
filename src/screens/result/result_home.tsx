@@ -30,9 +30,16 @@ import {useState} from 'react';
 import Chart from './chartExam';
 
 import TimeLine from './timeLineFullPage';
+import {red} from '@mui/material/colors';
+import {
+  useWindowSizeValue,
+  WindowSizeClassContext,
+  WindowSizeClassProvider,
+} from '@react-native-material/core';
 
 const RESULT_HOME = ({navigation, route}) => {
   //const [target, change] = useState(true);
+  const {imgpath, title_R} = require('../surveyResult');
   const [amh_isopen, openFunc] = useState(true);
 
   const graph_box_open_amh = () => {
@@ -54,6 +61,50 @@ const RESULT_HOME = ({navigation, route}) => {
         <View style={styles.graph_base}>
           <>{Chart()}</>
         </View>
+        <Text
+          style={{position: 'absolute', left: 17, top: 323, color: '#242424'}}>
+          2022.11.26/35세
+        </Text>
+        <Text
+          style={{
+            position: 'absolute',
+            left: 262,
+            top: 316,
+            color: '#FF7C00',
+            fontSize: 16,
+          }}>
+          정상
+        </Text>
+        <Text
+          style={{position: 'absolute', left: 245, top: 336, color: '#242424'}}>
+          1.91ng/mL
+        </Text>
+        <View
+          style={{
+            position: 'absolute',
+            width: 329,
+            top: 370,
+            height: 1,
+            backgroundColor: '#D9D9D9',
+          }}></View>
+        <Text
+          style={{position: 'absolute', left: 17, top: 391, color: '#242424'}}>
+          202.10.20/34세
+        </Text>
+        <Text
+          style={{
+            position: 'absolute',
+            left: 262,
+            top: 384,
+            color: '#FF7C00',
+            fontSize: 16,
+          }}>
+          정상
+        </Text>
+        <Text
+          style={{position: 'absolute', left: 245, top: 404, color: '#242424'}}>
+          1.91ng/mL
+        </Text>
       </View>
     );
   };
@@ -92,7 +143,7 @@ const RESULT_HOME = ({navigation, route}) => {
 
         <Text style={styles.hormone_text}>정상</Text>
         <Text style={styles.hormone_value}>1.91 ng/ml</Text>
-        <TouchableOpacity onPress={() => alert('aa')}>
+        <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
           <Image
             style={styles.hormone_button1}
             source={require('../../../assets/images/hormone_open.png')}
@@ -111,7 +162,7 @@ const RESULT_HOME = ({navigation, route}) => {
 
         <Text style={styles.hormone_text}>정상</Text>
         <Text style={styles.hormone_value}>1.91 ng/ml</Text>
-        <TouchableOpacity onPress={() => alert('aa')}>
+        <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
           <Image
             style={styles.hormone_button1}
             source={require('../../../assets/images/hormone_open.png')}
@@ -131,7 +182,7 @@ const RESULT_HOME = ({navigation, route}) => {
 
         <Text style={styles.hormone_text}>정상</Text>
         <Text style={styles.hormone_value}>1.91 ng/ml</Text>
-        <TouchableOpacity onPress={() => alert('aa')}>
+        <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
           <Image
             style={styles.hormone_button1}
             source={require('../../../assets/images/hormone_open.png')}
@@ -164,7 +215,8 @@ const RESULT_HOME = ({navigation, route}) => {
               }}>
               <Image
                 style={styles.A_image}
-                source={require('../../../assets/images/userA.png')}
+                //source={require('../../../assets/images/userA.png')}
+                source={imgpath}
               />
               {/* <Text style={styles.content1}>여유로운 똑똑이 유형</Text> */}
               <Text style={styles.content2}>
@@ -172,11 +224,11 @@ const RESULT_HOME = ({navigation, route}) => {
               </Text>
             </View>
 
-            <Text style={styles.content1}>여유로운 똑똑이 유형</Text>
+            <Text style={styles.content1}>{title_R}</Text>
 
             <Text style={styles.content3}>하해호님 호르몬 수치</Text>
 
-            <TouchableOpacity onPress={() => alert('호르몬수치 입력')}>
+            <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
               <Text style={styles.input_hormone}>
                 호르몬 수치 입력하기 {'>'}
               </Text>
@@ -236,7 +288,7 @@ const RESULT_HOME = ({navigation, route}) => {
               여성호르몬 수치를 검사받을 수 있는 병원을 찾아보세요
             </Text>
             {/* 병원 검색하기 버튼 */}
-            <TouchableOpacity onPress={() => alert('병원검색')}>
+            <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
               <View
                 style={{
                   position: 'absolute',
@@ -277,7 +329,7 @@ const RESULT_HOME = ({navigation, route}) => {
             </Text>
 
             {/* "전체보기 >" 스타일 피그마와 상이하게 조정한 부분 존재 */}
-            <TouchableOpacity onPress={() => alert('전체보기 화면으로 이동')}>
+            <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
               <Text
                 style={{
                   left: 290,
@@ -297,15 +349,15 @@ const RESULT_HOME = ({navigation, route}) => {
               <ScrollView nestedScrollEnabled={true}>
                 <TimeLine />
               </ScrollView>
-              <TouchableOpacity onPress={() => alert('타임라인수정')}>
+              <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
                 <Image
-                  style={{left: 311, top: 2, width: 48, height: 48}}
+                  style={{left: 282, top: -10, width: 48, height: 48}}
                   source={require('../../../assets/images/changeTimelineButton.png')}
                 />
               </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity onPress={() => alert('시술정보')}>
+          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
             <ImageBackground
               style={styles.medicalInfo}
               source={require('../../../assets/images/medical_info.png')}>
@@ -335,7 +387,7 @@ const RESULT_HOME = ({navigation, route}) => {
               </Text>
             </ImageBackground>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => alert('시술정보')}>
+          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
             <ImageBackground
               style={styles.column}
               source={require('../../../assets/images/column.png')}>
@@ -378,7 +430,7 @@ const RESULT_HOME = ({navigation, route}) => {
             }}>
             하해호님을 위한 건강 컨텐츠
           </Text>
-          <TouchableOpacity onPress={() => alert('골반스트레칭')}>
+          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
             <Image
               //style={styles.strecth}
               style={{
@@ -417,7 +469,7 @@ const RESULT_HOME = ({navigation, route}) => {
             }}>
             쉽고 재미있게 따라할 수 있어요
           </Text>
-          <TouchableOpacity onPress={() => alert('음악명상')}>
+          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
             <Image
               //style={styles.strecth}
               style={{
@@ -456,7 +508,7 @@ const RESULT_HOME = ({navigation, route}) => {
             }}>
             마음건강은 곧 신체건강 !
           </Text>
-          <TouchableOpacity onPress={() => alert('영양제추천')}>
+          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다')}>
             <Image
               //style={styles.strecth}
               style={{
@@ -495,7 +547,7 @@ const RESULT_HOME = ({navigation, route}) => {
             }}>
             꼭 필요한 영야제를 모아봤어요
           </Text>
-          <TouchableOpacity onPress={() => alert('음식정보')}>
+          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
             <Image
               //style={styles.strecth}
               style={{
@@ -534,7 +586,7 @@ const RESULT_HOME = ({navigation, route}) => {
             }}>
             이런 레시피 어때요?
           </Text>
-          <TouchableOpacity onPress={() => alert('더많은 컨텐츠 보러 가기')}>
+          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
             <View
               style={{
                 position: 'absolute',
@@ -557,6 +609,57 @@ const RESULT_HOME = ({navigation, route}) => {
                 더 많은 컨텐츠 보러가기
               </Text>
             </View>
+          </TouchableOpacity>
+          <View
+            style={{
+              position: 'absolute',
+              width: 390,
+              height: 0.6,
+              top: 3140,
+              backgroundColor: '#000000',
+            }}></View>
+
+          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+            <Image
+              style={{position: 'absolute', left: 81, top: 2338}}
+              source={require('./home_icon.png')}></Image>
+            <Text
+              style={{
+                position: 'absolute',
+                left: 93,
+                top: 2385,
+                color: '#F47100',
+              }}>
+              홈
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+            <Image
+              style={{position: 'absolute', left: 177, top: 2338}}
+              source={require('./content_icon.png')}></Image>
+            <Text
+              style={{
+                position: 'absolute',
+                left: 179,
+                top: 2385,
+                color: '#F47100',
+              }}>
+              컨텐츠
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+            <Image
+              style={{position: 'absolute', left: 273, top: 2338}}
+              source={require('./my_icon.png')}></Image>
+            <Text
+              style={{
+                position: 'absolute',
+                left: 283,
+                top: 2385,
+                color: '#F47100',
+              }}>
+              MY
+            </Text>
           </TouchableOpacity>
         </ImageBackground>
       </ScrollView>

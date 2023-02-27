@@ -1,7 +1,7 @@
 export interface TypePageModel {
   pagename: string;
   id: number;
-  imgpath: any;
+  //imgpath: any;
   pgLevel: number;
   questionType: string;
   questionTxt: any;
@@ -12,7 +12,7 @@ export interface TypePageModel {
   secondlineTxt: any;
   thirdPickerType: any;
   thirdlineTxt: any;
-  nextpage: string;
+  //nextpage: string;
 }
 
 //questiontxt, selectiontxt, pickertype -> array? object? string? any?

@@ -2,7 +2,7 @@ import {
   View,
   Text,
   Button,
-  Image,
+  Image, 
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
@@ -24,27 +24,111 @@ import testresult from '../txtCollection/testresult.json';
 const SurveyResult = () => {
   const navigation = useNavigation();
 
-  const [jsondata, setJson] = useState('');
+  // const [jsondata, setJson] = useState('');
 
-  const [nowpage, setNowpage] = useState(jsondata);
+  // const [nowpage, setNowpage] = useState(jsondata);
 
-  const GET = () => {
-    axios.get(TypeURL)
-      .then(res=>{
-        setJson(res.data);
-        setNowpage(res.data[NUM-1]);
-      })
-      .catch(error => console.log(error))
-  }
+  // const GET = () => {
+  //   axios.get(TypeURL)
+  //     .then(res=>{
+  //       setJson(res.data);
+  //       setNowpage(res.data[NUM-1]);
+  //     })
+  //     .catch(error => console.log(error))
+  // }
   //TypeURL = 'http://10.0.2.2:8080/resultPage/A~E'
-  const {TypeURL, imgpath} = require('./survey2');
 
-  //TYPE : A~E, NUM : 1~5
-  const {NUM} = require('./survey');
+  //const {TypeURL} = require('./survey2');
 
-  useEffect(() => {
-    GET();
-  }, []);
+  const {NUM, TYPE} = require('./survey');
+
+  const [type, setType] = useState(testresult.A);
+
+  const testing = () => {
+    switch (TYPE) {
+      case 'A':
+        setType(testresult.A);
+        break;
+      case 'B':
+        setType(testresult.B);
+        break;
+      case 'C':
+        setType(testresult.C);
+        break;
+      case 'D':
+        setType(testresult.D);
+        break;
+      case 'E':
+        setType(testresult.E);
+        break;
+    }
+  };
+
+  useEffect(()=>{
+    testing();
+  },[]);
+
+  var imgpath;
+  switch (TYPE) {
+    case 'A':
+      {
+        if (NUM == 1) imgpath = images.userA1R;
+        else if (NUM == 2) imgpath = images.userA2R;
+        else if (NUM == 3) imgpath = images.userA3R;
+        else if (NUM == 4) imgpath = images.userA4R;
+        else if (NUM == 5) imgpath = images.userA5R;
+      }
+      break;
+    case 'B':
+      {
+        if (NUM == 1) imgpath = images.userB1R;
+        else if (NUM == 2) imgpath = images.userB2R;
+        else if (NUM == 3) imgpath = images.userB3R;
+        else if (NUM == 4) imgpath = images.userB4R;
+        else if (NUM == 5) imgpath = images.userB5R;
+      }
+      break;
+    case 'C':
+      {
+        if (NUM == 1) imgpath = images.userC1R;
+        else if (NUM == 2) imgpath = images.userC2R;
+        else if (NUM == 3) imgpath = images.userC3R;
+        else if (NUM == 4) imgpath = images.userC4R;
+        else if (NUM == 5) imgpath = images.userC5R;
+      }
+      break;
+    case 'D':
+      {
+        if (NUM == 1) imgpath = images.userD1R;
+        else if (NUM == 2) imgpath = images.userD2R;
+        else if (NUM == 3) imgpath = images.userD3R;
+        else if (NUM == 4) imgpath = images.userD4R
+        else if (NUM == 5) imgpath = images.userD5R;
+      }
+      break;
+    case 'E':
+      {
+        if (NUM == 1) imgpath = images.userE1R;
+        else if (NUM == 2) imgpath = images.userE2R;
+        else if (NUM == 3) imgpath = images.userE3R;
+        else if (NUM == 4) imgpath = images.userE4R;
+        else if (NUM == 5) imgpath = images.userE5R;
+      }
+      break;
+    default:
+      break;
+  }
+
+  var title_R;
+  title_R = type[NUM-1].title;
+
+  module.exports={imgpath, title_R};
+
+  
+
+  // useEffect(() => {
+  //   //GET();
+  // }, []);
 
   const handleGoback = () => {
     navigation.pop();
@@ -53,7 +137,7 @@ const SurveyResult = () => {
   return (
     <>
       <GobackButton onPress={handleGoback} />
-      <ResultPage pageContents={nowpage} />
+      <ResultPage pageContents={type[NUM-1]} />
       <View style={[UserStyle.containerR_2]}>
         <Image source={imgpath} style={styles.image} />
       </View>

@@ -32,7 +32,7 @@ const TimeLine = () => {
   const test = () => {
     return (
       <>
-        <View
+        {/* <View
           style={{
             backgroundColor: 'black',
             position: 'absolute',
@@ -71,7 +71,7 @@ const TimeLine = () => {
           32세
         </Text>
 
-        {/**/}
+        
         <View
           style={{
             backgroundColor: 'red',
@@ -99,7 +99,10 @@ const TimeLine = () => {
         </Text>
         <Text style={{position: 'absolute', left: 46, top: 19, fontSize: 20}}>
           32세
-        </Text>
+        </Text> */}
+        <Image
+          style={{width: '100%'}}
+          source={require('./timeLineFull.png')}></Image>
       </>
     );
   };
@@ -144,6 +147,7 @@ const TimeLine = () => {
         34세
       </Text> */}
       {test()}
+      {/* <Text></Text>
       <Text></Text>
       <Text></Text>
       <Text></Text>
@@ -152,20 +156,7 @@ const TimeLine = () => {
       <Text></Text>
       <Text></Text>
       <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
+      <Text></Text> */}
     </>
   );
 };

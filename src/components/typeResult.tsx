@@ -16,7 +16,7 @@ type resultPageProps = {
 
 function ResultPage({pageContents}: resultPageProps) {
   const {NUM} = require('../screens/survey');
-
+  
   var titlecolor;
   switch (NUM) {
     case 1:

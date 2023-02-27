@@ -10,17 +10,16 @@ import {useNavigation} from '@react-navigation/native';
 //for testing
 import {Image, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
-import testing from '../txtCollection/testing.json';
-import testing2 from '../txtCollection/testing2.json';
 import TypePage from '../components/typePage';
 
-import UserImg from '../components/userImg';
-import UserAimg from '../../assets/images/userA.png';
-
-import handleGet from './axios';
-
 import images from '../../assets/images/index';
-
+//test
+import mock_type from "../txtCollection/mock_type.json"
+import mock_typeA from "../txtCollection/mock_typeA.json"
+import mock_typeB from "../txtCollection/mock_typeB.json"
+import mock_typeC from "../txtCollection/mock_typeC.json"
+import mock_typeD from "../txtCollection/mock_typeD.json"
+import mock_typeE from "../txtCollection/mock_typeE.json"
 //asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -30,6 +29,7 @@ import {
   removeData,
   storeMultiData,
 } from './async';
+import { TypePageModel } from '../models/typePageModel';
 // import handleGet from './axios';
 
 //콘솔창 에러 숨기기(임시)
@@ -46,40 +46,73 @@ export function usePrevState(state: any) {
 }
 
 const Survey2 = () => {
+  const {GETURL, TYPE, NUM} = require('./survey');
+
   const navigation = useNavigation();
-
-  const [jsondata, setJson] = useState('');
-
   const [input, setInput] = useState();
   var [iterator, setIterator] = useState(0);
 
-  const [nowpage, setNowpage] = useState(jsondata);
+  //const [jsondata, setJson] = useState('');
+  // const [nowpage, setNowpage] = useState(jsondata);
 
-  const [url, setUrl] = useState('');
+  
+  // const [testM, setTest] = useState(mock_type.A);
 
-  //store에 저장되어 있는 url을 이용하여 axios.get해온다
-  const GET = () => {
-    axios
-      .get(GETURL)
-      .then(res => {
-        //console.log(res.data);
-        // console.log('1');
-        setJson(res.data);
-        // console.log(jsondata);
-        // console.log('2');
-        setNowpage(res.data[iterator]);
-        // console.log(nowpage);
-        // return res.data
-      })
-      .catch(error => console.log(error));
-  };
+  //const [nowpage, setNowpage] = useState(testM[0]);
 
-  //전역변수 moduel 사용
 
-  const {GETURL, TYPE, NUM} = require('./survey');
+//이건 워때요
+// var tttt;
+// function testing() {
+//   if(TYPE == 'A') {tttt = mock_typeA; return tttt;}
+//   else if(TYPE == 'B') {tttt = mock_typeB; return tttt;}
+//   else if(TYPE == 'C') {tttt = mock_typeC; return tttt;}
+//   else if(TYPE == 'D') {tttt = mock_typeD; return tttt;}
+//   else if(TYPE == 'E') {tttt = mock_typeE; return tttt;}
+// }
+  // const [ testM, setTest] = useState(() => testing())
 
+  const [state, setState] = useState<TypePageModel[]>(mock_typeA);
+
+  const [nowpage, setNowpage] = useState(state[iterator]);
+
+  // const GET = () => {
+  //   axios
+  //     .get(GETURL)
+  //     .then(res => {
+  //       setJson(res.data);
+  //       setNowpage(res.data[iterator]);
+  //     })
+  //     .catch(error => console.log(error));
+  // };
+
+  const SETM = () => {
+    switch(TYPE){
+      case 'A':
+        setState(mock_typeA);
+        break;
+      case 'B':
+        setState(mock_typeB);
+        break;
+      case 'C':
+        setState(mock_typeC);
+        break;
+      case 'D':
+        setState(mock_typeD);
+        break;
+      case 'E':
+        setState(mock_typeE);
+        break;
+      default:
+        return;
+    }
+  }
+
+  //var imgpath;
+  //var TypeURL;
   var imgpath;
   var TypeURL;
+
   switch (TYPE) {
     case 'A':
       {
@@ -89,7 +122,6 @@ const Survey2 = () => {
         else if (NUM == 4) imgpath = images.userA4;
         else if (NUM == 5) imgpath = images.userA5;
       }
-      // imgpath = images.userA;
       TypeURL = 'http://10.0.2.2:8080/resultPage/A';
       module.exports = {TypeURL, imgpath};
       break;
@@ -141,34 +173,20 @@ const Survey2 = () => {
       imgpath = null;
       break;
   }
-
-  //asyncstorage 사용
-  // const GETURL = async () => {
-  //   setUrl(await getData('typeUrl'));
-  // };
-  // GETURL();
-  // //console.log(`${url}`);
-  // console.log(url);
+  
 
   useEffect(() => {
-    GET();
+    //GET();
+    SETM();
     console.log(TYPE);
     console.log(NUM);
   }, []);
-  //console.log(jsondata);
-  //console.log(nowpage);
 
   function parentFucntion(x: any) {
-    // setPagename(contents.pagename);
     useEffect(() => {
       setInput(x);
     }, [x]);
   }
-
-  //typepage 컴포넌트로부터 getidx값 or picked date 받아오기 (자식->부모)
-  //const jsondata = handleGet(t); //t 에는 url 들어가있다. 잠시 보류
-
-  // const [inputarr, setInputArr] = useState(new Array(MAX).fill(null))
 
   const handleGoback = () => {
     if (iterator > 0) {
@@ -177,28 +195,25 @@ const Survey2 = () => {
     } else {
       navigation.pop();
     }
-    setNowpage(jsondata[iterator]);
-    //setPagename(nowpage.pagename);
+    //setNowpage(jsondata[iterator]);
+    setNowpage(state[iterator])
   };
 
   const handleNext = () => {
-    if (iterator < jsondata.length) {
-      if (iterator === jsondata.length - 1) {
+    //if (iterator < jsondata.length) {
+    if (iterator < state.length) {
+      //if (iterator === jsondata.length - 1) {
+      if (iterator === state.length - 1) {
         navigation.navigate('SurveyResult');
       } else {
-        // setPagename(contents.pagename);
         ++iterator;
         setIterator(iterator);
       }
-      // setPagename(contents.pagename);
-      setNowpage(jsondata[iterator]);
-      //setPagename(contents.pagename);
+      //setNowpage(jsondata[iterator]);
+      setNowpage(state[iterator]);
     }
   };
-  //imgpath형식 : ex) A-1
 
-  //jsx구성요소 오류 해결 필요
-  //survey에 default, type공통으로 겹치는 myupbar, goback, next button을 구현해야하나?
   return (
     <>
       <MyUpBar level={nowpage.pgLevel} />
@@ -222,7 +237,6 @@ const Survey2 = () => {
           justifyContent: 'center',
         }}
       />
-      {/* <UserImg img={HQimg} /> */}
     </>
   );
 };
