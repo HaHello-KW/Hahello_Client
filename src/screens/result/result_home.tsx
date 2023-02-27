@@ -619,7 +619,7 @@ const RESULT_HOME = ({navigation, route}) => {
               backgroundColor: '#000000',
             }}></View>
 
-          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <Image
               style={{position: 'absolute', left: 81, top: 2338}}
               source={require('./home_icon.png')}></Image>
