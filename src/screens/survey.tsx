@@ -31,31 +31,30 @@ console.warn = console.error = () => {};
 const Survey = () => {
   const navigation = useNavigation();
 
-  //const [jsondata, setJson] = useState('');
+  const [jsondata, setJson] = useState('');
 
   const [input, setInput] = useState();
   var [iterator, setIterator] = useState(0);
 
-  //const [nowpage, setNowpage] = useState(jsondata);
-  const [nowpage, setNowpage] = useState(mock_default[0]);
+  const [nowpage, setNowpage] = useState(jsondata);
 
-  // const GET = () => {
-  //   axios
-  //     .get('http://10.0.2.2:8080/defaultPage')
-  //     .then(res => {
-  //       setJson(res.data);
-  //       console.log(jsondata);
-  //       setNowpage(res.data[iterator]);
-  //       console.log(nowpage);
-  //     })
-  //     .catch(error => console.log(error))
-  //     .then(function () {
-  //       console.log('loading');
-  //     });
-  // };
-  // useEffect(() => {
-  //   GET();
-  // }, []);
+  const GET = () => {
+    axios
+      .get('http://10.0.2.2:8080/defaultPage')
+      .then(res => {
+        setJson(res.data);
+        console.log(jsondata);
+        setNowpage(res.data[iterator]);
+        console.log(nowpage);
+      })
+      .catch(error => console.log(error))
+      .then(function () {
+        console.log('loading');
+      });
+  };
+  useEffect(() => {
+    GET();
+  }, []);
 
   function parentFucntion(x: any) {
     useEffect(() => {
@@ -70,18 +69,15 @@ const Survey = () => {
     } else {
       navigation.pop();
     }
-    //setNowpage(jsondata[iterator]);
-    setNowpage(mock_default[iterator]);
+    setNowpage(jsondata[iterator]);
   };
 
   //GET함수에서 로컬호스트 대신에 10.0.2.2를 넣어 주었으니 handleNext함수
   //안에서도 똑같이 url을 바꿔줘야 한다
   //'http://10.0.2.2:8080/defaultPage'
   const handleNext = async () => {
-    //if (iterator < jsondata.length) {
-    if (iterator < mock_default.length) {
-      //if (iterator === jsondata.length - 1) {
-      if (iterator === mock_default.length - 1) {
+    if (iterator < jsondata.length) {
+      if (iterator === jsondata.length - 1) {
         storeData(`userinput_${iterator}`, input);
 
         var GETURL;
@@ -110,35 +106,35 @@ const Survey = () => {
 
         switch (await getData(`userinput_${iterator}`)) {
           case 0:
-            //GETURL = 'http://10.0.2.2:8080/typePage/A';
+            GETURL = 'http://10.0.2.2:8080/typePage/A';
             TYPE = 'A';
 
             module.exports = {GETURL, TYPE, NUM};
 
             break;
           case 1:
-            //GETURL = 'http://10.0.2.2:8080/typePage/B';
+            GETURL = 'http://10.0.2.2:8080/typePage/B';
             TYPE = 'B';
 
             module.exports = {GETURL, TYPE, NUM};
 
             break;
           case 2:
-            //GETURL = 'http://10.0.2.2:8080/typePage/C';
+            GETURL = 'http://10.0.2.2:8080/typePage/C';
             TYPE = 'C';
 
             module.exports = {GETURL, TYPE, NUM};
 
             break;
           case 3:
-            //GETURL = 'http://10.0.2.2:8080/typePage/D';
+            GETURL = 'http://10.0.2.2:8080/typePage/D';
             TYPE = 'D';
 
             module.exports = {GETURL, TYPE, NUM};
 
             break;
           case 4:
-            //GETURL = 'http://10.0.2.2:8080/typePage/E';
+            GETURL = 'http://10.0.2.2:8080/typePage/E';
             TYPE = 'E';
 
             module.exports = {GETURL, TYPE, NUM};
@@ -154,8 +150,7 @@ const Survey = () => {
         ++iterator;
         setIterator(iterator);
       }
-      //setNowpage(jsondata[iterator]);
-      setNowpage(mock_default[iterator]);
+      setNowpage(jsondata[iterator]);
     }
   };
 

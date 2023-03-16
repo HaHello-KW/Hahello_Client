@@ -217,7 +217,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           <View style={{flex: 0.2}}></View>
           {/* <View style={styles.container_contents} /> */}
         </View>
-        {/* <Image
+        <Image
           //source={pageContents.imgpath}
           source={{uri : pageContents.imgpath}}
           style={{
@@ -229,7 +229,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-        /> */}
+        />
       </>
     );
   }

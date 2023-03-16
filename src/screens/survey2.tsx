@@ -52,64 +52,20 @@ const Survey2 = () => {
   const [input, setInput] = useState();
   var [iterator, setIterator] = useState(0);
 
-  //const [jsondata, setJson] = useState('');
-  // const [nowpage, setNowpage] = useState(jsondata);
+  const [jsondata, setJson] = useState('');
+  const [nowpage, setNowpage] = useState(jsondata);
+
+  const GET = () => {
+    axios
+      .get(GETURL)
+      .then(res => {
+        setJson(res.data);
+        setNowpage(res.data[iterator]);
+      })
+      .catch(error => console.log(error));
+  };
 
   
-  // const [testM, setTest] = useState(mock_type.A);
-
-  //const [nowpage, setNowpage] = useState(testM[0]);
-
-
-//이건 워때요
-// var tttt;
-// function testing() {
-//   if(TYPE == 'A') {tttt = mock_typeA; return tttt;}
-//   else if(TYPE == 'B') {tttt = mock_typeB; return tttt;}
-//   else if(TYPE == 'C') {tttt = mock_typeC; return tttt;}
-//   else if(TYPE == 'D') {tttt = mock_typeD; return tttt;}
-//   else if(TYPE == 'E') {tttt = mock_typeE; return tttt;}
-// }
-  // const [ testM, setTest] = useState(() => testing())
-
-  const [state, setState] = useState<TypePageModel[]>(mock_typeA);
-
-  const [nowpage, setNowpage] = useState(state[iterator]);
-
-  // const GET = () => {
-  //   axios
-  //     .get(GETURL)
-  //     .then(res => {
-  //       setJson(res.data);
-  //       setNowpage(res.data[iterator]);
-  //     })
-  //     .catch(error => console.log(error));
-  // };
-
-  const SETM = () => {
-    switch(TYPE){
-      case 'A':
-        setState(mock_typeA);
-        break;
-      case 'B':
-        setState(mock_typeB);
-        break;
-      case 'C':
-        setState(mock_typeC);
-        break;
-      case 'D':
-        setState(mock_typeD);
-        break;
-      case 'E':
-        setState(mock_typeE);
-        break;
-      default:
-        return;
-    }
-  }
-
-  //var imgpath;
-  //var TypeURL;
   var imgpath;
   var TypeURL;
 
@@ -174,10 +130,8 @@ const Survey2 = () => {
       break;
   }
   
-
   useEffect(() => {
-    //GET();
-    SETM();
+    GET();
     console.log(TYPE);
     console.log(NUM);
   }, []);
@@ -195,22 +149,18 @@ const Survey2 = () => {
     } else {
       navigation.pop();
     }
-    //setNowpage(jsondata[iterator]);
-    setNowpage(state[iterator])
+    setNowpage(jsondata[iterator]);
   };
 
   const handleNext = () => {
-    //if (iterator < jsondata.length) {
-    if (iterator < state.length) {
-      //if (iterator === jsondata.length - 1) {
-      if (iterator === state.length - 1) {
+    if (iterator < jsondata.length) {
+      if (iterator === jsondata.length - 1) {
         navigation.navigate('SurveyResult');
       } else {
         ++iterator;
         setIterator(iterator);
       }
-      //setNowpage(jsondata[iterator]);
-      setNowpage(state[iterator]);
+      setNowpage(jsondata[iterator]);
     }
   };
 
@@ -225,7 +175,7 @@ const Survey2 = () => {
           <Text style={styles.nxt_txt}>다음</Text>
         </TouchableOpacity>
       </View>
-      <Image
+      {/* <Image
         source={imgpath}
         style={{
           position: 'absolute',
@@ -236,7 +186,7 @@ const Survey2 = () => {
           alignItems: 'center',
           justifyContent: 'center',
         }}
-      />
+      /> */}
     </>
   );
 };

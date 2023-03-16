@@ -1,7 +1,7 @@
 export interface TypePageModel {
   pagename: string;
   id: number;
-  //imgpath: any;
+  imgpath: any;
   pgLevel: number;
   questionType: string;
   questionTxt: any;
