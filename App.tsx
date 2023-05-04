@@ -20,6 +20,8 @@ import ALQ_1 from './src/screens/OTHERQ/alq_1';
 import IQ_1 from './src/screens/OTHERQ/iq_1';
 import Q_RESULT from './src/screens/OTHERQ/q_result';
 import RESULT_HOME from './src/screens/result/result_home';
+import RESULT_CONTENT from './src/screens/result/result_contentPage';
+import ProcedureInfo from './src/screens/result/procedureInfo';
 
 import {LogBox} from 'react-native';
 import Survey from './src/screens/survey';
@@ -123,6 +125,16 @@ const App = () => {
               options={{headerShown: false}}
               name="RESULT_HOME"
               component={RESULT_HOME}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="RESULT_CONTENT"
+              component={RESULT_CONTENT}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="ProcedureInfo"
+              component={ProcedureInfo}
             />
           </Stack.Navigator>
         </NavigationContainer>
