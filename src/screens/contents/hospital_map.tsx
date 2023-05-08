@@ -63,9 +63,10 @@ const HospitalMap = ({navigation, route}) => {
             const result = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
             );
-            if (result === PermissionsAndroid.RESULTS.GRANTED) {
+            if (result === PermissionsAndroid.RESULTS.granted) {
                 console.log('Permission granted successfully');
                 GetLocation();
+                return;
             } else {
                 console.log('Permission denied');
             }
