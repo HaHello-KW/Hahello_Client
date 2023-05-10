@@ -54,3 +54,16 @@ export const containsKey = async (key: string) => {
     console.error(e.message);
   }
 };
+
+export const getResponse = async (length: number, keyname: string) => {
+  try{
+    const response = Array(length);
+    for(let i=0; i<length; i++){
+      response[i] = await getData(`${keyname}_${i}`);
+    }
+    //return response;
+    console.log(response);
+  }catch(e:any){
+    console.error(e.message);
+  }
+}

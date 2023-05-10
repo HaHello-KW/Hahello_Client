@@ -10,8 +10,6 @@ import mock_default from '../txtCollection/mock_default.json'
 import mock_typeA from '../txtCollection/mock_typeA.json'
 import mock_typeB from '../txtCollection/mock_typeB.json'
 
-
-
 //for testing
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
@@ -24,8 +22,8 @@ import {
   containsKey,
   removeData,
   storeMultiData,
+  getResponse
 } from './async';
-import handleGet from './axios';
 
 const initialDefault: defaultPageModel = {
   Questions_ID: 0,
@@ -73,7 +71,7 @@ const Survey = () => {
     try {
       //응답 성공
       const res = await axios.get('http://52.79.207.4/question/default');
-      console.log(res.data.responseDTO);
+      
       setJson(res.data.responseDTO);
       setNowpage(res.data.responseDTO[iterator]);
     } catch (error) {
@@ -102,19 +100,21 @@ const Survey = () => {
     setNowpage(jsondata[iterator]);
   };
 
+  //Answer_arr[iterator] = await AsyncStorage.getItem(`userinput_${iterator}`)
+
   //GET함수에서 로컬호스트 대신에 10.0.2.2를 넣어 주었으니 handleNext함수
   //안에서도 똑같이 url을 바꿔줘야 한다
   //'http://10.0.2.2:8080/defaultPage'
   const handleNext = async () => {
     if (iterator < jsondata.length) {
       if (iterator === jsondata.length - 1) {
-        storeData(`userinput_${iterator}`, input);
-
+        await storeData(`default_${iterator}`, input);
+        console.log(await getData(`default_${iterator}`));
         var GETURL;
         var TYPE;
         var NUM;
 
-        switch (await getData(`userinput_${iterator - 1}`)) {
+        switch (await getData(`default_${iterator - 1}`)) {
           case 0:
             NUM = 1;
             break;
@@ -134,41 +134,31 @@ const Survey = () => {
             console.log('testing2');
         }
 
-        switch (await getData(`userinput_${iterator}`)) {
+        switch (await getData(`default_${iterator}`)) {
           case 0:
             GETURL = 'http://52.79.207.4' + '/question/type/A';
             TYPE = 'A';
-
             module.exports = {GETURL, TYPE, NUM};
-
             break;
           case 1:
             GETURL = 'http://52.79.207.4' + '/question/type/B';
             TYPE = 'B';
-
             module.exports = {GETURL, TYPE, NUM};
-
             break;
           case 2:
             GETURL = 'http://52.79.207.4' + '/question/type/C';
             TYPE = 'C';
-
             module.exports = {GETURL, TYPE, NUM};
-
             break;
           case 3:
             GETURL = 'http://52.79.207.4/question/type/D';
             TYPE = 'D';
-
             module.exports = {GETURL, TYPE, NUM};
-
             break;
           case 4:
             GETURL = 'http://52.79.207.4/question/type/E';
             TYPE = 'E';
-
             module.exports = {GETURL, TYPE, NUM};
-
             break;
           default:
             console.log('testing');
@@ -176,40 +166,14 @@ const Survey = () => {
         //navigation
         navigation.navigate('Survey2');
       } else {
-        storeData(`userinput_${iterator}`, input);
+        await storeData(`default_${iterator}`, input);
+        console.log(await getData(`default_${iterator}`));
         ++iterator;
         setIterator(iterator);
       }
       setNowpage(jsondata[iterator]);
     }
-  };
-
-  var NUM;
-  const getNUM = async () => {
-    switch (await getData(`userinput_1`)) {
-      case 0:
-        NUM = 1;
-        module.exports = {NUM};
-        break;
-      case 1:
-        NUM = 2;
-        module.exports = {NUM};
-        break;
-      case 2:
-        NUM = 3;
-        module.exports = {NUM};
-        break;
-      case 3:
-        NUM = 4;
-        module.exports = {NUM};
-        break;
-      case 4:
-        NUM = 5;
-        module.exports = {NUM};
-        break;
-      default:
-        console.log('testing2');
-    }
+    getResponse(jsondata.length, 'default');
   };
 
   return (
