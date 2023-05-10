@@ -1,18 +1,19 @@
 export interface TypePageModel {
-  pagename: string;
-  id: number;
-  imgpath: any;
-  pgLevel: number;
-  questionType: string;
-  questionTxt: any;
-  selectionTxt: string[] | null;
-  firstPickerType: any;
-  firstlineTxt: any;
-  secondPickerType: any;
-  secondlineTxt: any;
-  thirdPickerType: any;
-  thirdlineTxt: any;
-  //nextpage: string;
+  Questions_ID: number;
+  page_type: string;
+  page_name: string;
+  page_level: number;
+  question_type: string;
+  question_txt?: string;
+  selection_txt?: [string[]];
+  first_picker_type?: string;
+  first_line_txt?: string;
+  second_picker_type?: string;
+  second_line_txt?: string;
+  third_picker_type?: string;
+  third_line_txt? : string;
+  img_path? : string;
+  max_level : number;
 }
 
 //questiontxt, selectiontxt, pickertype -> array? object? string? any?

@@ -40,10 +40,19 @@ import {
 import {alertClasses} from '@mui/material';
 import RESULT_CONTENT from './result_contentPage';
 
-const RESULT_HOME = ({navigation, route}) => {
+// import GobackButton from '../components/gobackButton';
+import {useNavigation} from '@react-navigation/native';
+
+const RESULT_HOME = () => {
   //const [target, change] = useState(true);
   const {imgpath, title_R} = require('../surveyResult');
   const [amh_isopen, openFunc] = useState(true);
+
+  const navigation = useNavigation();
+
+  function navigateTo({destination}: string): React.ReactElement {
+    navigation.navigate(destination);
+  }
 
   const graph_box_open_amh = () => {
     return (
@@ -291,7 +300,7 @@ const RESULT_HOME = ({navigation, route}) => {
               여성호르몬 수치를 검사받을 수 있는 병원을 찾아보세요
             </Text>
             {/* 병원 검색하기 버튼 */}
-            <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+            <TouchableOpacity onPress={() => navigation.navigate("HOSPITAL_SEARCH")}>
               <View
                 style={{
                   position: 'absolute',
@@ -361,7 +370,7 @@ const RESULT_HOME = ({navigation, route}) => {
             </View>
           </View>
           <TouchableOpacity
-            onPress={() => navigation.navigate('ProcedureInfo')}>
+            onPress={() => navigation.navigate('TreatmentInfo')}>
             <ImageBackground
               style={styles.medicalInfo}
               source={require('../../../assets/images/medical_info.png')}>
