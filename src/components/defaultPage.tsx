@@ -14,11 +14,6 @@ import {defaultPageStyles} from '../styles/defaultPageStyles';
 import PType from './dateConverter';
 import SelectionButton from './selectionButton';
 
-import {storeData} from '../store';
-import {getData} from '../get';
-import {removeData} from '../remove';
-import {containsKey} from '../contain';
-
 //async 테스트를 위함
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -34,11 +29,14 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
 
   // 질문 유형=button selector
   if (
-    pageContents.questionType == 'Button_Selector' &&
-    pageContents.selectionTxt != null
+    pageContents.question_type == 'Button_Selector' &&
+    pageContents.selection_txt != null
   ) {
-    const newArr = Array(pageContents.selectionTxt.length).fill(false);
-    const [isButtonSelect, setIsButtonSelect] = useState(newArr);
+    const [isButtonSelect, setIsButtonSelect] = useState('');
+    // const [newArr, setnewArr] = useState(Array(pageContents.selectionTxt.length).fill(false));
+    const newArr = Array(pageContents.selection_txt.contents.length).fill(
+      false,
+    );
     const [getidx, setgetidx] = useState(0);
     const handlePress = (idx: number) => {
       newArr[idx] = true;
@@ -56,11 +54,14 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
       <>
         <View style={[defaultPageStyles.container_bs_q]}>
           <Text style={[defaultPageStyles.txt]}>
-            {pageContents.questionTxt}
+            {pageContents.question_txt}
           </Text>
         </View>
         <View style={[defaultPageStyles.container_bs_c]}>
-          {pageContents.selectionTxt.map(function (value: any, index: number) {
+          {pageContents.selection_txt.contents.map(function (
+            value: any,
+            index: number,
+          ) {
             return (
               <TouchableOpacity
                 key={index}
@@ -89,8 +90,8 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
   }
   // 질문 유형 = threeline picker
   else if (
-    pageContents.questionType == 'Threeline_Picker' &&
-    pageContents.selectionTxt == null
+    pageContents.question_type == 'Threeline_Picker' &&
+    pageContents.selection_txt == null
   ) {
     function pickDateFunction(x: any) {
       parentFunction(x);
@@ -101,23 +102,22 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
           <View style={styles.container_tlp_line}>
             <PType
               Type_of_Picker={pageContents.firstPickerType}
-              pickDate={pickDateFunction}
-            />
+              pickDate={pickDateFunction}></PType>
             <Text style={styles.tlp_txt}>{pageContents.firstlineTxt}</Text>
           </View>
           <View style={styles.container_tlp_line}>
             <PType
-              Type_of_Picker={pageContents.secondPickerType}
+              Type_of_Picker={pageContents.second_picker_type}
               pickDate={pickDateFunction}
             />
-            <Text style={styles.tlp_txt}>{pageContents.secondlineTxt}</Text>
+            <Text style={styles.tlp_txt}>{pageContents.second_line_txt}</Text>
           </View>
           <View style={styles.container_tlp_line}>
             <PType
-              Type_of_Picker={pageContents.thirdPickerType}
+              Type_of_Picker={pageContents.third_picker_type}
               pickDate={pickDateFunction}
             />
-            <Text style={styles.tlp_txt}>{pageContents.thirdlineTxt}</Text>
+            <Text style={styles.tlp_txt}>{pageContents.third_line_txt}</Text>
           </View>
         </View>
         <View style={[defaultPageStyles.container_tlp_c]} />

@@ -17,9 +17,15 @@ import {ImageBackground} from 'react-native';
 import Homebg from '../../assets/images/home_start.png';
 import GobackButton from '../../Buttons/gobackButton';
 import NextButton from '../../Buttons/nextButton';
+import axios from 'axios';
+import { defaultPageModel } from '../models/defaultPageModel';
 
 const Q_Home = () => {
   const navigation = useNavigation();
+
+  const handler = () => {
+    navigation.navigate('Survey');
+  };
 
   return (
     <ImageBackground source={Homebg} style={styles.image}>
@@ -32,7 +38,7 @@ const Q_Home = () => {
       <TouchableOpacity
         style={styles.startbutton}
         onPress={() => {
-          navigation.navigate('Survey');
+          handler();
         }}>
         <Text style={styles.starttxt}>시작하기</Text>
       </TouchableOpacity>

@@ -29,11 +29,13 @@ type typePageProps = {
 
 function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
   if (
-    pageContents.questionType == 'Button_Selector' &&
-    pageContents.selectionTxt != null
+    pageContents.question_type == 'Button_Selector' &&
+    pageContents.selection_txt != null
   ) {
     const [isButtonSelect, setIsButtonSelect] = useState('');
-    const newArr = Array(pageContents.selectionTxt.length).fill(false);
+    const newArr = Array(pageContents.selection_txt.contents.length).fill(
+      false,
+    );
 
     const [getidx, setgetidx] = useState(0);
     const handlePress = (idx: number) => {
@@ -47,10 +49,13 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
     return (
       <>
         <View style={[UserStyle.container_bs_q]}>
-          <Text style={[UserStyle.txt]}>{pageContents.questionTxt}</Text>
+          <Text style={[UserStyle.txt]}>{pageContents.question_txt}</Text>
         </View>
         <View style={[UserStyle.container_bs_c]}>
-          {pageContents.selectionTxt.map(function (value: any, index: number) {
+          {pageContents.selection_txt.contents.map(function (
+            value: any,
+            index: number,
+          ) {
             return (
               <TouchableOpacity
                 key={index}
@@ -80,43 +85,42 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
   // 질문 유형 = threeline picker
   //ptype jsx 구성요소 반환 에러? 해결필요
   else if (
-    pageContents.questionType == 'Threeline_Picker' &&
-    pageContents.selectionTxt == null
+    pageContents.question_type == 'Threeline_Picker' &&
+    pageContents.selection_txt == null
   ) {
     function pickDateFunction(x: any) {
       parentFunction(x);
     }
     return (
       <>
-        <View style={[UserStyle.container_tlp_q]}>
-          <View style={UserStyle.container_tlp_line}>
+        <View style={[defaultPageStyles.container_tlp_q]}>
+          <View style={styles.container_tlp_line}>
             <PType
-              Type_of_Picker={pageContents.firstPickerType}
+              Type_of_Picker={pageContents.first_picker_type}
               pickDate={pickDateFunction}></PType>
-            <Text style={styles.tlp_txt}>{pageContents.firstlineTxt}</Text>
+            <Text style={styles.tlp_txt}>{pageContents.first_line_txt}</Text>
           </View>
-          <View style={UserStyle.container_tlp_line}>
+          <View style={styles.container_tlp_line}>
             <PType
-              Type_of_Picker={pageContents.secondPickerType}
+              Type_of_Picker={pageContents.second_picker_type}
               pickDate={pickDateFunction}
             />
-            <Text style={styles.tlp_txt}>{pageContents.secondlineTxt}</Text>
+            <Text style={styles.tlp_txt}>{pageContents.second_line_txt}</Text>
           </View>
-          <View style={UserStyle.container_tlp_line}>
+          <View style={styles.container_tlp_line}>
             <PType
-              Type_of_Picker={pageContents.thirdPickerType}
+              Type_of_Picker={pageContents.third_picker_type}
               pickDate={pickDateFunction}
             />
-
-            <Text style={styles.tlp_txt}>{pageContents.thirdlineTxt}</Text>
+            <Text style={styles.tlp_txt}>{pageContents.third_line_txt}</Text>
           </View>
         </View>
-        <View style={[UserStyle.container_tlp_c]} />
+        <View style={[defaultPageStyles.container_tlp_c]} />
       </>
     );
   } else if (
-    pageContents.questionType == 'Sixline_Picker' &&
-    pageContents.selectionTxt == null
+    pageContents.question_type == 'Sixline_Picker' &&
+    pageContents.selection_txt == null
   ) {
     function pickDateFunction(x: any) {
       parentFunction(x);
@@ -127,28 +131,34 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
         {}
         <View style={UserStyle.container_slp_q}>
           <View style={UserStyle.container3_1}>
-            <Text style={UserStyle.blacktxt}>{pageContents.firstlineTxt}</Text>
+            <Text style={UserStyle.blacktxt}>
+              {pageContents.first_line_txt}
+            </Text>
 
             <PType
-              Type_of_Picker={pageContents.firstPickerType}
+              Type_of_Picker={pageContents.first_picker_type}
               pickDate={pickDateFunction}></PType>
           </View>
           <View style={UserStyle.container3_2}>
-            <Text style={UserStyle.blacktxt}>{pageContents.secondlineTxt}</Text>
+            <Text style={UserStyle.blacktxt}>
+              {pageContents.second_line_txt}
+            </Text>
             <Text style={[UserStyle.descriptionGray]}>
               마지막 생리일에서 다음 생리 때까지 걸리는 시기
             </Text>
 
             <PType
-              Type_of_Picker={pageContents.secondPickerType}
+              Type_of_Picker={pageContents.second_picker_type}
               pickDate={pickDateFunction}></PType>
           </View>
           <View style={UserStyle.container3_3}>
-            <Text style={UserStyle.blacktxt}>{pageContents.thirdlineTxt}</Text>
+            <Text style={UserStyle.blacktxt}>
+              {pageContents.third_line_txt}
+            </Text>
             <Text style={[UserStyle.descriptionGray]}>생리하는 기간</Text>
 
             <PType
-              Type_of_Picker={pageContents.thirdPickerType}
+              Type_of_Picker={pageContents.third_picker_type}
               pickDate={pickDateFunction}></PType>
           </View>
         </View>
@@ -156,10 +166,12 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
       </>
     );
   } else if (
-    pageContents.questionType == 'Hybrid_Type'
+    pageContents.question_type == 'Hybrid_Type'
     // && pageContents.selectionTxt == null
   ) {
-    const newArr2 = Array(pageContents.selectionTxt.length).fill(false);
+    const newArr2 = Array(pageContents.selection_txt.contents.length).fill(
+      false,
+    );
     const [isButtonSelect2, setIsButtonSelect2] = useState(newArr2);
     const [getidx, setgetidx] = useState(0);
 
@@ -181,15 +193,17 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           <View style={styles.container_question}>
             <View style={{flex: 1.6}}></View>
             <View style={{flex: 3}}>
-              <Text style={styles.text_H}>{pageContents.firstlineTxt}</Text>
+              <Text style={styles.text_H}>{pageContents.first_line_txt}</Text>
               <View style={styles.container_t}>
                 <PType
-                  Type_of_Picker={pageContents.secondPickerType}
+                  Type_of_Picker={pageContents.second_picker_type}
                   pickDate={pickDateFunction}></PType>
-                <Text style={styles.text_H}>{pageContents.secondlineTxt}</Text>
+                <Text style={styles.text_H}>
+                  {pageContents.second_line_txt}
+                </Text>
               </View>
               <View style={styles.container_t}>
-                <Text style={styles.text_H}>{pageContents.thirdlineTxt}</Text>
+                <Text style={styles.text_H}>{pageContents.third_line_txt}</Text>
               </View>
             </View>
 
@@ -197,7 +211,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
               {/* 여기부터 코드삽입 */}
 
               <ScrollView>
-                {pageContents.selectionTxt.map(function (
+                {pageContents.selection_txt.contents.map(function (
                   value2: any,
                   index2: number,
                 ) {
@@ -221,7 +235,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
         </View>
         <Image
           //source={pageContents.imgpath}
-          source={{uri: pageContents.imgpath}}
+          source={{uri: pageContents.img_path}}
           style={{
             position: 'absolute',
             left: '36%',

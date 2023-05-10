@@ -297,7 +297,7 @@ const RESULT_HOME = () => {
               여성호르몬 수치를 검사받을 수 있는 병원을 찾아보세요
             </Text>
             {/* 병원 검색하기 버튼 */}
-            <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+            <TouchableOpacity onPress={() => navigation.navigate("HOSPITAL_SEARCH")}>
               <View
                 style={{
                   position: 'absolute',

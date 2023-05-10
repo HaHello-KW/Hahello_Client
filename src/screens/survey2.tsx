@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import defaultPage from '../components/defaultPage';
 import axios from 'axios';
 import {defaultPageModel} from '../models/defaultPageModel';
-import MyUpBar from '../components/MyUpBar';
+import MyUpBar_Type from '../components/MyUpBar_Type';
 import GobackButton from '../components/gobackButton';
 // import {useNavigation} from '@react-navigation/native';
 import DefaultPage from '../components/defaultPage';
@@ -35,14 +35,30 @@ import { TypePageModel } from '../models/typePageModel';
 //콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
 
-// const MAX = 3;
-
 export function usePrevState(state: any) {
   const ref = useRef(state);
   useEffect(() => {
     ref.current = state;
   }, [state]);
   return ref.current;
+}
+
+const initialType : TypePageModel = {
+  Questions_ID: 0,
+  page_type: '',
+  page_name: '',
+  page_level: 0,
+  question_type: '',
+  question_txt: '',
+  selection_txt: [[]],
+  first_picker_type: '',
+  first_line_txt: '',
+  second_picker_type: '',
+  second_line_txt: '',
+  third_picker_type: '',
+  third_line_txt: '',
+  img_path: '',
+  max_level: 0
 }
 
 const Survey2 = () => {
@@ -55,17 +71,29 @@ const Survey2 = () => {
   const [jsondata, setJson] = useState('');
   const [nowpage, setNowpage] = useState(jsondata);
 
-  const GET = () => {
-    axios
-      .get(GETURL)
-      .then(res => {
-        setJson(res.data);
-        setNowpage(res.data[iterator]);
-      })
-      .catch(error => console.log(error));
-  };
+  // const GET = () => {
+  //   axios
+  //     .get(GETURL)
+  //     .then(res => {
+  //       setJson(res.data);
+  //       setNowpage(res.data[iterator]);
+  //     })
+  //     .catch(error => console.log(error));
+  // };
 
-  
+  async function GET() {
+    try {
+      //응답 성공
+      const res = await axios.get(GETURL);
+      console.log(res.data.responseDTO);
+      setJson(res.data.responseDTO);
+      setNowpage(res.data.responseDTO[iterator]);
+    } catch (error) {
+      //응답 실패
+      console.error(error);
+    }
+  }
+
   var imgpath;
   var TypeURL;
 
@@ -166,7 +194,7 @@ const Survey2 = () => {
 
   return (
     <>
-      <MyUpBar level={nowpage.pgLevel} />
+      <MyUpBar_Type max_level = {nowpage.max_level} current_level={nowpage.page_level} />
       <GobackButton onPress={handleGoback} />
       <TypePage pageContents={nowpage} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>
