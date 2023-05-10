@@ -13,11 +13,6 @@ import {defaultPageStyles} from '../styles/defaultPageStyles';
 import PType from './dateConverter';
 import SelectionButton from './selectionButton';
 
-import {storeData} from '../store';
-import {getData} from '../get';
-import {removeData} from '../remove';
-import {containsKey} from '../contain';
-
 //async 테스트를 위함
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -32,12 +27,12 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
 
   // 질문 유형=button selector
   if (
-    pageContents.questionType == 'Button_Selector' &&
-    pageContents.selectionTxt != null
+    pageContents.question_type == 'Button_Selector' &&
+    pageContents.selection_txt != null
   ) {
     const [isButtonSelect, setIsButtonSelect] = useState('');
     // const [newArr, setnewArr] = useState(Array(pageContents.selectionTxt.length).fill(false));
-    const newArr = Array(pageContents.selectionTxt.length).fill(false);
+    const newArr = Array(pageContents.selection_txt.contents.length).fill(false);
     const [getidx, setgetidx] = useState(0);
     const handlePress = (idx: number) => {
       newArr[idx] = true;
@@ -63,11 +58,11 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
       <>
         <View style={[defaultPageStyles.container_bs_q]}>
           <Text style={[defaultPageStyles.txt]}>
-            {pageContents.questionTxt}
+            {pageContents.question_txt}
           </Text>
         </View>
         <View style={[defaultPageStyles.container_bs_c]}>
-          {pageContents.selectionTxt.map(function (value: any, index: number) {
+          {pageContents.selection_txt.contents.map(function (value: any, index: number) {
             return (
               //왜 가려져서 나오지?? scrollview의 문제인가? 스타일링 관련해서 알아볼 것
               <TouchableOpacity
@@ -98,8 +93,8 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
   // 질문 유형 = threeline picker
   //ptype jsx 구성요소 반환 에러? 해결필요
   else if (
-    pageContents.questionType == 'Threeline_Picker' &&
-    pageContents.selectionTxt == null
+    pageContents.question_type == 'Threeline_Picker' &&
+    pageContents.selection_txt == null
   ) {
     function pickDateFunction(x: any) {
       parentFunction(x);
@@ -109,23 +104,23 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
         <View style={[defaultPageStyles.container_tlp_q]}>
           <View style={styles.container_tlp_line}>
             <PType
-              Type_of_Picker={pageContents.firstPickerType}
+              Type_of_Picker={pageContents.first_picker_type}
               pickDate={pickDateFunction}></PType>
-            <Text style={styles.tlp_txt}>{pageContents.firstlineTxt}</Text>
+            <Text style={styles.tlp_txt}>{pageContents.first_line_txt}</Text>
           </View>
           <View style={styles.container_tlp_line}>
             <PType
-              Type_of_Picker={pageContents.secondPickerType}
+              Type_of_Picker={pageContents.second_picker_type}
               pickDate={pickDateFunction}
             />
-            <Text style={styles.tlp_txt}>{pageContents.secondlineTxt}</Text>
+            <Text style={styles.tlp_txt}>{pageContents.second_line_txt}</Text>
           </View>
           <View style={styles.container_tlp_line}>
             <PType
-              Type_of_Picker={pageContents.thirdPickerType}
+              Type_of_Picker={pageContents.third_picker_type}
               pickDate={pickDateFunction}
             />
-            <Text style={styles.tlp_txt}>{pageContents.thirdlineTxt}</Text>
+            <Text style={styles.tlp_txt}>{pageContents.third_line_txt}</Text>
           </View>
         </View>
         <View style={[defaultPageStyles.container_tlp_c]} />

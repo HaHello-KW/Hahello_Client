@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import defaultPage from '../components/defaultPage';
 import axios from 'axios';
 import {defaultPageModel} from '../models/defaultPageModel';
-import MyUpBar from '../components/MyUpBar';
+import MyUpBar_Type from '../components/MyUpBar_Type';
 import GobackButton from '../components/gobackButton';
 // import {useNavigation} from '@react-navigation/native';
 import DefaultPage from '../components/defaultPage';
@@ -65,7 +65,6 @@ const Survey2 = () => {
       .catch(error => console.log(error));
   };
 
-  
   var imgpath;
   var TypeURL;
 
@@ -166,7 +165,7 @@ const Survey2 = () => {
 
   return (
     <>
-      <MyUpBar level={nowpage.pgLevel} />
+      <MyUpBar_Type max_level = {nowpage.max_level} current_level={nowpage.pgLevel} />
       <GobackButton onPress={handleGoback} />
       <TypePage pageContents={nowpage} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>

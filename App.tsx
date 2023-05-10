@@ -25,6 +25,7 @@ import {LogBox} from 'react-native';
 import Survey from './src/screens/survey';
 import Survey2 from './src/screens/survey2';
 import SurveyResult from './src/screens/surveyResult';
+import HospitalMap from './src/screens/contents/hospital_map';
 
 LogBox.ignoreAllLogs();
 
@@ -123,6 +124,11 @@ const App = () => {
               options={{headerShown: false}}
               name="RESULT_HOME"
               component={RESULT_HOME}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="HOSPITAL_SEARCH"
+              component={HospitalMap}
             />
           </Stack.Navigator>
         </NavigationContainer>
