@@ -28,6 +28,7 @@ import {
   containsKey,
   removeData,
   storeMultiData,
+  getResponse,
 } from './async';
 import {TypePageModel} from '../models/typePageModel';
 // import handleGet from './axios';
@@ -85,7 +86,6 @@ const Survey2 = () => {
     try {
       //응답 성공
       const res = await axios.get(GETURL);
-      console.log(res.data.responseDTO);
       setJson(res.data.responseDTO);
       setNowpage(res.data.responseDTO[iterator]);
     } catch (error) {
@@ -160,8 +160,6 @@ const Survey2 = () => {
 
   useEffect(() => {
     GET();
-    console.log(TYPE);
-    console.log(NUM);
   }, []);
 
   function parentFucntion(x: any) {
@@ -180,16 +178,21 @@ const Survey2 = () => {
     setNowpage(jsondata[iterator]);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (iterator < jsondata.length) {
       if (iterator === jsondata.length - 1) {
+        await storeData(`type_${TYPE}_${iterator}`, input);
+        console.log(await getData(`type_${TYPE}_${iterator}`));
         navigation.navigate('SurveyResult');
       } else {
+        await storeData(`type_${TYPE}_${iterator}`, input);
+        console.log(await getData(`type_${TYPE}_${iterator}`));
         ++iterator;
         setIterator(iterator);
       }
       setNowpage(jsondata[iterator]);
     }
+    getResponse(jsondata.length,`type_${TYPE}`);
   };
 
   return (
