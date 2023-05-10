@@ -135,7 +135,9 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           </View>
           <View style={UserStyle.container3_2}>
             <Text style={UserStyle.blacktxt}>{pageContents.secondlineTxt}</Text>
-            <Text style={[UserStyle.descriptionGray]}>마지막 생리일에서 다음 생리 때까지 걸리는 시기</Text>
+            <Text style={[UserStyle.descriptionGray]}>
+              마지막 생리일에서 다음 생리 때까지 걸리는 시기
+            </Text>
 
             <PType
               Type_of_Picker={pageContents.secondPickerType}
@@ -219,7 +221,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
         </View>
         <Image
           //source={pageContents.imgpath}
-          source={{uri : pageContents.imgpath}}
+          source={{uri: pageContents.imgpath}}
           style={{
             position: 'absolute',
             left: '36%',

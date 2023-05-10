@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {useNavigation} from '@react-navigation/native';
 import React, {Component, useEffect, useState} from 'react';
 import {
@@ -7,7 +8,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {set} from 'react-native-reanimated';
+// import {set} from 'react-native-reanimated';
 import {defaultPageModel} from '../models/defaultPageModel';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import PType from './dateConverter';
@@ -24,6 +25,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 type defaultPageProps = {
   pageContents: defaultPageModel;
   parentFunction: any;
+
   //handling function 추후 ㄱㄱ
 };
 
@@ -35,14 +37,13 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
     pageContents.questionType == 'Button_Selector' &&
     pageContents.selectionTxt != null
   ) {
-    const [isButtonSelect, setIsButtonSelect] = useState('');
-    // const [newArr, setnewArr] = useState(Array(pageContents.selectionTxt.length).fill(false));
     const newArr = Array(pageContents.selectionTxt.length).fill(false);
+    const [isButtonSelect, setIsButtonSelect] = useState(newArr);
     const [getidx, setgetidx] = useState(0);
     const handlePress = (idx: number) => {
       newArr[idx] = true;
       // setnewArr(newArr);
-      setIsButtonSelect(newArr);
+      setIsButtonSelect({...newArr});
       // console.log(idx);
       setgetidx(idx);
     };
@@ -50,14 +51,6 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
     //페이지마다 사용자의 선택지 답변 = getidx
     //부모 컴포넌트로 getidx 전달
     parentFunction(getidx);
-
-    // if (pageContents.id == 2) {
-    //   //pageContents.id 값이 2 라면 디폴트페이지의 맨 마지막 페이지라는 뜻.
-    //   // AsyncStorage.setItem('UserChoice',String(getidx), () => {
-    //   //   console.log('유저 선택지 저장 완료')
-    //   // });
-    //   storeData('UserChoice', getidx); //store에 Key가 UserChoice고 value가 getidx(선택지의 인덱스)인 key-value쌍을 저장함
-    // }
 
     return (
       <>
@@ -69,7 +62,6 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
         <View style={[defaultPageStyles.container_bs_c]}>
           {pageContents.selectionTxt.map(function (value: any, index: number) {
             return (
-              //왜 가려져서 나오지?? scrollview의 문제인가? 스타일링 관련해서 알아볼 것
               <TouchableOpacity
                 key={index}
                 style={[
@@ -96,7 +88,6 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
     );
   }
   // 질문 유형 = threeline picker
-  //ptype jsx 구성요소 반환 에러? 해결필요
   else if (
     pageContents.questionType == 'Threeline_Picker' &&
     pageContents.selectionTxt == null
@@ -110,7 +101,8 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
           <View style={styles.container_tlp_line}>
             <PType
               Type_of_Picker={pageContents.firstPickerType}
-              pickDate={pickDateFunction}></PType>
+              pickDate={pickDateFunction}
+            />
             <Text style={styles.tlp_txt}>{pageContents.firstlineTxt}</Text>
           </View>
           <View style={styles.container_tlp_line}>

@@ -6,9 +6,9 @@ import MyUpBar from '../components/MyUpBar';
 import GobackButton from '../components/gobackButton';
 import {useNavigation} from '@react-navigation/native';
 import DefaultPage from '../components/defaultPage';
-import mock_default from '../txtCollection/mock_default.json'
-import mock_typeA from '../txtCollection/mock_typeA.json'
-import mock_typeB from '../txtCollection/mock_typeB.json'
+import mock_default from '../txtCollection/mock_default.json';
+import mock_typeA from '../txtCollection/mock_typeA.json';
+import mock_typeB from '../txtCollection/mock_typeB.json';
 
 //for testing
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
@@ -43,15 +43,14 @@ const Survey = () => {
       .get('http://10.0.2.2:8080/defaultPage')
       .then(res => {
         setJson(res.data);
-        console.log(jsondata);
         setNowpage(res.data[iterator]);
-        console.log(nowpage);
       })
       .catch(error => console.log(error))
       .then(function () {
         console.log('loading');
       });
   };
+
   useEffect(() => {
     GET();
   }, []);

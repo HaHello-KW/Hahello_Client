@@ -37,10 +37,19 @@ import {
   WindowSizeClassProvider,
 } from '@react-native-material/core';
 
-const RESULT_HOME = ({navigation, route}) => {
+// import GobackButton from '../components/gobackButton';
+import {useNavigation} from '@react-navigation/native';
+
+const RESULT_HOME = () => {
   //const [target, change] = useState(true);
   const {imgpath, title_R} = require('../surveyResult');
   const [amh_isopen, openFunc] = useState(true);
+
+  const navigation = useNavigation();
+
+  function navigateTo({destination}: string): React.ReactElement {
+    navigation.navigate(destination);
+  }
 
   const graph_box_open_amh = () => {
     return (
@@ -357,7 +366,8 @@ const RESULT_HOME = ({navigation, route}) => {
               </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('TreatmentInfo')}>
             <ImageBackground
               style={styles.medicalInfo}
               source={require('../../../assets/images/medical_info.png')}>
