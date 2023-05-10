@@ -125,7 +125,7 @@ function PType({Type_of_Picker, pickDate}: props) {
         </TouchableOpacity>
       </>
     );
-  } else if (Type_of_Picker == 'yearPicker') {
+  } else if (Type_of_Picker == 'YearPicker') {
     const handleConfirm = date => {
       hideDatePicker();
       onChangeText(date.format('yyyy년'));
@@ -156,7 +156,7 @@ function PType({Type_of_Picker, pickDate}: props) {
         </TouchableOpacity>
       </>
     );
-  } else if (Type_of_Picker == 'numberPicker') {
+  } else if (Type_of_Picker == 'NumberPicker') {
     // const handleConfirm = date => {
     //   hideDatePicker();
     //   onChangeText(date.format('yyyy년'));

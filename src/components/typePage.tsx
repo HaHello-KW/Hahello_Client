@@ -47,7 +47,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
     return (
       <>
         <View style={[UserStyle.container_bs_q]}>
-          <Text style={[UserStyle.txt]}>{pageContents.questionTxt}</Text>
+          <Text style={[UserStyle.txt]}>{pageContents.question_txt}</Text>
         </View>
         <View style={[UserStyle.container_bs_c]}>
           {pageContents.selection_txt.contents.map(function (value: any, index: number) {

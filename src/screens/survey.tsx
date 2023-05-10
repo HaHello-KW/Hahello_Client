@@ -69,7 +69,7 @@ const Survey = () => {
   //     });
   // };
 
-  async function getData() {
+  async function GET() {
     try {
       //응답 성공
       const res = await axios.get('http://52.79.207.4/question/default');
@@ -83,8 +83,7 @@ const Survey = () => {
   }
 
   useEffect(() => {
-    // GET();
-    getData();
+    GET();
   }, []);
 
   function parentFucntion(x: any) {
