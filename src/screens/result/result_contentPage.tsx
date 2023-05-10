@@ -326,7 +326,7 @@ const RESULT_CONTENT = ({navigation, route}) => {
             }}>
             호르몬 백과사전
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Search')}>
             <Text
               style={{
                 fontSize: 14,
