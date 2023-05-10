@@ -68,7 +68,7 @@ Number.prototype.zf = function (len) {
 };
 
 type props = {
-  Type_of_Picker: string;
+  Type_of_Picker?: string;
   pickDate: any;
 };
 
@@ -94,7 +94,7 @@ function PType({Type_of_Picker, pickDate}: props) {
     setDatePickerVisibility(false);
   };
 
-  if (Type_of_Picker == 'datePicker') {
+  if (Type_of_Picker == 'DatePicker') {
     const handleConfirm = date => {
       hideDatePicker();
       onChangeText(date.format('yyyy년 MM월 dd일'));

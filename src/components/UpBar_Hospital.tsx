@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Box, HStack} from '@react-native-material/core';
 import {ImageBackground} from 'react-native';
-import homebg from '../../assets/images/home_start.png';
 import { Text } from 'react-native-paper';
 
 const UpBar_Hospital = ({text}) => {

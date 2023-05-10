@@ -4,8 +4,6 @@ import {
     Button,
     Image,
     StyleSheet,
-    NativeSyntheticEvent,
-    NativeScrollEvent,
     Platform,
     PermissionsAndroid,
 } from 'react-native';
@@ -21,15 +19,18 @@ import Geolocation from 'react-native-geolocation-service';
 
 
 const HospitalMap = ({navigation, route}) => {
+    //병원찾기 : search => 병원 이름
     const [search, setSearch] = useState("");
 
     const updateSearch = (search) => {
         setSearch(search);
     }
 
+    //사용자 위치 : latitude => 위도, longitude => 경도 
     const [latitude, setLatitude] = useState("");
     const [longitude, setLogitude] = useState("");
 
+    //위치 구하기
     const GetLocation = async () => {
         console.log('Getting location...');
         Geolocation.getCurrentPosition(
@@ -50,6 +51,7 @@ const HospitalMap = ({navigation, route}) => {
         );
     };
 
+    //위치 권한
     const CheckPermission = async () => {
         try {
             const granted = await PermissionsAndroid.check(
@@ -92,6 +94,7 @@ const HospitalMap = ({navigation, route}) => {
                 inputContainerStyle={styles.searchBarInputContainer}
                 inputStyle={styles.searchBarInput}
             />
+            
         </ImageBackground>
         </>
     )

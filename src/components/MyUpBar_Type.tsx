@@ -4,15 +4,17 @@ import {Box, HStack} from '@react-native-material/core';
 // import PropTypes from 'prop-types';
 // import GobackButton from '../Buttons/gobackButton';
 
-type props = {
-  level: number;
+interface MyUpBarType_Type {
+  current_level: number,
+  max_level: number
 };
-const MyUpBar = ({level}: props, {navigation}) => {
+const MyUpBar_Type = (props: MyUpBarType_Type) => {
+  const {current_level, max_level} = props;
   let arr: any = [];
   //i 키값 부여로 인한 오류
   //encountered two children with the same...
-  for (let i = 1; i <= 7; i++) {
-    i <= level
+  for (let i = 1; i <= max_level; i++) {
+    i <= current_level
       ? arr.push(<Box key="{i}" w="12%" h={2} style={styles.boxlineDone} />)
       : arr.push(<Box key="{i}" w="12%" h={2} style={styles.boxlineYet} />);
   }
@@ -79,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyUpBar;
+export default MyUpBar_Type;
