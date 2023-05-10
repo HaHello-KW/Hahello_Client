@@ -6,11 +6,9 @@ import MyUpBar_Default from '../components/MyUpBar_Default';
 import GobackButton from '../components/gobackButton';
 import {useNavigation} from '@react-navigation/native';
 import DefaultPage from '../components/defaultPage';
-import mock_default from '../txtCollection/mock_default.json'
-import mock_typeA from '../txtCollection/mock_typeA.json'
-import mock_typeB from '../txtCollection/mock_typeB.json'
-
-
+import mock_default from '../txtCollection/mock_default.json';
+import mock_typeA from '../txtCollection/mock_typeA.json';
+import mock_typeB from '../txtCollection/mock_typeB.json';
 
 //for testing
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
@@ -41,8 +39,8 @@ const initialDefault: defaultPageModel = {
   second_line_txt: '',
   third_picker_type: '',
   third_line_txt: '',
-  img_path: ''
-}
+  img_path: '',
+};
 
 //콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
@@ -51,11 +49,11 @@ const Survey = () => {
   const navigation = useNavigation();
 
   const [input, setInput] = useState();
-  
+
   var [iterator, setIterator] = useState(0);
   const [jsondata, setJson] = useState([]);
   const [nowpage, setNowpage] = useState(initialDefault);
-  
+
   // const GET = () => {
   //   axios
   //     .get('http://52.79.207.4/question/default')
@@ -214,7 +212,7 @@ const Survey = () => {
 
   return (
     <>
-      <MyUpBar_Default level = {nowpage.page_level} />
+      <MyUpBar_Default level={nowpage.page_level} />
       <GobackButton onPress={handleGoback} />
       <DefaultPage pageContents={nowpage} parentFunction={parentFucntion} />
       <View style={[defaultPageStyles.container_next]}>

@@ -26,6 +26,7 @@ import Survey from './src/screens/survey';
 import Survey2 from './src/screens/survey2';
 import SurveyResult from './src/screens/surveyResult';
 import HospitalMap from './src/screens/contents/hospital_map';
+import TreatmentInfo from './src/screens/contents/treatmentInfo/treatmentInfo';
 
 LogBox.ignoreAllLogs();
 
@@ -129,6 +130,11 @@ const App = () => {
               options={{headerShown: false}}
               name="HOSPITAL_SEARCH"
               component={HospitalMap}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="TreatmentInfo"
+              component={TreatmentInfo}
             />
           </Stack.Navigator>
         </NavigationContainer>
