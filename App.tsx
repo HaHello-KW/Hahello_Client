@@ -128,16 +128,6 @@ const App = () => {
             />
             <Stack.Screen
               options={{headerShown: false}}
-<<<<<<< HEAD
-              name="TreatmentInfo"
-              component={TreatmentInfo}
-=======
-              name="HOSPITAL_SEARCH"
-              component={HospitalMap}
->>>>>>> 515a8fee35d5f94153087538785d67825a5c2768
-            />
-            <Stack.Screen
-              options={{headerShown: false}}
               name="HOSPITAL_SEARCH"
               component={HospitalMap}
             />
