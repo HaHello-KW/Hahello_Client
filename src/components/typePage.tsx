@@ -33,7 +33,9 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
     pageContents.selection_txt != null
   ) {
     const [isButtonSelect, setIsButtonSelect] = useState('');
-    const newArr = Array(pageContents.selection_txt.contents.length).fill(false);
+    const newArr = Array(pageContents.selection_txt.contents.length).fill(
+      false,
+    );
 
     const [getidx, setgetidx] = useState(0);
     const handlePress = (idx: number) => {
@@ -50,7 +52,10 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
           <Text style={[UserStyle.txt]}>{pageContents.question_txt}</Text>
         </View>
         <View style={[UserStyle.container_bs_c]}>
-          {pageContents.selection_txt.contents.map(function (value: any, index: number) {
+          {pageContents.selection_txt.contents.map(function (
+            value: any,
+            index: number,
+          ) {
             return (
               <TouchableOpacity
                 key={index}
@@ -126,22 +131,30 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
         {}
         <View style={UserStyle.container_slp_q}>
           <View style={UserStyle.container3_1}>
-            <Text style={UserStyle.blacktxt}>{pageContents.first_line_txt}</Text>
+            <Text style={UserStyle.blacktxt}>
+              {pageContents.first_line_txt}
+            </Text>
 
             <PType
               Type_of_Picker={pageContents.first_picker_type}
               pickDate={pickDateFunction}></PType>
           </View>
           <View style={UserStyle.container3_2}>
-            <Text style={UserStyle.blacktxt}>{pageContents.second_line_txt}</Text>
-            <Text style={[UserStyle.descriptionGray]}>마지막 생리일에서 다음 생리 때까지 걸리는 시기</Text>
+            <Text style={UserStyle.blacktxt}>
+              {pageContents.second_line_txt}
+            </Text>
+            <Text style={[UserStyle.descriptionGray]}>
+              마지막 생리일에서 다음 생리 때까지 걸리는 시기
+            </Text>
 
             <PType
               Type_of_Picker={pageContents.second_picker_type}
               pickDate={pickDateFunction}></PType>
           </View>
           <View style={UserStyle.container3_3}>
-            <Text style={UserStyle.blacktxt}>{pageContents.third_line_txt}</Text>
+            <Text style={UserStyle.blacktxt}>
+              {pageContents.third_line_txt}
+            </Text>
             <Text style={[UserStyle.descriptionGray]}>생리하는 기간</Text>
 
             <PType
@@ -156,7 +169,9 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
     pageContents.question_type == 'Hybrid_Type'
     // && pageContents.selectionTxt == null
   ) {
-    const newArr2 = Array(pageContents.selection_txt.contents.length).fill(false);
+    const newArr2 = Array(pageContents.selection_txt.contents.length).fill(
+      false,
+    );
     const [isButtonSelect2, setIsButtonSelect2] = useState(newArr2);
     const [getidx, setgetidx] = useState(0);
 
@@ -183,7 +198,9 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
                 <PType
                   Type_of_Picker={pageContents.second_picker_type}
                   pickDate={pickDateFunction}></PType>
-                <Text style={styles.text_H}>{pageContents.second_line_txt}</Text>
+                <Text style={styles.text_H}>
+                  {pageContents.second_line_txt}
+                </Text>
               </View>
               <View style={styles.container_t}>
                 <Text style={styles.text_H}>{pageContents.third_line_txt}</Text>
@@ -218,7 +235,7 @@ function TypePage(this: any, {pageContents, parentFunction}: typePageProps) {
         </View>
         <Image
           //source={pageContents.imgpath}
-          source={{uri : pageContents.img_path}}
+          source={{uri: pageContents.img_path}}
           style={{
             position: 'absolute',
             left: '36%',

@@ -14,12 +14,12 @@ import TypePage from '../components/typePage';
 
 import images from '../../assets/images/index';
 //test
-import mock_type from "../txtCollection/mock_type.json"
-import mock_typeA from "../txtCollection/mock_typeA.json"
-import mock_typeB from "../txtCollection/mock_typeB.json"
-import mock_typeC from "../txtCollection/mock_typeC.json"
-import mock_typeD from "../txtCollection/mock_typeD.json"
-import mock_typeE from "../txtCollection/mock_typeE.json"
+import mock_type from '../txtCollection/mock_type.json';
+import mock_typeA from '../txtCollection/mock_typeA.json';
+import mock_typeB from '../txtCollection/mock_typeB.json';
+import mock_typeC from '../txtCollection/mock_typeC.json';
+import mock_typeD from '../txtCollection/mock_typeD.json';
+import mock_typeE from '../txtCollection/mock_typeE.json';
 //asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -30,7 +30,7 @@ import {
   storeMultiData,
   getResponse,
 } from './async';
-import { TypePageModel } from '../models/typePageModel';
+import {TypePageModel} from '../models/typePageModel';
 // import handleGet from './axios';
 
 //콘솔창 에러 숨기기(임시)
@@ -157,7 +157,7 @@ const Survey2 = () => {
       imgpath = null;
       break;
   }
-  
+
   useEffect(() => {
     GET();
   }, []);

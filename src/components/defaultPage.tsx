@@ -32,7 +32,9 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
   ) {
     const [isButtonSelect, setIsButtonSelect] = useState('');
     // const [newArr, setnewArr] = useState(Array(pageContents.selectionTxt.length).fill(false));
-    const newArr = Array(pageContents.selection_txt.contents.length).fill(false);
+    const newArr = Array(pageContents.selection_txt.contents.length).fill(
+      false,
+    );
     const [getidx, setgetidx] = useState(0);
     const handlePress = (idx: number) => {
       newArr[idx] = true;
@@ -62,7 +64,10 @@ function DefaultPage({pageContents, parentFunction}: defaultPageProps) {
           </Text>
         </View>
         <View style={[defaultPageStyles.container_bs_c]}>
-          {pageContents.selection_txt.contents.map(function (value: any, index: number) {
+          {pageContents.selection_txt.contents.map(function (
+            value: any,
+            index: number,
+          ) {
             return (
               //왜 가려져서 나오지?? scrollview의 문제인가? 스타일링 관련해서 알아볼 것
               <TouchableOpacity

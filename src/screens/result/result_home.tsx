@@ -12,6 +12,7 @@ import {
   TextBase,
   ScrollView,
   Image,
+  Alert,
 } from 'react-native';
 
 import {ImageBackground} from 'react-native';
@@ -36,11 +37,22 @@ import {
   WindowSizeClassContext,
   WindowSizeClassProvider,
 } from '@react-native-material/core';
+import {alertClasses} from '@mui/material';
+import RESULT_CONTENT from './result_contentPage';
 
-const RESULT_HOME = ({navigation, route}) => {
+// import GobackButton from '../components/gobackButton';
+import {useNavigation} from '@react-navigation/native';
+
+const RESULT_HOME = () => {
   //const [target, change] = useState(true);
   const {imgpath, title_R} = require('../surveyResult');
   const [amh_isopen, openFunc] = useState(true);
+
+  const navigation = useNavigation();
+
+  function navigateTo({destination}: string): React.ReactElement {
+    navigation.navigate(destination);
+  }
 
   const graph_box_open_amh = () => {
     return (
@@ -357,7 +369,8 @@ const RESULT_HOME = ({navigation, route}) => {
               </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('TreatmentInfo')}>
             <ImageBackground
               style={styles.medicalInfo}
               source={require('../../../assets/images/medical_info.png')}>
@@ -586,7 +599,8 @@ const RESULT_HOME = ({navigation, route}) => {
             }}>
             이런 레시피 어때요?
           </Text>
-          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('RESULT_CONTENT')}>
             <View
               style={{
                 position: 'absolute',
@@ -633,7 +647,8 @@ const RESULT_HOME = ({navigation, route}) => {
               홈
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('RESULT_CONTENT')}>
             <Image
               style={{position: 'absolute', left: 177, top: 2338}}
               source={require('./content_icon.png')}></Image>

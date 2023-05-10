@@ -20,12 +20,16 @@ import ALQ_1 from './src/screens/OTHERQ/alq_1';
 import IQ_1 from './src/screens/OTHERQ/iq_1';
 import Q_RESULT from './src/screens/OTHERQ/q_result';
 import RESULT_HOME from './src/screens/result/result_home';
+import RESULT_CONTENT from './src/screens/result/result_contentPage';
+import ProcedureInfo from './src/screens/result/procedureInfo';
+import Search from './src/screens/result/column';
 
 import {LogBox} from 'react-native';
 import Survey from './src/screens/survey';
 import Survey2 from './src/screens/survey2';
 import SurveyResult from './src/screens/surveyResult';
 import HospitalMap from './src/screens/contents/hospital_map';
+import TreatmentInfo from './src/screens/contents/treatmentInfo/treatmentInfo';
 
 LogBox.ignoreAllLogs();
 
@@ -127,8 +131,28 @@ const App = () => {
             />
             <Stack.Screen
               options={{headerShown: false}}
+              name="RESULT_CONTENT"
+              component={RESULT_CONTENT}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="ProcedureInfo"
+              component={ProcedureInfo}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="Search"
+              component={Search}
+            />
+            <Stack.Screen
+              option={{headerShown: false}}
               name="HOSPITAL_SEARCH"
               component={HospitalMap}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="TreatmentInfo"
+              component={TreatmentInfo}
             />
           </Stack.Navigator>
         </NavigationContainer>
