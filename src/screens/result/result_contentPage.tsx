@@ -100,7 +100,7 @@ const CP1 = () => {
           source={require('../../../assets/images/Rectangle_333.png')}
         />
       </View>
-      <Text style={{left: '10%', top: '-50%'}}>요약줄ddddd</Text>
+      <Text style={{left: '10%', top: '-50%'}}>요약내용</Text>
     </View>
   );
 };

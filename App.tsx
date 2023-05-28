@@ -30,6 +30,7 @@ import Survey2 from './src/screens/survey2';
 import SurveyResult from './src/screens/surveyResult';
 import HospitalMap from './src/screens/contents/hospital_map';
 import TreatmentInfo from './src/screens/contents/treatmentInfo/treatmentInfo';
+import ColumnDetail from './src/screens/result/columnDetail';
 
 LogBox.ignoreAllLogs();
 
@@ -153,6 +154,11 @@ const App = () => {
               options={{headerShown: false}}
               name="TreatmentInfo"
               component={TreatmentInfo}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="ColumnDetail"
+              component={ColumnDetail}
             />
           </Stack.Navigator>
         </NavigationContainer>
