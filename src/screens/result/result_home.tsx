@@ -300,7 +300,8 @@ const RESULT_HOME = () => {
               여성호르몬 수치를 검사받을 수 있는 병원을 찾아보세요
             </Text>
             {/* 병원 검색하기 버튼 */}
-            <TouchableOpacity onPress={() => navigation.navigate("HOSPITAL_SEARCH")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('HOSPITAL_SEARCH')}>
               <View
                 style={{
                   position: 'absolute',
@@ -400,7 +401,7 @@ const RESULT_HOME = () => {
               </Text>
             </ImageBackground>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Search')}>
             <ImageBackground
               style={styles.column}
               source={require('../../../assets/images/column.png')}>
@@ -633,7 +634,9 @@ const RESULT_HOME = () => {
               backgroundColor: '#000000',
             }}></View>
 
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('RESULT_HOME')}
+            disabled={true}>
             <Image
               style={{position: 'absolute', left: 81, top: 2338}}
               source={require('./home_icon.png')}></Image>
