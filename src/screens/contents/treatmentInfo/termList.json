@@ -2,27 +2,27 @@
   {
     "termTitle": "난포",
     "definition": "난소조직에 있는 주머니 모양의 세포 집합체로 난자를 포함하고 있습니다. 성숙난포는 난소안에 있는 성숙한 난자와 액체가 있는 공간으로, 배란기에 난자를 배출합니다.",
-    "destination": "Survey1"
+    "destination": "termDetail"
   },
   {
     "termTitle": "과배란 유도주사",
     "definition": "체내에서 조기에 배란 호르몬이 분비되는 것을 방지하기 위해, 배란 유도주사를 단독 투여하여 난포 크기가 12~14mm가 되면, 배란 주사일 또는 전일까지 GnRH길항제 피하주사를 과배란 주사를 맞는 동안 계속 병해하며 투여합니다.",
 
-    "destination": "Survey1"
+    "destination": "termDetail"
   },
   {
     "termTitle": "유리화 동결",
     "definition": "유리화 동결 설명이 들어갈 공간입니다.",
-    "destination": "Survey1"
+    "destination": "termDetail"
   },
   {
     "termTitle": "신선배아",
     "definition": "신선배아 설명이 들어갈 공간입니다.",
-    "destination": "Survey1"
+    "destination": "termDetail"
   },
   {
     "termTitle": "다낭성 난소증후군",
     "definition": "다낭성 난소증후군 설명이 들어갈 공간입니다.",
-    "destination": "Survey1"
+    "destination": "termDetail"
   }
 ]

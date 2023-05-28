@@ -2,51 +2,116 @@
   {
     "number": 1,
     "title": "고날-에프펜",
-    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다."
+    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다.",
+    "destination": "injectionDetail",
+    "injectAdministration": [
+      "해당 주사 투여방법 1번 입니다.",
+      "해당 주사 투여방법 2번 입니다.",
+      "해당 주사 투여방법 3번 입니다.",
+      "해당 주사 투여방법 4번 입니다.",
+      "해당 주사 투여방법 5번 입니다.",
+      "해당 주사 투여방법 6번 입니다.",
+      "해당 주사 투여방법 7번 입니다.",
+      "해당 주사 투여방법 8번 입니다.",
+      "해당 주사 투여방법 9번 입니다.",
+      "해당 주사 투여방법 10번 입니다.",
+      "해당 주사 투여방법 11번 입니다.",
+      "해당 주사 투여방법 12번 입니다."
+    ]
   },
   {
     "number": 2,
     "title": "로렐린",
-    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다."
+    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다.",
+    "destination": "injectionDetail",
+    "injectAdministration": [
+      "해당 주사 투여방법 1번 입니다.",
+      "해당 주사 투여방법 2번 입니다.",
+      "해당 주사 투여방법 3번 입니다."
+    ]
   },
   {
     "number": 3,
     "title": "메노푸어",
-    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다."
+    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다.",
+    "destination": "injectionDetail",
+    "injectAdministration": [
+      "해당 주사 투여방법 1번 입니다.",
+      "해당 주사 투여방법 2번 입니다."
+    ]
   },
   {
     "number": 4,
     "title": "세트로타이드",
-    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다."
+    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다.",
+    "destination": "injectionDetail",
+    "injectAdministration": [
+      "해당 주사 투여방법 1번 입니다.",
+      "해당 주사 투여방법 2번 입니다.",
+      "해당 주사 투여방법 3번 입니다.",
+      "해당 주사 투여방법 4번 입니다."
+    ]
   },
   {
     "number": 5,
     "title": "아이브이에프엠",
-    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다."
+    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다.",
+    "destination": "injectionDetail",
+    "injectAdministration": [
+      "해당 주사 투여방법 1번 입니다.",
+      "해당 주사 투여방법 2번 입니다."
+    ]
   },
   {
     "number": 6,
     "title": "오비드렐",
-    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다."
+    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다.",
+    "destination": "injectionDetail",
+    "injectAdministration": ["해당 주사 투여방법 1번 입니다."]
   },
   {
     "number": 7,
     "title": "퍼고베리스",
-    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다."
+    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다.",
+    "destination": "injectionDetail",
+    "injectAdministration": [
+      "해당 주사 투여방법 1번 입니다.",
+      "해당 주사 투여방법 2번 입니다.",
+      "해당 주사 투여방법 3번 입니다.",
+      "해당 주사 투여방법 4번 입니다."
+    ]
   },
   {
     "number": 8,
     "title": "폴리트롭",
-    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다."
+    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다.",
+    "destination": "injectionDetail",
+    "injectAdministration": [
+      "해당 주사 투여방법 1번 입니다.",
+      "해당 주사 투여방법 2번 입니다.",
+      "해당 주사 투여방법 3번 입니다."
+    ]
   },
   {
     "number": 9,
     "title": "퓨레곤펜",
-    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다."
+    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다.",
+    "destination": "injectionDetail",
+    "injectAdministration": [
+      "해당 주사 투여방법 1번 입니다.",
+      "해당 주사 투여방법 2번 입니다.",
+      "해당 주사 투여방법 3번 입니다.",
+      "해당 주사 투여방법 4번 입니다."
+    ]
   },
   {
     "number": 10,
     "title": "프룰루텍스주",
-    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다."
+    "description": "Service is on ready. 해당 주사의 설명입니다. 테스트입니다.",
+    "destination": "injectionDetail",
+    "injectAdministration": [
+      "해당 주사 투여방법 1번 입니다.",
+      "해당 주사 투여방법 2번 입니다."
+    ]
   }
 ]

@@ -22,22 +22,24 @@ import {useState} from 'react';
 import {imgPath} from './termImgPath';
 
 interface TermButtonProps {
-  destination: any;
+  destination: string;
   icon: any; //type 지정 다시 생각할 것
   termTitle: String;
-  test: () => void;
+  termData: any;
+  index: number;
 }
 //props: TermButtonProps
 
 const TermButton = (props: TermButtonProps) => {
-  const {destination, icon, termTitle, test} = props;
+  const {destination, icon, termTitle, termData, index} = props;
   const navigation = useNavigation();
 
-  const handleNavigation = () => navigation.navigate(destination);
+  const handleNavigation = () =>
+    navigation.navigate(destination, {termData, index});
 
   return (
     <View style={styles.termButtonContainer}>
-      <TouchableOpacity style={styles.termButton} onPress={test}>
+      <TouchableOpacity style={styles.termButton} onPress={handleNavigation}>
         <Image style={styles.icon} source={icon} />
       </TouchableOpacity>
       <Text style={styles.termTitle}>{termTitle}</Text>
