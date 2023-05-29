@@ -16,6 +16,7 @@ import Map1 from '../../../assets/images/Map1.png';
 
 import { SearchBar, Icon } from 'react-native-elements';
 import Geolocation from 'react-native-geolocation-service';
+import axios from 'axios';
 
 
 const HospitalMap = ({navigation, route}) => {
@@ -79,7 +80,26 @@ const HospitalMap = ({navigation, route}) => {
 
     useEffect(()=>{
         CheckPermission();
+        upload_location();
     },[]);
+
+    async function upload_location() {
+        const form = new FormData();
+        form.append('latitude', latitude);
+        form.append('longitude', longitude);
+        
+        try {
+          const response = await axios({
+            url: '', // 실제 서버의 URL로 대체해야 합니다.
+            method: 'post',
+            data: form
+          });
+      
+          console.log(response);
+        } catch (error) {
+          console.log(error);
+        }
+    }
 
     return(
         <>
