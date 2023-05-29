@@ -31,6 +31,10 @@ import SurveyResult from './src/screens/surveyResult';
 import HospitalMap from './src/screens/contents/hospital_map';
 import TreatmentInfo from './src/screens/contents/treatmentInfo/treatmentInfo';
 import ColumnDetail from './src/screens/result/columnDetail';
+import termDetail from './src/screens/contents/treatmentInfo/termDetail';
+import injectionDetail from './src/screens/contents/treatmentInfo/injectionDetail';
+// import TermDetail from './src/screens/contents/treatmentInfo/termDetail';
+// import InjectionDetail from './src/screens/contents/treatmentInfo/injectionDetail';
 
 LogBox.ignoreAllLogs();
 
@@ -146,7 +150,7 @@ const App = () => {
               component={Search}
             />
             <Stack.Screen
-              option={{headerShown: false}}
+              options={{headerShown: false}}
               name="HOSPITAL_SEARCH"
               component={HospitalMap}
             />
@@ -159,6 +163,16 @@ const App = () => {
               options={{headerShown: false}}
               name="ColumnDetail"
               component={ColumnDetail}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="termDetail"
+              component={termDetail}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="injectionDetail"
+              component={injectionDetail}
             />
           </Stack.Navigator>
         </NavigationContainer>

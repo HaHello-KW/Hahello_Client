@@ -19,8 +19,11 @@ import {
   containsKey,
   removeData,
   storeMultiData,
-  getResponse
+  getResponse,
+  storingData,
+  parseData,
 } from './async';
+import { userdataModel } from '../models/userdataModel';
 
 const initialDefault: defaultPageModel = {
   Questions_ID: 0,
@@ -39,6 +42,20 @@ const initialDefault: defaultPageModel = {
   img_path: '',
 };
 
+//default_1, default_2, default_3이라는 키 값 안에 저장될 배열 형식
+const userdataDefault: userdataModel = {
+  questionID : 0,
+  question_Type: '',
+  pglevel: 0,
+  answer_selection: 0,
+  answer_first_type: '',
+  answer_first_content: '',
+  answer_second_type: '',
+  answer_second_content: '',
+  answer_third_type: '',
+  answer_third_content: '',
+};
+
 //콘솔창 에러 숨기기(임시)
 console.warn = console.error = () => {};
 
@@ -50,19 +67,9 @@ const Survey = () => {
   var [iterator, setIterator] = useState(0);
   const [jsondata, setJson] = useState([]);
   const [nowpage, setNowpage] = useState(initialDefault);
-
-  // const GET = () => {
-  //   axios
-  //     .get('http://52.79.207.4/question/default')
-  //     .then(res => {
-  //       setJson(res.data.responseDTO);
-  //       setNowpage(res.data.responseDTO[0]);
-  //     })
-  //     .catch(error => console.log(error))
-  //     .then(function () {
-  //       console.log('loading');
-  //     });
-  // };
+  
+  //사용자 답변을 포함한 api -> asyncstorage에
+  const [userdata, setUserdata] = useState(userdataDefault);
 
   async function GET() {
     try {
@@ -97,21 +104,42 @@ const Survey = () => {
     setNowpage(jsondata[iterator]);
   };
 
-  //Answer_arr[iterator] = await AsyncStorage.getItem(`userinput_${iterator}`)
-
-  //GET함수에서 로컬호스트 대신에 10.0.2.2를 넣어 주었으니 handleNext함수
-  //안에서도 똑같이 url을 바꿔줘야 한다
-  //'http://10.0.2.2:8080/defaultPage'
   const handleNext = async () => {
     if (iterator < jsondata.length) {
       if (iterator === jsondata.length - 1) {
-        await storeData(`default_${iterator}`, input);
-        console.log(await getData(`default_${iterator}`));
+        //초기화
+        const serializedValues = JSON.stringify(userdata);
+        await AsyncStorage.setItem(`default_${iterator}`, serializedValues);
+        //아이템을 가져와서 파싱
+        const storedValues = await AsyncStorage.getItem(`default_${iterator}`);
+        const parsedValues = storedValues !== null ? JSON.parse(storedValues) : null;
+        //파싱 후 데이터 업데이트
+        parsedValues.questionID = jsondata[iterator].Questions_ID;
+        parsedValues.question_Type = jsondata[iterator].question_type;
+        parsedValues.pglevel = jsondata[iterator].page_level;
+        if(jsondata[iterator].question_type === "Threeline_Picker"){
+          parsedValues.answer_first_type = "None";
+          parsedValues.answer_first_content = null;
+          parsedValues.answer_second_type = "DatePicker";
+          parsedValues.answer_second_content = input;
+          parsedValues.answer_third_type = "None";
+          parsedValues.answer_third_content = null;
+        }else if(jsondata[iterator].question_type === "Button_Selector"){
+          parsedValues.answer_selection = input;
+        }
+        //업데이트 후 다시 저장
+        const updatedValues = JSON.stringify(parsedValues);
+        await AsyncStorage.setItem(`default_${iterator}`, updatedValues);
+
+        // await storeData(`default_${iterator}`, input);
         var GETURL;
         var TYPE;
         var NUM;
 
-        switch (await getData(`default_${iterator - 1}`)) {
+        const storedValues2 = await AsyncStorage.getItem(`default_${iterator-1}`);
+        const parsedValues2 = storedValues !== null ? JSON.parse(storedValues2) : null;
+        
+        switch (parsedValues2.answer_selection) {
           case 0:
             NUM = 1;
             break;
@@ -131,7 +159,7 @@ const Survey = () => {
             console.log('testing2');
         }
 
-        switch (await getData(`default_${iterator}`)) {
+        switch (parsedValues.answer_selection) {
           case 0:
             GETURL = 'http://52.79.207.4' + '/question/type/A';
             TYPE = 'A';
@@ -163,14 +191,37 @@ const Survey = () => {
         //navigation
         navigation.navigate('Survey2');
       } else {
-        await storeData(`default_${iterator}`, input);
-        console.log(await getData(`default_${iterator}`));
+        //초기화
+        const serializedValues = JSON.stringify(userdata);
+        await AsyncStorage.setItem(`default_${iterator}`, serializedValues);
+        //아이템을 가져와서 파싱
+        const storedValues = await AsyncStorage.getItem(`default_${iterator}`);
+        const parsedValues = storedValues !== null ? JSON.parse(storedValues) : null;
+        //파싱 후 데이터 업데이트
+        parsedValues.questionID = jsondata[iterator].Questions_ID;
+        parsedValues.question_Type = jsondata[iterator].question_type;
+        parsedValues.pglevel = jsondata[iterator].page_level;
+        if(jsondata[iterator].question_type === "Threeline_Picker"){
+          parsedValues.answer_first_type = "None";
+          parsedValues.answer_first_content = null;
+          parsedValues.answer_second_type = "DatePicker";
+          parsedValues.answer_second_content = input;
+          parsedValues.answer_third_type = "None";
+          parsedValues.answer_third_content = null;
+        }else if(jsondata[iterator].question_type === "Button_Selector"){
+          parsedValues.answer_selection = input;
+        }
+        //업데이트 후 다시 저장
+        const updatedValues = JSON.stringify(parsedValues);
+        await AsyncStorage.setItem(`default_${iterator}`, updatedValues);
+
+        // await storeData(`default_${iterator}`, input);
         ++iterator;
         setIterator(iterator);
       }
       setNowpage(jsondata[iterator]);
+      getResponse(jsondata.length, 'default');
     }
-    getResponse(jsondata.length, 'default');
   };
 
   return (

@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
@@ -6,20 +7,24 @@ interface InjectionProps {
   image: any;
   title: string;
   description: string;
-  //   destination: string;
+  destination: string;
+  injectionData: any;
+  index: number;
 }
 //props: TermButtonProps
 
 const Injection = (props: InjectionProps) => {
-  const {description, number, image, title} = props;
-  //   const navigation = useNavigation();
-  //   const handleNavigation = () => navigation.navigate(destination);
+  const {number, image, title, description, destination, injectionData, index} =
+    props;
+  const navigation = useNavigation();
+  const handleNavigation = () =>
+    navigation.navigate(destination, {injectionData, index});
 
-  const testHandle = () => alert(number + '번 주사입니다.' + description);
+  // const testHandle = () => alert(number + '번 주사입니다.' + description);
 
   return (
     <View style={{flexDirection: 'column', justifyContent: 'center'}}>
-      <TouchableOpacity onPress={testHandle}>
+      <TouchableOpacity onPress={handleNavigation}>
         <Image style={styles.image} source={image} />
       </TouchableOpacity>
       <Text

@@ -7,17 +7,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  Button,
 } from 'react-native';
-
-import {ImageBackground} from 'react-native';
-import Homebg from '../../../assets/images/home_start.png';
-import NextButton from '../../../Buttons/nextButton';
 
 import GobackButton from '../../../components/gobackButton';
 import {useNavigation} from '@react-navigation/native';
-
-import {useState} from 'react';
 
 import TermButton from './termButton';
 import termList from './termList.json';
@@ -66,13 +59,14 @@ const TreatmentInfo = () => {
               marginHorizontal: 15,
               marginBottom: 20,
             }}>
-            {termList.map((element: any, index: number) => {
+            {termList.map((termData: any, index: number) => {
               return (
                 <TermButton
-                  destination={undefined}
+                  destination={termList[index].destination}
                   icon={termImgPath[index].icon}
-                  termTitle={termList[index].termTitle}
-                  test={() => alert(termList[index].definition)}
+                  termTitle={termData.termTitle}
+                  termData={termData}
+                  index={index}
                 />
               );
             })}
@@ -137,13 +131,16 @@ const TreatmentInfo = () => {
             }}>
             <View style={styles.procedureBox}>
               {/*1*/}
-              {injectionList.map((element: any, index: number) => {
+              {injectionList.map((injectionData: any, index: number) => {
                 return (
                   <Injection
-                    number={injectionList[index].number}
+                    number={injectionData.number}
                     image={injectionImgPath[index].image}
-                    title={injectionList[index].title}
-                    description={injectionList[index].description}
+                    title={injectionData.title}
+                    description={injectionData.description}
+                    destination={injectionList[index].destination}
+                    injectionData={injectionData}
+                    index={index}
                   />
                 );
               })}
@@ -274,7 +271,8 @@ const TreatmentInfo = () => {
             style={{
               borderTopWidth: 0.2,
               borderTopColor: '#545454',
-            }}></View>
+            }}
+          />
           <View
             style={{
               flex: 1,
@@ -284,11 +282,13 @@ const TreatmentInfo = () => {
               marginTop: 15,
               justifyContent: 'space-evenly',
             }}>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('RESULT_HOME')}>
               <Image source={require('./images/home_icon.png')}></Image>
               <Text style={styles.navigationBarTxt}>홈</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('RESULT_CONTENT')}>
               <Image source={require('./images/content_icon.png')}></Image>
               <Text style={styles.navigationBarTxt}>컨텐츠</Text>
             </TouchableOpacity>
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
   contentsDescription: {
     fontSize: 12,
     fontWeight: '400',
-    color: '#123123',
+    color: '##545454',
     marginLeft: 18,
     marginBottom: 10,
   },
