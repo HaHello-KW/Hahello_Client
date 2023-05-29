@@ -149,7 +149,7 @@ const App = () => {
               component={Search}
             />
             <Stack.Screen
-              option={{headerShown: false}}
+              options={{headerShown: false}}
               name="HOSPITAL_SEARCH"
               component={HospitalMap}
             />

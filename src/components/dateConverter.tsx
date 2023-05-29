@@ -85,6 +85,7 @@ function PType({Type_of_Picker, pickDate}: props) {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [text, onChangeText] = useState('');
+  const [selectedtxt, changetxt] = useState('');
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -98,8 +99,9 @@ function PType({Type_of_Picker, pickDate}: props) {
     const handleConfirm = date => {
       hideDatePicker();
       onChangeText(date.format('yyyy년 MM월 dd일'));
+      changetxt(date.format('yyyy-MM-dd'));
     };
-    pickDate(text);
+    pickDate(selectedtxt);
 
     con_day = year + '년 ' + month + '월 ' + day + '일 ';
 
