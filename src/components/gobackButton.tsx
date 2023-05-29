@@ -37,5 +37,6 @@ const styles = StyleSheet.create({
         ? StatusBar.currentHeight || 0
         : getStatusBarHeight(true),
     left: '3%',
+    zIndex: 1,
   },
 });

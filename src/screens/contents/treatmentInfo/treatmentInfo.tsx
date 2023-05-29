@@ -271,7 +271,8 @@ const TreatmentInfo = () => {
             style={{
               borderTopWidth: 0.2,
               borderTopColor: '#545454',
-            }}></View>
+            }}
+          />
           <View
             style={{
               flex: 1,
@@ -281,11 +282,13 @@ const TreatmentInfo = () => {
               marginTop: 15,
               justifyContent: 'space-evenly',
             }}>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('RESULT_HOME')}>
               <Image source={require('./images/home_icon.png')}></Image>
               <Text style={styles.navigationBarTxt}>홈</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => alert('서비스 준비중 입니다!')}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('RESULT_CONTENT')}>
               <Image source={require('./images/content_icon.png')}></Image>
               <Text style={styles.navigationBarTxt}>컨텐츠</Text>
             </TouchableOpacity>
