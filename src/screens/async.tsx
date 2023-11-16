@@ -1,8 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { parse } from 'react-native-svg';
-import { userdataModel } from '../models/userdataModel';
 
-export const storeData = async (key, value) => {
+export const storeData = async (key: string, value: undefined) => {
   try {
     const stringValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, stringValue);
@@ -11,7 +9,7 @@ export const storeData = async (key, value) => {
   }
 };
 
-export const storeMultiData = async (key, value) => {
+export const storeMultiData = async (key: string, value: any) => {
   try {
     const stringValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, stringValue);
@@ -20,7 +18,7 @@ export const storeMultiData = async (key, value) => {
   }
 };
 
-export const getData = async (key) => {
+export const getData = async (key: string) => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
@@ -57,7 +55,7 @@ export const retrieveDataFromStorage = async (keys : any) => {
   try {
     const retrievedData = {};
 
-    const retrievalPromises = keys.map(async (key) => {
+    const retrievalPromises = keys.map(async (key: string) => {
       const serializedData = await AsyncStorage.getItem(key);
       const parsedData = JSON.parse(serializedData);
       retrievedData[key] = parsedData;
@@ -103,7 +101,7 @@ export const getResponse = async (length: number, keyname: string) => {
   }
 }
 
-export const parseData = async (key) => {
+export const parseData = async (key: string) => {
   // //초기화
   // const serializedValues = JSON.stringify(userdata);
   // await AsyncStorage.setItem(key, serializedValues);
@@ -114,7 +112,7 @@ export const parseData = async (key) => {
   return parsedValues;
 }
 
-export const storingData = async (key, ) => {
+export const storingData = async (key: string, ) => {
   const parsedValues = parseData(key);
 
   //파싱 후 데이터 업데이트

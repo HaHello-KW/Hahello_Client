@@ -23,7 +23,7 @@ import {
   storingData,
   parseData,
 } from './async';
-import { userdataModel } from '../models/userdataModel';
+import {userdataModel} from '../models/userdataModel';
 
 const initialDefault: defaultPageModel = {
   Questions_ID: 0,
@@ -44,7 +44,7 @@ const initialDefault: defaultPageModel = {
 
 //default_1, default_2, default_3이라는 키 값 안에 저장될 배열 형식
 const userdataDefault: userdataModel = {
-  questionID : 0,
+  questionID: 0,
   question_Type: '',
   pglevel: 0,
   answer_selection: 0,
@@ -67,15 +67,15 @@ const Survey = () => {
   var [iterator, setIterator] = useState(0);
   const [jsondata, setJson] = useState([]);
   const [nowpage, setNowpage] = useState(initialDefault);
-  
+
   //사용자 답변을 포함한 api -> asyncstorage에
   const [userdata, setUserdata] = useState(userdataDefault);
 
   async function GET() {
     try {
       //응답 성공
-      const res = await axios.get('http://52.79.207.4/question/default');
-      
+      const res = await axios.get('http://cnslab.org:8000/question/default');
+
       setJson(res.data.responseDTO);
       setNowpage(res.data.responseDTO[iterator]);
     } catch (error) {
@@ -112,19 +112,20 @@ const Survey = () => {
         await AsyncStorage.setItem(`default_${iterator}`, serializedValues);
         //아이템을 가져와서 파싱
         const storedValues = await AsyncStorage.getItem(`default_${iterator}`);
-        const parsedValues = storedValues !== null ? JSON.parse(storedValues) : null;
+        const parsedValues =
+          storedValues !== null ? JSON.parse(storedValues) : null;
         //파싱 후 데이터 업데이트
         parsedValues.questionID = jsondata[iterator].Questions_ID;
         parsedValues.question_Type = jsondata[iterator].question_type;
         parsedValues.pglevel = jsondata[iterator].page_level;
-        if(jsondata[iterator].question_type === "Threeline_Picker"){
-          parsedValues.answer_first_type = "None";
+        if (jsondata[iterator].question_type === 'Threeline_Picker') {
+          parsedValues.answer_first_type = 'None';
           parsedValues.answer_first_content = null;
-          parsedValues.answer_second_type = "DatePicker";
+          parsedValues.answer_second_type = 'DatePicker';
           parsedValues.answer_second_content = input;
-          parsedValues.answer_third_type = "None";
+          parsedValues.answer_third_type = 'None';
           parsedValues.answer_third_content = null;
-        }else if(jsondata[iterator].question_type === "Button_Selector"){
+        } else if (jsondata[iterator].question_type === 'Button_Selector') {
           parsedValues.answer_selection = input;
         }
         //업데이트 후 다시 저장
@@ -136,9 +137,12 @@ const Survey = () => {
         var TYPE;
         var NUM;
 
-        const storedValues2 = await AsyncStorage.getItem(`default_${iterator-1}`);
-        const parsedValues2 = storedValues !== null ? JSON.parse(storedValues2) : null;
-        
+        const storedValues2 = await AsyncStorage.getItem(
+          `default_${iterator - 1}`,
+        );
+        const parsedValues2 =
+          storedValues !== null ? JSON.parse(storedValues2) : null;
+
         switch (parsedValues2.answer_selection) {
           case 0:
             NUM = 1;
@@ -161,27 +165,27 @@ const Survey = () => {
 
         switch (parsedValues.answer_selection) {
           case 0:
-            GETURL = 'http://52.79.207.4' + '/question/type/A';
+            GETURL = 'http://cnslab.org:8000' + '/question/type/A';
             TYPE = 'A';
             module.exports = {GETURL, TYPE, NUM};
             break;
           case 1:
-            GETURL = 'http://52.79.207.4' + '/question/type/B';
+            GETURL = 'http://cnslab.org:8000' + '/question/type/B';
             TYPE = 'B';
             module.exports = {GETURL, TYPE, NUM};
             break;
           case 2:
-            GETURL = 'http://52.79.207.4' + '/question/type/C';
+            GETURL = 'http://cnslab.org:8000' + '/question/type/C';
             TYPE = 'C';
             module.exports = {GETURL, TYPE, NUM};
             break;
           case 3:
-            GETURL = 'http://52.79.207.4/question/type/D';
+            GETURL = 'http://cnslab.org:8000/question/type/D';
             TYPE = 'D';
             module.exports = {GETURL, TYPE, NUM};
             break;
           case 4:
-            GETURL = 'http://52.79.207.4/question/type/E';
+            GETURL = 'http://cnslab.org:8000/question/type/E';
             TYPE = 'E';
             module.exports = {GETURL, TYPE, NUM};
             break;
@@ -196,19 +200,20 @@ const Survey = () => {
         await AsyncStorage.setItem(`default_${iterator}`, serializedValues);
         //아이템을 가져와서 파싱
         const storedValues = await AsyncStorage.getItem(`default_${iterator}`);
-        const parsedValues = storedValues !== null ? JSON.parse(storedValues) : null;
+        const parsedValues =
+          storedValues !== null ? JSON.parse(storedValues) : null;
         //파싱 후 데이터 업데이트
         parsedValues.questionID = jsondata[iterator].Questions_ID;
         parsedValues.question_Type = jsondata[iterator].question_type;
         parsedValues.pglevel = jsondata[iterator].page_level;
-        if(jsondata[iterator].question_type === "Threeline_Picker"){
-          parsedValues.answer_first_type = "None";
+        if (jsondata[iterator].question_type === 'Threeline_Picker') {
+          parsedValues.answer_first_type = 'None';
           parsedValues.answer_first_content = null;
-          parsedValues.answer_second_type = "DatePicker";
+          parsedValues.answer_second_type = 'DatePicker';
           parsedValues.answer_second_content = input;
-          parsedValues.answer_third_type = "None";
+          parsedValues.answer_third_type = 'None';
           parsedValues.answer_third_content = null;
-        }else if(jsondata[iterator].question_type === "Button_Selector"){
+        } else if (jsondata[iterator].question_type === 'Button_Selector') {
           parsedValues.answer_selection = input;
         }
         //업데이트 후 다시 저장

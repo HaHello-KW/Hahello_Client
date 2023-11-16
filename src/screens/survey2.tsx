@@ -1,33 +1,20 @@
-import React, {useState, useEffect, useRef} from 'react';
-import defaultPage from '../components/defaultPage';
+import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
-import {defaultPageModel} from '../models/defaultPageModel';
 import MyUpBar_Type from '../components/MyUpBar_Type';
 import GobackButton from '../components/gobackButton';
 // import {useNavigation} from '@react-navigation/native';
-import DefaultPage from '../components/defaultPage';
 import {useNavigation} from '@react-navigation/native';
 //for testing
-import {Image, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {defaultPageStyles} from '../styles/defaultPageStyles';
 import TypePage from '../components/typePage';
 
 import images from '../../assets/images/index';
 //test
-import mock_type from '../txtCollection/mock_type.json';
-import mock_typeA from '../txtCollection/mock_typeA.json';
-import mock_typeB from '../txtCollection/mock_typeB.json';
-import mock_typeC from '../txtCollection/mock_typeC.json';
-import mock_typeD from '../txtCollection/mock_typeD.json';
-import mock_typeE from '../txtCollection/mock_typeE.json';
 //asyncstorage
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   storeData,
   getData,
-  containsKey,
-  removeData,
-  storeMultiData,
   getResponse,
 } from './async';
 import {TypePageModel} from '../models/typePageModel';
@@ -106,7 +93,7 @@ const Survey2 = () => {
         else if (NUM == 4) imgpath = images.userA4;
         else if (NUM == 5) imgpath = images.userA5;
       }
-      TypeURL = 'http://10.0.2.2:8080/resultPage/A';
+      TypeURL = 'http://cnslab.org:8000/resultPage/A';
       module.exports = {TypeURL, imgpath};
       break;
     case 'B':
@@ -117,7 +104,7 @@ const Survey2 = () => {
         else if (NUM == 4) imgpath = images.userB4;
         else if (NUM == 5) imgpath = images.userB5;
       }
-      TypeURL = 'http://10.0.2.2:8080/resultPage/B';
+      TypeURL = 'http://cnslab.org:8000/resultPage/B';
       module.exports = {TypeURL, imgpath};
       break;
     case 'C':
@@ -128,7 +115,7 @@ const Survey2 = () => {
         else if (NUM == 4) imgpath = images.userC4;
         else if (NUM == 5) imgpath = images.userC5;
       }
-      TypeURL = 'http://10.0.2.2:8080/resultPage/C';
+      TypeURL = 'http://cnslab.org:8000/resultPage/C';
       module.exports = {TypeURL, imgpath};
       break;
     case 'D':
@@ -139,7 +126,7 @@ const Survey2 = () => {
         else if (NUM == 4) imgpath = images.userD4;
         else if (NUM == 5) imgpath = images.userD5;
       }
-      TypeURL = 'http://10.0.2.2:8080/resultPage/D';
+      TypeURL = 'http://cnslab.org:8000/resultPage/D';
       module.exports = {TypeURL, imgpath};
       break;
     case 'E':
@@ -150,7 +137,7 @@ const Survey2 = () => {
         else if (NUM == 4) imgpath = images.userE4;
         else if (NUM == 5) imgpath = images.userE5;
       }
-      TypeURL = 'http://10.0.2.2:8080/resultPage/E';
+      TypeURL = 'http://cnslab.org:8000/resultPage/E';
       module.exports = {TypeURL, imgpath};
       break;
     default:

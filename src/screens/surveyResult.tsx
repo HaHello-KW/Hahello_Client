@@ -1,11 +1,6 @@
-import {
-  View,
-  Text,
-  Button,
-  Image, 
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable no-lone-blocks */
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {useState, useEffect} from 'react';
 
 //import {UserStyle} from '../../styling/userLayout';
@@ -13,13 +8,11 @@ import {UserStyle} from '../styling/userLayout';
 import GobackButton from '../components/gobackButton';
 
 //import TxtCollection from '../../txtCollection/txtcolletion';
-import TxtCollection from '../txtCollection/txtcolletion';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 //import {UserStyle} from '../styles/typePageStyles';
 import images from '../../assets/images/index';
 import ResultPage from '../components/typeResult';
-import testresult from '../txtCollection/testresult.json';
 
 const SurveyResult = () => {
   const {TypeURL} = require('./survey2');
@@ -33,17 +26,18 @@ const SurveyResult = () => {
   const [nowpage, setNowpage] = useState(jsondata);
 
   const GET = () => {
-    axios.get(TypeURL)
-      .then(res=>{
+    axios
+      .get(TypeURL)
+      .then(res => {
         setJson(res.data);
-        setNowpage(res.data[NUM-1]);
+        setNowpage(res.data[NUM - 1]);
       })
-      .catch(error => console.log(error))
-  }
+      .catch(error => console.log(error));
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     GET();
-  },[]);
+  }, []);
 
   var imgpath;
   switch (TYPE) {
@@ -82,7 +76,7 @@ const SurveyResult = () => {
         if (NUM == 1) imgpath = images.userD1R;
         else if (NUM == 2) imgpath = images.userD2R;
         else if (NUM == 3) imgpath = images.userD3R;
-        else if (NUM == 4) imgpath = images.userD4R
+        else if (NUM == 4) imgpath = images.userD4R;
         else if (NUM == 5) imgpath = images.userD5R;
       }
       module.exports = {imgpath};
@@ -100,7 +94,6 @@ const SurveyResult = () => {
     default:
       break;
   }
-
 
   const handleGoback = () => {
     navigation.pop();
